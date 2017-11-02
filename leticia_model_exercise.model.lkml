@@ -3,6 +3,8 @@ connection: "thelook"
 # include all the views
 include: "*.view"
 
+# model for ramp lookml project
+
 # include all the dashboards
 include: "*.dashboard"
 
