@@ -4,7 +4,6 @@ connection: "thelook"
 include: "*.view"
 
 # model for ramp lookml project
-
 # include all the dashboards
 include: "*.dashboard"
 
