@@ -7,8 +7,6 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-
-#look test comment
 #Explore with fields parameter
 explore: events {
   join: users {
