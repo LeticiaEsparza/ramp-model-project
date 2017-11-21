@@ -8,8 +8,9 @@ view: user_facts {
            FROM order_items
            GROUP BY user_id
       ;;
-      indexes: ["user_id"]
       sql_trigger_value: SELECT current_date;;
+      indexes: ["user_id"]
+
     }
 
 dimension_group: first_order {
