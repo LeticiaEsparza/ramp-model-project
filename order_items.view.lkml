@@ -7,7 +7,6 @@ view: order_items {
     sql: ${TABLE}.id ;;
   }
 
-
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -19,6 +18,7 @@ view: order_items {
     # hidden: yes
     sql: ${TABLE}.order_id ;;
   }
+
 
   dimension_group: returned {
     type: time
