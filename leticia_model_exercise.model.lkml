@@ -39,6 +39,12 @@ explore: order_items {
     sql_on: ${order_items.order_id} = ${orders.id} ;;
     relationship: many_to_one
   }
+#Joining PDT
+  join: user_facts {
+    type: left_outer
+    sql_on: ${user_facts.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
 
   join: products {
     type: left_outer
@@ -51,6 +57,7 @@ explore: order_items {
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
+
 }
 
 #Explore with always_filter parameter; Looks at the orders from users only in California
@@ -68,12 +75,7 @@ explore: orders {
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
-  #Joining PDT
-  join: user_facts {
-    type: left_outer
-    sql_on: ${user_facts.user_id} = ${user_id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: products {}
