@@ -1,4 +1,5 @@
 view: user_facts {
+
     derived_table: {
       sql: SELECT
            order_items.user_id AS user_id, COUNT(orders.id) AS orders_count,
@@ -7,9 +8,8 @@ view: user_facts {
            FROM order_items
            GROUP BY user_id
       ;;
-      sortkeys: ["user_id"]
-      distribution: "user_id"
-      sql_trigger_value: SELECT current_date ;;
+      indexes: ["user_id"]
+      sql_trigger_value: SELECT current_date;;
     }
 
 dimension_group: first_order {
@@ -29,4 +29,10 @@ dimension: user_id {
   #     hidden: true
   sql: ${TABLE}.user_id ;;
 }
+
+measure: orders_count {
+  type: count_distinct
+  sql: ${TABLE}.orders_count ;;
+}
+
 }

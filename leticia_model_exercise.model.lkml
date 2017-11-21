@@ -68,6 +68,12 @@ explore: orders {
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
+  #Joining PDT
+  join: user_facts {
+    type: left_outer
+    sql_on: ${user_facts.user_id} = ${user_id} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: products {}
