@@ -8,7 +8,7 @@ view: user_facts {
            FROM order_items
            GROUP BY user_id
       ;;
-      sql_trigger_value: SELECT current_date;;
+      sql_trigger_value: SELECT CURDATE();;
       indexes: ["user_id"]
 
     }
