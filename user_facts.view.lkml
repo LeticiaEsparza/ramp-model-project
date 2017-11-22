@@ -55,6 +55,11 @@ view: user_facts {
     sql: ${TABLE}.repeat_customer ;;
   }
 
+#   dimension: avg_orders_per_month {
+#     type: string
+#     sql: ${TABLE}.avg_orders_per_month ;;
+#   }
+
   dimension: days_since_first_purchase {
     type: string
     sql: ${TABLE}.days_since_first_purchase ;;
@@ -67,6 +72,7 @@ view: user_facts {
       first_order,
       latest_order,
       repeat_customer,
+    #  avg_orders_per_month,
       days_since_first_purchase
     ]
   }
