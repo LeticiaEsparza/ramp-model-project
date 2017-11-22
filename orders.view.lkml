@@ -32,12 +32,24 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+ # measure: first_order {
+  #  type: min
+  #  sql: ${created_date};;
+   # drill_fields: [users.id, users.full_name, products.category]
+  #}
+
   measure: first_order {
-    type: min
-    sql: ${created_date};;
+    type: date
+    sql: min(${created_date});;
     drill_fields: [users.id, users.full_name, products.category]
+
   }
 
+measure: last_order {
+  type: date
+  sql: max(${created_date}) ;;
+  drill_fields: [users.id, users.full_name, products.category]
+}
 
   measure: count {
     type: count
