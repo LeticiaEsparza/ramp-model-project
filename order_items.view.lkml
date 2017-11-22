@@ -18,7 +18,12 @@ view: order_items {
     # hidden: yes
     sql: ${TABLE}.order_id ;;
   }
-
+#TEST FOR PDT
+  dimension: user_id {
+    type: number
+    hidden: yes
+    sql: ${TABLE}.user_id ;;
+  }
 
   dimension_group: returned {
     type: time
