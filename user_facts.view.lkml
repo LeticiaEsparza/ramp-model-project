@@ -7,10 +7,6 @@ view: user_facts {
            MIN(NULLIF(orders.created_at,0)) as first_order,
            MAX(NULLIF(orders.created_at,0)) as latest_order,
            CASE WHEN COUNT(orders.created_at)>1 THEN 'yes' ELSE 'no' END AS repeat_customer,
-
---           (SELECT AVG(orders_num) FROM (SELECT created_at, COUNT(DISTINCT id) orders_num FROM orders GROUP BY MONTH(created_at)) orders_per_month
--- )avg_orders_per_month,
-
            DATEDIFF(CURDATE(), MIN(NULLIF(orders.created_at,0))) AS days_since_first_purchase
            FROM order_items JOIN orders ON order_items.order_id=orders.id
            GROUP BY orders.user_id
@@ -19,7 +15,6 @@ view: user_facts {
 
 
 
--- -- Average number of orders per month
  ;;
     sql_trigger_value: SELECT current_date;;
     indexes: ["user_id"]
@@ -72,7 +67,6 @@ view: user_facts {
       first_order,
       latest_order,
       repeat_customer,
-    #  avg_orders_per_month,
       days_since_first_purchase
     ]
   }
