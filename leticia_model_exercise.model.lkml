@@ -39,17 +39,19 @@ explore: order_items {
     sql_on: ${order_items.order_id} = ${orders.id} ;;
     relationship: many_to_one
   }
-#Joining PDT
+
+## Joining PDT
   join: user_facts {
     type: left_outer
-    sql_on: ${user_facts.user_id} = ${user_id} ;;
+    sql_on: ${orders.user_id} = ${user_facts.user_id} ;;
     relationship: many_to_one
   }
   join: user_facts_test {
     type: left_outer
-    sql_on: ${user_facts_test.user_id} = ${user_id} ;;
+    sql_on: ${orders.user_id} = ${user_facts_test.user_id} ;;
     relationship: many_to_one
   }
+
   join: products {
     type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
@@ -74,7 +76,7 @@ explore: orders {
     }
 
   }
-  #join for pdt
+
   join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
