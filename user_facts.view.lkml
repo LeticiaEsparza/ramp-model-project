@@ -16,7 +16,8 @@ view: user_facts {
 
 
  ;;
-    sql_trigger_value: SELECT current_date;;
+    ## sql_trigger_value: SELECT current_date;;
+    persist_for: "24 hours"
     indexes: ["user_id"]
   }
 
