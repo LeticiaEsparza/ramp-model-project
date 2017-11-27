@@ -99,3 +99,4 @@ explore: users {}
 
 explore: users_nn {}
 explore: user_facts_test {}
+explore: user_facts {}
