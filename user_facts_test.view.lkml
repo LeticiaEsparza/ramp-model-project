@@ -8,7 +8,7 @@ view: user_facts_test {
            MAX(NULLIF(orders.created_at,0)) as latest_order,
            CASE WHEN COUNT(orders.created_at)>1 THEN 'yes' ELSE 'no' END AS repeat_customer,
            DATEDIFF(CURDATE(), MIN(NULLIF(orders.created_at,0))) AS days_since_first_purchase
-           FROM order_items LEFT JOIN orders ON order_items.order_id=orders.id
+           FROM order_items JOIN orders ON order_items.order_id=orders.id
            GROUP BY orders.user_id
            ORDER BY COUNT(DISTINCT orders.id) desc
 
