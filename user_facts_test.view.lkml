@@ -26,7 +26,7 @@ view: user_facts_test {
   }
 
   dimension: user_id {
-    type: string
+    type: number
     primary_key: yes
     sql: ${TABLE}.user_id ;;
   }
