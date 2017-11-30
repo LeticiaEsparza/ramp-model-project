@@ -106,7 +106,8 @@ view: ndt1 {
     }
   }
   # Define the view's fields as desired
-  dimension: user_id {hidden: yes}
+  dimension: user_id {hidden: no
+    primary_key:yes}
   dimension: lifetime_number_of_orders {type: number}
 }
 
@@ -118,7 +119,8 @@ view: ndt2 {
     }
   }
   # Define the view's fields as desired
-  dimension: user_id {hidden: yes}
+  dimension: user_id {hidden: no
+    primary_key:yes}
   dimension: lifetime_customer_value {type: number}
 }
 
