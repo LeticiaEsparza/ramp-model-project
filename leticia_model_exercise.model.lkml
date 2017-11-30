@@ -97,6 +97,7 @@ explore: user_data {
   }
 }
 
+# beginning of ndt test
 view: ndt1 {
   derived_table: {
     explore_source: order_items {
@@ -108,7 +109,7 @@ view: ndt1 {
   dimension: user_id {hidden: yes}
   dimension: lifetime_number_of_orders {type: number}
 }
-# beginning of ndt test
+
 view: ndt2 {
   derived_table: {
     explore_source: order_items {
