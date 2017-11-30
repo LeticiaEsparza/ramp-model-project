@@ -97,6 +97,40 @@ explore: user_data {
   }
 }
 
+view: ndt1 {
+  derived_table: {
+    explore_source: order_items {
+      column: user_id {field: order_items.user_id}
+      column: lifetime_number_of_orders {field: order_items.count}
+    }
+  }
+  # Define the view's fields as desired
+  dimension: user_id {hidden: yes}
+  dimension: lifetime_number_of_orders {type: number}
+}
+# beginning of ndt test
+view: ndt2 {
+  derived_table: {
+    explore_source: order_items {
+      column: user_id {field: order_items.user_id}
+      column: lifetime_customer_value {field: order_items.total_revenue}
+    }
+  }
+  # Define the view's fields as desired
+  dimension: user_id {hidden: yes}
+  dimension: lifetime_customer_value {type: number}
+}
+
+explore: ndt1 {
+  join: ndt2 {
+    type: left_outer
+    sql_on: ${ndt1.user_id}=${ndt2.user_id} ;;
+    relationship: many_to_one
+  }
+}
+
+#end of ndt test
+
 explore: users {}
 
 explore: users_nn {}
