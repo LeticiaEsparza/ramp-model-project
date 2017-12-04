@@ -82,6 +82,7 @@ dimension: case_test {
       sql: ${profit_tier}=0;;
       label: "fall"
     }
+    else: "blah"
   }
 }
 
