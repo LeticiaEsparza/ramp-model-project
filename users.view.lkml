@@ -41,8 +41,8 @@ view: users {
 dimension: relative_year {
   case: {
         when: {
-          sql: ${created_year} = '2017' ;;
-          label: "current"
+          sql: ${created_year} = '2014' ;;
+          label: "about three years ago"
         }
         when: {
           sql: ${created_year} = '2016' ;;
@@ -53,8 +53,8 @@ dimension: relative_year {
           label: "about two years ago"
         }
         when: {
-          sql: ${created_year} = '2014' ;;
-          label: "about three years ago"
+          sql: ${created_year} = '2017' ;;
+          label: "current"
         }
   }
 }
