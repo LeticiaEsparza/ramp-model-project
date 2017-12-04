@@ -184,18 +184,6 @@ dimension: was_item_returned {
 
 }
 
-dimension: returned_test {
-  case: {
-    when: {
-      sql: ${was_item_returned}=1;;
-      label: "yes"
-    }
-    else: "no"
-  }
-
-}
-
-
 
   measure: count {
     type: count
