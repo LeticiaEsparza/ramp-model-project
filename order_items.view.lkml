@@ -76,6 +76,15 @@ dimension: profit_tier {
 
 }
 
+dimension: case_test {
+  case: {
+    when: {
+      sql: ${profit_tier}=0;;
+      label: "fall"
+    }
+  }
+}
+
 #average order - measure with average
 measure: avg_order {
   label: "Order Sale Average"
