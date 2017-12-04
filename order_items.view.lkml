@@ -76,12 +76,9 @@ dimension: profit_tier {
 
 }
 
-dimension: profit_class {
+dimension: profit_test {
   case: {
-    when: {
-      sql: ${profit}<25 ;;
-      label: "fall"
-    }
+
     when: {
       sql: ${profit}>=25 and ${profit}<50 ;;
       label: "winter"
@@ -93,6 +90,10 @@ dimension: profit_class {
     when: {
       sql: ${profit}>=75 ;;
       label: "summer"
+    }
+    when: {
+      sql: ${profit}<25 ;;
+      label: "fall"
     }
   }
 }
