@@ -58,7 +58,7 @@ dimension: relative_year {
         }
 
   }
-  alpha_sort: yes
+  #alpha_sort: yes
 }
 
 
