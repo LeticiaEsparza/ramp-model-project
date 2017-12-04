@@ -46,9 +46,16 @@ dimension: relative_year {
         }
         when: {
           sql: ${created_year} = '2016' ;;
-          label: "last year"
+          label: "las year"
         }
-
+        when: {
+          sql: ${created_year} = '2015' ;;
+          label: "about two years ago"
+        }
+        when: {
+          sql: ${created_year} = '2014' ;;
+          label: "about three years ago"
+        }
   }
 
 }
