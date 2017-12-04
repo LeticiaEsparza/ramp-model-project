@@ -76,27 +76,27 @@ dimension: profit_tier {
 
 }
 
-dimension: profit_test {
-  case: {
-    when: {
-      sql: ${profit}<25 ;;
-      label: "fall"
-    }
-    when: {
-      sql: ${profit}>=25 and ${profit}<50 ;;
-      label: "winter"
-    }
-    when: {
-      sql: ${profit}>=50 and ${profit}<75 ;;
-      label: "spring"
-    }
-    when: {
-      sql: ${profit}>=75 ;;
-      label: "summer"
-    }
-
-  }
-}
+# dimension: profit_test {
+#   case: {
+#     when: {
+#       sql: ${profit}<25 ;;
+#       label: "fall"
+#     }
+#     when: {
+#       sql: ${profit}>=25 and ${profit}<50 ;;
+#       label: "winter"
+#     }
+#     when: {
+#       sql: ${profit}>=50 and ${profit}<75 ;;
+#       label: "spring"
+#     }
+#     when: {
+#       sql: ${profit}>=75 ;;
+#       label: "summer"
+#     }
+#
+#   }
+# }
 
 
 #average order - measure with average
