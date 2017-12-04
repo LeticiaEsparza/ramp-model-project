@@ -24,7 +24,7 @@ view: orders {
  dimension: season {
   case: {
     when: {
-      sql: ${created_month}>=date(%,01,01) AND ${created_month}<date(%,03,31) ;;
+      sql: ${created_month}>='20%-01' AND ${created_month}<'20%-04' ;;
       label: "Winter"
     }
   }
