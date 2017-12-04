@@ -100,28 +100,30 @@ explore: user_data {
 # beginning of ndt test
 view: ndt1 {
   derived_table: {
-    explore_source: order_items {
-      column: user_id {field: order_items.user_id}
-      column: lifetime_number_of_orders {field: order_items.count}
+    explore_source: orders {
+      column: user_id {field: orders.user_id}
+      column: number_of_orders {field: orders.count}
     }
   }
   # Define the view's fields as desired
   dimension: user_id {hidden: no
     primary_key:yes}
-  dimension: lifetime_number_of_orders {type: number}
+  dimension: number_of_orders {type: number}
 }
 
 view: ndt2 {
   derived_table: {
-    explore_source: order_items {
-      column: user_id {field: order_items.user_id}
-      column: lifetime_customer_value {field: order_items.total_revenue}
+    explore_source: orders {
+      column: user_id {field: orders.user_id}
+      column: first_order {field: orders.first_order}
+      column: last_order {field: orders.last_order}
     }
   }
   # Define the view's fields as desired
   dimension: user_id {hidden: no
     primary_key:yes}
-  dimension: lifetime_customer_value {type: number}
+  measure: first_order {type: date}
+  measure: last_order {type: date}
 }
 
 explore: ndt1 {

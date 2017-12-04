@@ -37,6 +37,25 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
+
+dimension: relative_year {
+  case: {
+        when: {
+          sql: ${created_year} = '2017'  ;;
+          label: "current"
+        }
+        when: {
+          sql: ${created_year} = '2016' ;;
+          label: "last year"
+        }
+
+  }
+
+}
+
+
+
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
@@ -62,8 +81,6 @@ view: users {
     type: string
     sql: CONCAT(${TABLE}.first_name,' ',${TABLE}.last_name);;
     }
-
-
 
 
   dimension: state {
