@@ -21,14 +21,15 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
-#  dimension: season {
-#   case: {
-#     when: {
-#       sql: ${created_month}>= ;;
-#     }
-#   }
-#
-#  }
+ dimension: season {
+  case: {
+    when: {
+      sql: ${created_month}>=01 AND ${created_month}<04 ;;
+      label: "Winter"
+    }
+  }
+
+ }
 
 
 # coalesce(
