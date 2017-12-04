@@ -56,7 +56,9 @@ dimension: relative_year {
           sql: ${created_year} = '2014' ;;
           label: "about three years ago"
         }
+
   }
+  alpha_sort: yes
 }
 
 
