@@ -37,11 +37,11 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
-
+#case when test dimension ticket #113557
 dimension: relative_year {
   case: {
         when: {
-          sql: ${created_year} = '2017'  ;;
+          sql: ${created_year} = '2017' ;;
           label: "current"
         }
         when: {
@@ -57,8 +57,9 @@ dimension: relative_year {
           label: "about three years ago"
         }
   }
-
 }
+
+
 
 
 
