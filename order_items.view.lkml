@@ -76,15 +76,27 @@ dimension: profit_tier {
 
 }
 
-dimension: case_test {
+dimension: profit_class {
   case: {
     when: {
-      sql: ${profit_tier}=0;;
+      sql: ${profit}<25 ;;
       label: "fall"
     }
-    else: "blah"
+    when: {
+      sql: ${profit}>=25 and ${profit}<50 ;;
+      label: "winter"
+    }
+    when: {
+      sql: ${profit}>=50 and ${profit}<75 ;;
+      label: "spring"
+    }
+    when: {
+      sql: ${profit}>=75 ;;
+      label: "summer"
+    }
   }
 }
+
 
 #average order - measure with average
 measure: avg_order {
