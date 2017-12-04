@@ -21,16 +21,6 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
- dimension: season {
-  case: {
-    when: {
-      sql: ${created_month}>='20%-01' AND ${created_month}<'20%-04' ;;
-      label: "Winter"
-    }
-  }
-
- }
-
 
 # coalesce(
 #
