@@ -126,14 +126,14 @@ view: ndt2 {
   measure: last_order {type: date}
 }
 
-# explore: ndt1 {
-#   join: ndt2 {
-#     type: left_outer
-#     sql_on: ${ndt1.user_id}=${ndt2.user_id} ;;
-#     relationship: many_to_one
-#   }
-# }
-explore: ndt1 {}
+explore: ndt1 {
+  join: ndt2 {
+    type: left_outer
+    sql_on: ${ndt1.user_id}=${ndt2.user_id} ;;
+    relationship: many_to_one
+  }
+}
+
 
 
 #end of ndt test
