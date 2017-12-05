@@ -133,6 +133,7 @@ view: ndt2 {
 #     relationship: many_to_one
 #   }
 # }
+explore: ndt1 {}
 
 
 #end of ndt test
