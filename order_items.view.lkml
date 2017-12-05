@@ -162,7 +162,7 @@ measure: total_revenue {
   type: sum
   sql: ${sale_price};;
   value_format_name: usd
-  drill_fields: [users.id, users.full_name, products.category]
+  # drill_fields: [users.id, users.full_name, products.category]
 
 
 }
@@ -174,7 +174,7 @@ measure: total_profit {
   type: number
   sql: ${total_revenue}-${inventory_items.total_cost} ;;
   value_format_name: usd
-  drill_fields: [users.id, users.full_name, products.category]
+  # drill_fields: [users.id, users.full_name, products.category]
 
 }
 
