@@ -198,14 +198,6 @@ measure: profit_range {
 
 }
 
-measure: returning_shopper_revenue {
-  type: yesno
-  sql: CASE WHEN  ${user_facts.repeat_customer}=true THEN (${total_revenue}-${total_profit})
-        ELSE "Not a returning customer"
-        END;;
-  }
-
-
 
 #dimension of type yesno
 dimension: was_item_returned {
@@ -230,10 +222,7 @@ dimension: was_item_returned {
        label: "Total Revenue"
        value: "total_revenue"
      }
-     allowed_value: {
-       label: "Returning Shopper Revenue"
-       value: "returning_shopper_revenue"
-     }
+
    }
    measure: metric {
      label_from_parameter: metric_selector
@@ -245,8 +234,7 @@ dimension: was_item_returned {
            ${total_profit}
          WHEN {% parameter metric_selector %} = 'total_first_purchase_revenue' THEN
            ${total_revenue}
-         WHEN {% parameter metric_selector %} = 'returning_shopper_revenue' THEN
-           ${returning_shopper_revenue}
+
          ELSE
            NULL
        END ;;
