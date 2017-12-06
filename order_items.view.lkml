@@ -198,15 +198,12 @@ measure: profit_range {
 
 }
 
-dimension: returning_shopper {
-  type: yesno
-  sql: ${user_facts.repeat_customer}>1 ;;
-
-}
 measure: returning_shopper_revenue {
-  type: sum
-  sql: ${returning_shopper}=true ;;
+  type: number
+  sql: if(${user_facts.repeat_customer}=true, ${total_revenue}-${total_profit},"Not a returning customer" ) ;;
 }
+
+
 
 #dimension of type yesno
 dimension: was_item_returned {
