@@ -217,46 +217,59 @@ dimension: returning_shopper{
     drill_fields: [id, inventory_items.id, orders.id]
   }
 
-  measure: total_first_purchase_revenue{
-    type: sum
-    sql:  ;;
-  }
-  measure: total_returning_shopper_revenue{
-    type: sum
-    sql:  ;;
-  }
 
-  parameter: metric_selector {
-    type: string
-    allowed_value: {
-      label: "Total Order Profit"
-      value: "total_profit"
-    }
-    allowed_value: {
-      label: "First-Time Shopper Revenue"
-      value: "total_first_purchase_revenue"
-    }
-    allowed_value: {
-      label: "Returning Shopper Revenue"
-      value: "total_returning_shopper_revenue"
-    }
-  }
-  measure: metric {
-    label_from_parameter: metric_selector
-    type: number
-    value_format: "$0.0,\"K\""
-    sql:
-      CASE
-        WHEN {% parameter metric_selector %} = 'total_profit' THEN
-          ${total_profit}
-        WHEN {% parameter metric_selector %} = 'total_first_purchase_revenue' THEN
-          ${total_first_purchase_revenue}
-        WHEN {% parameter metric_selector %} = 'total_returning_shopper_revenue' THEN
-          ${total_returning_shopper_revenue}
-        ELSE
-          NULL
-      END ;;
-  }
+# dimension: first_purchase {
+#   type: yesno
+#   sql: ${orders.count}=1;;
+#
+# }
+#   measure: total_first_purchase_revenue{
+#     type: sum
+#     sql: ${total_revenue} ;;
+#     filters: {
+#       field:
+#       value: "1"
+#     }
+#
+#   }
+#
+#
+#   measure: total_returning_shopper_revenue{
+#     type: sum
+#     sql:  ;;
+#   }
+
+#   parameter: metric_selector {
+#     type: string
+#     allowed_value: {
+#       label: "Total Order Profit"
+#       value: "total_profit"
+#     }
+#     allowed_value: {
+#       label: "First-Time Shopper Revenue"
+#       value: "total_first_purchase_revenue"
+#     }
+#     allowed_value: {
+#       label: "Returning Shopper Revenue"
+#       value: "total_returning_shopper_revenue"
+#     }
+#   }
+#   measure: metric {
+#     label_from_parameter: metric_selector
+#     type: number
+#     value_format: "$0.0,\"K\""
+#     sql:
+#       CASE
+#         WHEN {% parameter metric_selector %} = 'total_profit' THEN
+#           ${total_profit}
+#         WHEN {% parameter metric_selector %} = 'total_first_purchase_revenue' THEN
+#           ${total_first_purchase_revenue}
+#         WHEN {% parameter metric_selector %} = 'total_returning_shopper_revenue' THEN
+#           ${total_returning_shopper_revenue}
+#         ELSE
+#           NULL
+#       END ;;
+#   }
 
 
 }
