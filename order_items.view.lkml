@@ -205,7 +205,7 @@ dimension: returning_shopper {
 }
 measure: returning_shopper_revenue {
   type: sum
-  sql: ${returning_shopper}=1 ;;
+  sql: ${returning_shopper}=true ;;
 }
 
 #dimension of type yesno
