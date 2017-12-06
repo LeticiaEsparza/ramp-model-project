@@ -200,8 +200,10 @@ measure: profit_range {
 
 measure: returning_shopper_revenue {
   type: number
-  sql: if(${user_facts.repeat_customer}=true, ${total_revenue}-${total_profit},"Not a returning customer" ) ;;
-}
+  sql: CASE WHEN  ${user_facts.repeat_customer}=true THEN (${total_revenue}-${total_profit})
+        ELSE "Not a returning customer"
+        END;;
+  }
 
 
 
