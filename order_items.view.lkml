@@ -207,37 +207,10 @@ dimension: was_item_returned {
 
 }
 
-dimension: returning_shopper{
-  type: yesno
-  sql:  ;;
-}
-
   measure: count {
     type: count
-    drill_fields: [id, inventory_items.id, orders.id]
+    drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
   }
-
-
-# dimension: first_purchase {
-#   type: yesno
-#   sql: ${orders.count}=1;;
-#
-# }
-#   measure: total_first_purchase_revenue{
-#     type: sum
-#     sql: ${total_revenue} ;;
-#     filters: {
-#       field:
-#       value: "1"
-#     }
-#
-#   }
-#
-#
-#   measure: total_returning_shopper_revenue{
-#     type: sum
-#     sql:  ;;
-#   }
 
 #   parameter: metric_selector {
 #     type: string
