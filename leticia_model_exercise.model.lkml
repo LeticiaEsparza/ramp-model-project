@@ -104,6 +104,8 @@ view: ndt1 {
       column: user_id {field: orders.user_id}
       column: number_of_orders {field: orders.count}
     }
+    persist_for: "4 hours"
+    indexes: ["user_id"]
   }
   # Define the view's fields as desired
   dimension: user_id {hidden: no
