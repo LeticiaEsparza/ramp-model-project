@@ -37,6 +37,17 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension_group: created_test {
+    type: time
+    timeframes: [
+      raw,
+
+      date
+    ]
+    sql: ${TABLE}.created_at ;;
+  }
+
+
 #case when test dimension ticket #113557
 dimension: relative_year {
   case: {
