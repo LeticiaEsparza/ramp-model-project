@@ -141,6 +141,7 @@ explore: ndt1 {
 #end of ndt test
 
 explore: users {}
+explore: counts_tester {}
 
 explore: users_nn {}
 explore: user_facts_test {}
