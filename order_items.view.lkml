@@ -254,22 +254,7 @@ dimension: was_item_returned {
        END ;;
    }
 
-#   filter: count_filter {
-#     type: string
-#   }
-#
-#   dimension: count_status_filter {
-#     type: yesno
-#     hidden: yes
-#     sql: {% condition ${count_filter} %} ${products.department} {% endcondition %} ;;
-#   }
-#   measure: count_dynamic {
-#     type: count
-#     filters: {
-#       field: count_status_filter
-#       value: "men"
-#     }
-#   }
+
 
 
 
