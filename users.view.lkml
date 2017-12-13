@@ -40,7 +40,7 @@ view: users {
   dimension_group: created_test {
     type: time
     timeframes: [
-      raw,
+
 
       date
     ]
