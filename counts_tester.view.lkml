@@ -7,6 +7,8 @@ view: counts_tester {
       GROUP BY user_id
       HAVING COUNT(user_id) >= 2) as t
        ;;
+    sql_trigger_value: SELECT current_date;;
+    indexes: ["user_id"]
   }
 
   dimension: count {
