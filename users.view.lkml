@@ -37,15 +37,6 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension_group: created_test {
-    type: time
-    timeframes: [
-
-
-      date
-    ]
-    sql: ${TABLE}.created_at ;;
-  }
 
 
 #case when test dimension ticket #113557
