@@ -207,19 +207,6 @@ dimension: was_item_returned {
 
 }
 
-#   measure: returned_count {
-#     type: count
-#     filters: {
-#       field: was_item_returned
-#       value: "yes"
-#     }
-#   }
-#
-#
-# measure: count_test {
-#   type: count_distinct
-#   sql: ${returned_count} ;;
-# }
 
   measure: count {
     type: count
