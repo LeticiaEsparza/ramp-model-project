@@ -25,7 +25,7 @@ measure: date_count {
   type: count
   filters:  {
     field: created_date
-    value: "this week"
+    value: "7 days"
   }
 
 }
