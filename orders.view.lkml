@@ -21,6 +21,12 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+dimension: created_filter {
+    type:  date
+    sql: ${created_date} = 'the past 7 complete days' ;;
+
+
+}
 
 # coalesce(
 #
