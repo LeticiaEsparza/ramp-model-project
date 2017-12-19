@@ -27,7 +27,6 @@ measure: date_count {
     field: created_date
     value: "7 days"
   }
-
 }
 
 # coalesce(
