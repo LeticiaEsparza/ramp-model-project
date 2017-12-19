@@ -14,7 +14,7 @@ view: products {
 
   dimension: category {
     type: string
-    hidden: yes
+    #hidden: yes
     sql: ${TABLE}.category ;;
   }
 
