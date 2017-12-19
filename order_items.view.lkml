@@ -14,6 +14,14 @@ view: order_items {
     sql: ${TABLE}.inventory_item_id ;;
   }
 
+  dimension: test {
+    type:  number
+    sql: CASE WHEN ${inventory_item_id} >= 50 THEN 50
+      ELSE ${inventory_item_id} END;;
+  }
+
+
+
   dimension: order_id {
     type: number
     # hidden: yes
@@ -178,6 +186,12 @@ measure: total_profit {
   drill_fields: [users.id, users.full_name, products.category]
 
 }
+
+# dimension: test {
+#  type:  number
+# sql: CASE WHEN ${total_profit} >= 50 THEN 50
+# ELSE ${total_profit} END;;
+# }
 
 
 #measure using sum - with profit field
