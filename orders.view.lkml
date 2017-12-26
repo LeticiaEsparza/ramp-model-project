@@ -105,14 +105,31 @@ measure: last_order {
        END ;;
   }
 
-  measure: count_2017{
-    type:count
-    filters:
-    { field: created_year
-      value: "2017"
-    }
-  }
+#   measure: count_2017{
+#     type:count
+#     filters:
+#     { field: created_year
+#       value: "2017"
+#     }
+#   }
 
+# yeno dimension true whenever filter dimension is satisfied
+# filter: year_filter {
+#   type: string
+# }
+#
+# dimension: year_filter_satisfied {
+#   type: yesno
+#   sql: {% condition ${year_filter} %} ${created_year} {% endcondition %};;
+# }
+#
+# measure: count_2017 {
+#   type: count
+#   filters: {
+#     field: created_year
+#     value: "yes"
+#   }
+# }
 
 
 }
