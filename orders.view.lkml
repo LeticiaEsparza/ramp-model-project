@@ -30,19 +30,6 @@ measure: date_count {
   }
 }
 
-# coalesce(
-#
-# if(${orders.created_date}>=date(2017,01,01) AND ${orders.created_date}<date(2017,03,31),"winter",null),
-#
-# if(${orders.created_date}>=date(2017,03,31) AND ${orders.created_date}<date(2017,06,30),"spring",null),
-#
-# if(${orders.created_date}>= date(2017,06,30)AND ${orders.created_date}<date(2017,09,30),"summer",null),
-#
-# if(${orders.created_date}>= date(2017,09,30)AND ${orders.created_date}<=date(2017,12,31), "fall",null)
-#
-# )
-
-
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
@@ -120,7 +107,11 @@ measure: count_year_filter {
     field: created_year
     value: "2017"
   }
+}
 
+measure: percentage_orders_2017_over_total {
+  type: number
+  sql: ${count_year_filter}/${count} ;;
 }
 
 }
