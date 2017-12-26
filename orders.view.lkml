@@ -117,7 +117,7 @@ dimension: status_satisfies_filter {
 measure: count_year_filter {
   type: count
   filters: {
-    field: status_satisfies_filter
+    field: created_year
     value: "2017"
   }
 
