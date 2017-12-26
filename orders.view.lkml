@@ -105,4 +105,14 @@ measure: last_order {
        END ;;
   }
 
+  measure: count_2017{
+    type:count
+    filters:
+    { field: created_year
+      value: "2017"
+    }
+  }
+
+
+
 }
