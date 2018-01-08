@@ -54,7 +54,8 @@ explore: order_items {
 
   join: products {
     type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
+    sql_on: ${inventory_items.product_id} = ${products.id}
+    AND ${products.category} LIKE '%swim%';;
     relationship: many_to_one
   }
 
@@ -135,7 +136,6 @@ explore: ndt1 {
     relationship: many_to_one
   }
 }
-
 
 
 #end of ndt test
