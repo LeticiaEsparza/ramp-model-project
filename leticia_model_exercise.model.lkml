@@ -27,11 +27,6 @@ explore: inventory_items {
 
 #join used for profit dimension in order_items
 explore: order_items {
-  sql_always_where:
-  {% if ${products.category}._in_query %}
-  field NOT LIKE '%swim%'
-  {% endif %}
-  ;;
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
