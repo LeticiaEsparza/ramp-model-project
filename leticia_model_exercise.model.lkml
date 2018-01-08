@@ -55,7 +55,7 @@ explore: order_items {
   join: products {
     type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id}
-    AND ${products.category} NOT LIKE '%swim%';;
+    AND ${products.category} NOT ILIKE '%swim%';;
     relationship: many_to_one
   }
 
