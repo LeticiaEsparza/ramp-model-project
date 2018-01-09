@@ -22,6 +22,7 @@ view: order_items {
 
 
 
+
   dimension: order_id {
     type: number
     # hidden: yes
@@ -32,6 +33,12 @@ view: order_items {
     type: number
     hidden: yes
     sql: ${TABLE}.user_id ;;
+  }
+
+  dimension: sub_id {
+    type: number
+    sql: ${order_id} - ${user_id}  ;;
+
   }
 
   dimension_group: returned {
