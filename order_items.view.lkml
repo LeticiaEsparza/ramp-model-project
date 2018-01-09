@@ -35,11 +35,7 @@ view: order_items {
     sql: ${TABLE}.user_id ;;
   }
 
-  dimension: sub_id {
-    type: number
-    sql: ${order_id} - ${user_id}  ;;
 
-  }
 
   dimension_group: returned {
     type: time
