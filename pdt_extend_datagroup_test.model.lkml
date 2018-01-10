@@ -5,5 +5,5 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 include: "*"
 
 explore: pdt_test_extended {
-  extends: [pdt_test]
+
 }
