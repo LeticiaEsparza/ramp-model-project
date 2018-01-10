@@ -3,7 +3,7 @@ view: pdt_test {
     derived_table: {
       sql: SELECT id, products.category FROM products
               GROUP BY category;;
-              sql_trigger_value: SELECT CURDATE() ;;
+              datagroup_trigger: pdt_test_datagroup
               indexes: ["id"]
 
     }
