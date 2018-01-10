@@ -137,7 +137,10 @@ explore: ndt1 {
   }
 }
 
-
+datagroup: pdt_test_datagroup {
+  sql_trigger: SELECT max(id) FROM products ;;
+  max_cache_age: "24 hours"
+}
 #end of ndt test
 
 explore: users {}
