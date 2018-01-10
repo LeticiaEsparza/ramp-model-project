@@ -18,6 +18,11 @@ view: pdt_test {
       sql: ${TABLE}.category ;;
     }
 
+    dimension:  id {
+      type: number
+      sql: ${TABLE}.id ;;
+    }
+
     set: detail {
       fields: [category]
     }
