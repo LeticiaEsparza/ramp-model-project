@@ -60,7 +60,7 @@ explore: order_items {
 
   join: disc_test_pdt {
     type: left_outer
-    sql_on: ${disc_test_pdt.id} = ${inventory_items.product_id}.id};;
+    sql_on: ${disc_test_pdt.id} = ${inventory_items.product_id};;
     relationship: many_to_one
   }
 
