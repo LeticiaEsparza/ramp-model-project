@@ -225,13 +225,16 @@ dimension: was_item_returned {
 
 }
 
-  filter: veiw_filter_test {
-    type: yesno
-    sql: ${TABLE}.returned IS NOT NULL ;;
-# default_value: "No"
-    view_label: "Filter view test"
+  filter: test_temp_filter {
+    type: string
+    suggestions: ["yes","no"]
   }
 
+  dimension: was_item_returned_t {
+    hidden: yes
+    type: number
+    sql: if({% condition test_temp_filter %} 'yes' {% endcondition %} ,1 , 0) ;;
+  }
 
   measure: count {
     type: count
