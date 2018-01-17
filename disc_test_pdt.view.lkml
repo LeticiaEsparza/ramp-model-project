@@ -10,12 +10,12 @@ view: disc_test_pdt {
     }
 
     dimension: id {
-      type: string
+      type: number
       sql: ${TABLE}.id ;;
     }
 
     dimension: count {
-      type: string
+      type: number
       sql: ${TABLE}.`count(*)` ;;
     }
 
