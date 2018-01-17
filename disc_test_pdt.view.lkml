@@ -4,6 +4,8 @@ view: disc_test_pdt {
       sql: SELECT id, count(*)
               FROM  products;
                ;;
+      sql_trigger_value: SELECT CURDATE() ;;
+      indexes: ["id"]
     }
 
     dimension: id {
