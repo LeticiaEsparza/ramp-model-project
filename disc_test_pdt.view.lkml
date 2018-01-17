@@ -1,9 +1,9 @@
 view: disc_test_pdt {
 
     derived_table: {
-      sql: SELECT id, count(*)
+      sql: SELECT id, count(*), category
               FROM  products
-              GROUP BY id
+              GROUP BY category
                ;;
       sql_trigger_value: SELECT CURDATE() ;;
       indexes: ["id"]
@@ -17,6 +17,11 @@ view: disc_test_pdt {
     dimension: count {
       type: number
       sql: ${TABLE}.`count(*)` ;;
+    }
+
+    dimension: category {
+      type: string
+      sql: ${TABLE}.category ;;
     }
 
     set: detail {
