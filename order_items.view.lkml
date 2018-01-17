@@ -225,6 +225,13 @@ dimension: was_item_returned {
 
 }
 
+  filter: wir {
+    type: yesno
+    sql: ${returned_date} IS NOT NULL ;;
+# default_value: "No"
+    view_label: "Sales Data"
+  }
+
 
   measure: count {
     type: count
