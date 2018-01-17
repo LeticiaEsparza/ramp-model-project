@@ -225,16 +225,6 @@ dimension: was_item_returned {
 
 }
 
-  filter: test_temp_filter {
-    type: string
-    suggestions: ["yes","no"]
-  }
-
-  dimension: was_item_returned_t {
-    hidden: yes
-    type: number
-    sql: if({% condition test_temp_filter %} 'yes' {% endcondition %} ,1 , 0) ;;
-  }
 
   measure: count {
     type: count
