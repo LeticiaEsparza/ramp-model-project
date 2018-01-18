@@ -149,6 +149,7 @@ datagroup: pdt_test_datagroup {
 }
 #end of ndt test
 
+explore: stn_test {}
 explore: users {}
 explore: counts_tester {}
 
