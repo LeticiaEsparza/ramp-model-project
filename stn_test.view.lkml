@@ -1,6 +1,6 @@
 view: stn_test {
 
-sql_table_name: ( SELECT * FROM demo_db.order_items WHERE ${TABLE}.returned_at IS NULL);;
+sql_table_name: ( SELECT * FROM demo_db.order_items WHERE demo_db.order_items.returned_at IS NULL);;
   dimension: id {
     primary_key: yes
     #hidden: yes
