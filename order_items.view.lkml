@@ -225,6 +225,13 @@ dimension: was_item_returned {
 
 }
 
+  filter: reconciled {
+    type: yesno
+    sql: ${returned_date} IS NULL ;;
+# default_value: "No"
+    view_label: "Sales Data"
+  }
+
 #   filter: wir {
 #     type: yesno
 #     sql: ${returned_date} IS NOT NULL ;;
