@@ -1,6 +1,6 @@
 view: stn_test {
 
-sql_table_name: demo_db.order_items ;;
+sql_table_name: ( SELECT * FROM demo_db.order_items WHERE ${returned_date} IS NULL);;
   dimension: id {
     primary_key: yes
     #hidden: yes
@@ -47,7 +47,13 @@ sql_table_name: demo_db.order_items ;;
 
 
 
+#dimension of type yesno
+  dimension: was_item_returned {
+    label: "Was Item Returned?"
+    type: yesno
+    sql: ${returned_date} IS NOT NULL ;;
 
+  }
 
 
 
