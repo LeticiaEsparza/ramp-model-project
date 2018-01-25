@@ -20,7 +20,10 @@ view: order_items {
       ELSE ${inventory_item_id} END;;
   }
 
-
+measure: yn_test {
+  type: yesno
+  sql: ${returned_date}= CURDATE() ;;
+}
 
 
   dimension: order_id {
