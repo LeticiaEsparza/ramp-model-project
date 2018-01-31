@@ -22,6 +22,32 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+
+# dimension: created_string {
+#   type: string
+#   sql: ${created_quarter} ;;
+# }
+#
+# dimension: quarter_test {
+#   type: string
+#   case: {
+#     when: {
+#       sql: ${created_string} LIKE '%-01%'  ;;
+#       label: "Q1"
+#     }
+#     when: {
+#       sql: ${created_string} LIKE '-%04%' ;;
+#       label: "Q2"
+#     }
+#     when: {
+#       sql: ${created_string} LIKE '%-07%' ;;
+#       label: "Q3"
+#     }
+#     # Possibly more when statements
+#     else: "Q4"
+#   }
+# }
+
 measure: date_count {
   type: count
   filters:  {
