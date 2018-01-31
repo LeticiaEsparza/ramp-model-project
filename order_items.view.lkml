@@ -190,7 +190,7 @@ measure: total_profit {
   value_format_name: usd
 #   drill_fields: [users.id, users.full_name, products.category]
   html:
-  {% if inventory_items._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
+  {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
   {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
   {% endif %};;
 
