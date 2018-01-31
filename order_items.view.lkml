@@ -179,7 +179,6 @@ measure: total_revenue {
   value_format_name: usd
   drill_fields: [users.id, users.full_name, products.category]
 
-
 }
 
 #measure using multiple measures - I basically created this to
@@ -189,9 +188,15 @@ measure: total_profit {
   type: number
   sql: ${total_revenue}-${inventory_items.total_cost} ;;
   value_format_name: usd
-  drill_fields: [users.id, users.full_name, products.category]
+#   drill_fields: [users.id, users.full_name, products.category]
+  html:
+  {% if inventory_items._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
+  {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
+  {% endif %};;
 
 }
+
+
 
 # dimension: test {
 #  type:  number
