@@ -68,7 +68,8 @@ view: user_facts {
       total_orders,
       first_order,
       latest_order,
-      repeat_customer,
+      repeat_customer
+      ,
       days_since_first_purchase
     ]
   }
