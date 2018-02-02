@@ -83,6 +83,11 @@ dimension: relative_year {
     sql: ${TABLE}.gender ;;
   }
 
+  dimension: is_female {
+    type: yesno
+    sql: ${gender}='f' ;;
+  }
+
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;
@@ -99,6 +104,11 @@ dimension: relative_year {
     type: string
     map_layer_name: us_states
     sql: ${TABLE}.state ;;
+  }
+
+  dimension: is_california {
+    type: yesno
+    sql: ${state}='California' ;;
   }
 
 # Dimension with zip code

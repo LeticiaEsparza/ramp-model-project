@@ -14,6 +14,12 @@ view: order_items {
     sql: ${TABLE}.inventory_item_id ;;
   }
 
+# dimension: test_hard_insert {
+#   type: date
+#   sql: CURDATE();;
+#
+# }
+
   dimension: test {
     type:  number
     sql: CASE WHEN ${inventory_item_id} >= 50 THEN 50
