@@ -84,6 +84,14 @@ dimension: profit_status {
 
 }
 
+#   dimension: profit_test {
+#     type: string
+#     sql: CASE WHEN ${profit_status}="Not Profitable" THEN 'yes'
+#     ELSE 'no'
+#     END;;
+#   }
+
+
 # Dimension of type tier
 dimension: profit_tier {
   label: "Profit in Tiers"
@@ -204,6 +212,7 @@ measure: total_profit {
 
 
 
+
 # dimension: test {
 #  type:  number
 # sql: CASE WHEN ${total_profit} >= 50 THEN 50
@@ -216,7 +225,8 @@ measure: total_item_profit {
   type: sum
   sql: ${profit} ;;
   value_format_name: usd
-  drill_fields: [users.id, users.full_name, products.category]
+  #drill_fields: [users.id, users.full_name, products.category,count]
+  html: <a href="https://www.google.com/">{{ value }}</a>  ;;
 
 }
 
@@ -238,6 +248,18 @@ dimension: was_item_returned {
   sql: ${returned_date} IS NOT NULL ;;
 
 }
+
+# parameter: liquid_test {
+#   type: string
+#   allowed_value: {{ products.category }} ;;
+# }
+#
+# dimension: liquid_filter_test {
+#   label_from_parameter: liquid_test
+#
+# }
+
+
 
   filter: reconciled {
     type: yesno
@@ -288,7 +310,14 @@ dimension: was_item_returned {
    }
 
 
+  parameter: fieldname {
+    type: unquoted
+  }
 
+  dimension: thing {
+    type: string
+    sql: ${TABLE}.{% parameter fieldname %} ;;
+    }
 
 
 
