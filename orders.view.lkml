@@ -17,10 +17,17 @@ view: orders {
       week,
       month,
       quarter,
-      year
+      year,
+      day_of_month,
+      month_name
     ]
     sql: ${TABLE}.created_at ;;
   }
+
+dimension: month_and_day {
+  type: string
+  sql: CONCAT(${created_month_name}," ",${created_day_of_month}) ;;
+}
 
 
 # dimension: created_string {
