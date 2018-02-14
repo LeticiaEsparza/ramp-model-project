@@ -322,6 +322,24 @@ dimension: was_item_returned {
        END ;;
    }
 
+# filter: date_test {
+#   type: date
+# }
+#
+# measure: test_thing {
+#   type: number
+#   sql:
+#       CASE
+#          WHEN EXTRACT(MONTH from DATE_SUB({% parameter date_test %}, INTERVAL -1 MONTH)) = EXTRACT(MONTH from ${returned_time}) THEN
+#            ${total_profit}
+#
+#          ELSE
+#            NULL
+#       END
+#   ;;
+# }
+
+
 
   parameter: fieldname {
     type: unquoted

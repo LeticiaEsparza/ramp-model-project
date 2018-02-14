@@ -1,6 +1,6 @@
 view: running_total_test {
     derived_table: {
-      sql: SELECT order_items.id,
+      sql: SELECT order_items.id, order_items.returned_at,
         CASE
       WHEN (order_items.sale_price - inventory_items.cost)  < 0.0 THEN 0
       WHEN (order_items.sale_price - inventory_items.cost)  >= 0.0 AND (order_items.sale_price - inventory_items.cost)  < 10.0 THEN 10
@@ -38,6 +38,12 @@ view: running_total_test {
     measure: running_total {
       type: running_total
       sql: ${order_items_case_profit} ;;
+    }
+
+    dimension_group: date {
+      type: time
+      timeframes: [raw, date, month]
+      sql: ${TABLE}.returned_at ;;
     }
 
     set: detail {

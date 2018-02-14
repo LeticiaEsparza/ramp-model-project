@@ -1,6 +1,7 @@
 - dashboard: ramp_model_exercise
   title: Ramp Model Exercise
   layout: newspaper
+  refresh: 1 min
   elements:
   - title: Amount of Orders Categorized in Profit Tier
     name: Amount of Orders Categorized in Profit Tier
