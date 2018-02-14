@@ -26,6 +26,18 @@ view: orders {
 #     allow_fill: no
   }
 
+
+# dimension: created_quarters_test {
+#   type: date
+#   sql: DATE_SUB(${created_date}, INTERVAL 1 QUARTER);;
+# }
+
+dimension_group: previous_quarter_test {
+  type: time
+  timeframes: [quarter]
+  sql: DATE_SUB(${created_date}, INTERVAL 1 QUARTER);;
+}
+
 dimension: month_and_day {
   type: string
   sql: CONCAT(${created_month_name}," ",${created_day_of_month}) ;;
