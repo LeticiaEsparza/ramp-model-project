@@ -19,9 +19,11 @@ view: orders {
       quarter,
       year,
       day_of_month,
-      month_name
+      month_name,
+      day_of_year
     ]
     sql: ${TABLE}.created_at ;;
+#     allow_fill: no
   }
 
 dimension: month_and_day {

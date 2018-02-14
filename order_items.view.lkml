@@ -210,7 +210,20 @@ measure: total_profit {
 
 }
 
+measure: profit_running_total {
+  type: running_total
+  sql: ${total_profit} ;;
+}
 
+# measure: profit_running_total_should_not_work{
+#   type: running_total
+#   sql:  ;;
+# }
+
+# measure: scatter_test {
+#   type: number
+#   sql: CONCAT(${total_revenue}," ",${total_profit}) ;;
+# }
 
 
 # dimension: test {
