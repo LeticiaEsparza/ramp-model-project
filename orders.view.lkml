@@ -38,6 +38,11 @@ dimension_group: previous_quarter_test {
   sql: DATE_SUB(${created_date}, INTERVAL 1 QUARTER);;
 }
 
+  dimension: thisvslast {
+    type: yesno
+    sql: ${created_quarter} = ${previous_quarter_test_quarter} ;;
+  }
+
 dimension: month_and_day {
   type: string
   sql: CONCAT(${created_month_name}," ",${created_day_of_month}) ;;
@@ -143,6 +148,8 @@ filter: year_filter {
   type: number
 }
 
+
+
 dimension: status_satisfies_filter {
   type: yesno
   sql: {% condition ${year_filter} %} ${created_year} {% endcondition %}  ;;
@@ -153,6 +160,14 @@ measure: count_year_filter {
   filters: {
     field: created_year
     value: "2017"
+  }
+}
+
+measure: count_last_quarter {
+  type: count
+  filters: {
+    field: previous_quarter_test_quarter
+    value: "last 10 years"
   }
 }
 

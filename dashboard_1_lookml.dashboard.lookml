@@ -2,6 +2,7 @@
   title: Ramp Model Exercise
   layout: newspaper
 #   refresh: 1 min
+#   query_timezone: America/Los_Angeles
   elements:
   - title: Amount of Orders Categorized in Profit Tier
     name: Amount of Orders Categorized in Profit Tier
