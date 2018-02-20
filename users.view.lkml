@@ -14,6 +14,7 @@ view: users {
 
   dimension: city {
     type: string
+#     map_layer_name: city
     sql: ${TABLE}.city ;;
   }
 

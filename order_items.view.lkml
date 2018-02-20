@@ -20,6 +20,14 @@ view: order_items {
 #
 # }
 
+# filter: test_filter_2 {
+#   sql: {% condition %} ${products.test_filter} {% endcondition %} ;;
+# }
+
+# filter: other_churn_days {
+#   sql: ${products.churn_days} ;;
+# }
+
   dimension: test {
     type:  number
     sql: CASE WHEN ${inventory_item_id} >= 50 THEN 50

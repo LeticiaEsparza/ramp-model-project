@@ -18,6 +18,13 @@ view: products {
     sql: ${TABLE}.category ;;
   }
 
+# filter: test_filter {
+#   suggestions: ["swim"]
+# }
+#   filter: churn_days {
+#     suggestions: ["10","30","60"]
+#   }
+
   dimension: department {
     type: string
     sql: ${TABLE}.department ;;
