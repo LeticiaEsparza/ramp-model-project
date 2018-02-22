@@ -104,6 +104,22 @@ explore: user_data {
   }
 }
 
+view: list_ndt {
+  derived_table: {
+    explore_source: products{
+      column: id {field: products.id}
+      column: category {field: products.category}
+      column: list_test {field: products.list_test}
+    }
+  }
+  dimension: id {hidden: no primary_key:yes}
+  dimension: category {type:string}
+  measure: list_test {type:list
+                      list_field:category}
+}
+
+explore: list_ndt {}
+
 # beginning of ndt test
 view: ndt1 {
   derived_table: {
@@ -142,6 +158,7 @@ explore: ndt1 {
     relationship: many_to_one
   }
 }
+
 
 datagroup: pdt_test_datagroup {
   sql_trigger: SELECT max(id) FROM products ;;
