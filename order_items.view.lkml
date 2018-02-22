@@ -257,6 +257,7 @@ measure: profit_range {
   type: number
   sql: ${largest_item_profit}-${smallest_item_profit};;
   value_format_name: usd
+  # value_format: "$0.000 \" k\";($0.000\" k\")"
   drill_fields: [users.id, users.full_name, products.category]
 
 }

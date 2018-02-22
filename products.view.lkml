@@ -18,6 +18,10 @@ view: products {
     sql: ${TABLE}.category ;;
   }
 
+measure: list_test {
+  type: list
+  list_field: category
+}
 # filter: test_filter {
 #   suggestions: ["swim"]
 # }
