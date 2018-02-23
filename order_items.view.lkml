@@ -223,6 +223,27 @@ measure: profit_running_total {
   sql: ${total_profit} ;;
 }
 
+
+filter: date_filter_test {
+  description: "filter dates for offline"
+  type: string
+  suggest_explore: order_items
+  suggest_dimension: orders.created_date
+}
+
+measure: date_test_measure {
+  type: sum
+  sql:
+      CASE
+      WHEN {% condition date_filter_test %} ${orders.created_date} {% endcondition %}
+      THEN 1
+      ELSE 0
+    END
+  ;;
+}
+
+
+
 # measure: profit_running_total_should_not_work{
 #   type: running_total
 #   sql:  ;;
