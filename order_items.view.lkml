@@ -313,32 +313,12 @@ dimension: returned_color{
   ;;
 }
 
-# parameter: liquid_test {
-#   type: string
-#   allowed_value: {{ products.category }} ;;
-# }
-#
-# dimension: liquid_filter_test {
-#   label_from_parameter: liquid_test
-#
-# }
-
-
-
   filter: reconciled {
     type: yesno
     sql: ${returned_date} IS NULL ;;
 # default_value: "No"
     view_label: "Sales Data"
   }
-
-#   filter: wir {
-#     type: yesno
-#     sql: ${returned_date} IS NOT NULL ;;
-# # default_value: "No"
-#     view_label: "Sales Data"
-#   }
-
 
   measure: count {
     type: count
