@@ -243,7 +243,19 @@ measure: date_test_measure {
   ;;
 }
 
+filter: date_test_with_other_measure{
+  type: string
+}
 
+measure: date_test_other_measure{
+  type: number
+  sql:
+    CASE WHEN {%condition date_test_with_other_measure%} ${orders.created_date} {%endcondition%}
+    THEN ${total_revenue}-${inventory_items.total_cost}
+    ELSE 0
+    END
+  ;;
+}
 
 # measure: profit_running_total_should_not_work{
 #   type: running_total

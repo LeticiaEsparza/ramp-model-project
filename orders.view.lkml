@@ -144,6 +144,7 @@ measure: last_order {
        END ;;
   }
 
+#templated filter example
 filter: year_filter {
   type: number
 }
@@ -152,7 +153,7 @@ filter: year_filter {
 
 dimension: status_satisfies_filter {
   type: yesno
-  sql: {% condition ${year_filter} %} ${created_year} {% endcondition %}  ;;
+  sql: {% condition year_filter %} ${created_year} {% endcondition %}  ;;
 }
 
 measure: count_year_filter {
