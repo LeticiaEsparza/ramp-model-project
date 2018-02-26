@@ -113,6 +113,7 @@ dimension: profit_tier {
 
 }
 
+
 # dimension: profit_test {
 #   case: {
 #     when: {
@@ -290,6 +291,20 @@ dimension: was_item_returned {
   type: yesno
   sql: ${returned_date} IS NOT NULL ;;
 
+}
+
+#Liquid example coloring cells
+dimension: returned_color{
+  type: string
+  sql: ${was_item_returned} ;;
+  html:
+        {% if value == 'yes' %}
+          <div style="background-color:#E33F0F">{{ value }}</div>
+        {% elsif value == 'no' %}
+          <div style="background-color:#25A318">{{ value }}</div>
+        {% endif %}
+
+  ;;
 }
 
 # parameter: liquid_test {
