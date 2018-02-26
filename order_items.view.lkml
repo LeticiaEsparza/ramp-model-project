@@ -289,8 +289,15 @@ measure: profit_range {
 dimension: was_item_returned {
   label: "Was Item Returned?"
   type: yesno
-  sql: ${returned_date} IS NOT NULL ;;
-
+  sql: ${returned_date} IS NOT NULL;;
+# this will return red in red cell
+#   html:
+#   {% if value IS NOT NULL %}
+#   <div style="background-color:#E33F0F">{{ value }}</div>
+#   {% elsif value is null %}
+#   <div style="background-color:#25A318">{{ value }}</div>
+#   {% endif %}
+#   ;;
 }
 
 #Liquid example coloring cells
@@ -298,12 +305,11 @@ dimension: returned_color{
   type: string
   sql: ${was_item_returned} ;;
   html:
-        {% if value == 'yes' %}
+        {% if value == 1 %}
           <div style="background-color:#E33F0F">{{ value }}</div>
-        {% elsif value == 'no' %}
+        {% elsif value == 0 %}
           <div style="background-color:#25A318">{{ value }}</div>
         {% endif %}
-
   ;;
 }
 
