@@ -313,11 +313,24 @@ dimension: returned_color{
   ;;
 }
 
+#This example masks the customer user ID if the Looker end-user is not allowed to see IDs.
+#   dimension: safe_id {
+#     sql:
+#     CASE
+#       WHEN '{{ _user_attributes['can_see_id'] }}' = 'Yes'
+#       THEN ${id}::varchar
+#       ELSE MD5(${id})
+#     END
+#   ;;
+#   }
+
+
   filter: reconciled {
     type: yesno
     sql: ${returned_date} IS NULL ;;
 # default_value: "No"
     view_label: "Sales Data"
+    hidden: yes
   }
 
   measure: count {
