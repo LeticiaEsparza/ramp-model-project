@@ -18,6 +18,18 @@ view: products {
     sql: ${TABLE}.category ;;
   }
 
+#LIQUID IN URLS
+
+ dimension: category_google_search{
+  type: string
+  sql: ${category} ;;
+  link: {
+    label: "Category Google Search Test"
+    url: "https://www.google.com/search?q={{ value }}"
+  }
+ }
+
+
 # filter: date_filter_test {
 #   type: string
 # }
@@ -41,7 +53,7 @@ view: products {
 
 
 
-
+#FILTER MEASURE BY DATES
 
 
 # measure: count_pants {
@@ -83,12 +95,7 @@ measure: list_test {
   type: list
   list_field: category
 }
-# filter: test_filter {
-#   suggestions: ["swim"]
-# }
-#   filter: churn_days {
-#     suggestions: ["10","30","60"]
-#   }
+
 
   dimension: department {
     type: string
