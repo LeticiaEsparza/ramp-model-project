@@ -211,11 +211,11 @@ measure: total_profit {
   type: number
   sql: ${total_revenue}-${inventory_items.total_cost} ;;
   value_format_name: usd
-#   drill_fields: [users.id, users.full_name, products.category]
-  html:
-  {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
-  {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
-  {% endif %};;
+  drill_fields: [orders.created_quarter, total_revenue, total_profit]
+#   html:
+#   {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
+#   {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
+#   {% endif %};;
 
 }
 
@@ -280,8 +280,9 @@ measure: total_item_profit {
   type: sum
   sql: ${profit} ;;
   value_format_name: usd
-  #drill_fields: [users.id, users.full_name, products.category,count]
-  html: <a href="https://www.google.com/">{{ value }}</a>  ;;
+  drill_fields: [users.id, users.full_name, products.category,count]
+#   html: <a href="https://www.google.com/">{{ value }}</a>  ;;
+
 
 }
 
