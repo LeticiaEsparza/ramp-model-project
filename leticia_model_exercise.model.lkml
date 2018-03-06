@@ -159,7 +159,7 @@ explore: ndt1 {
   }
 }
 
-
+explore: extend_my_pdt_test {}
 datagroup: pdt_test_datagroup {
   sql_trigger: SELECT max(id) FROM products ;;
   max_cache_age: "24 hours"

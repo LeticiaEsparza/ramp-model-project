@@ -52,7 +52,10 @@ measure: yn_test {
     sql: ${TABLE}.user_id ;;
   }
 
-
+measure: count_dist_concat {
+  type: count_distinct
+  sql: CONCAT(${products.category},",",CAST(${orders.id} AS string)) ;;
+}
 
   dimension_group: returned {
     type: time
