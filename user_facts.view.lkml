@@ -6,6 +6,7 @@ view: user_facts {
            COUNT(DISTINCT orders.id) AS total_orders,
            MIN(NULLIF(orders.created_at,0)) as first_order,
            MAX(NULLIF(orders.created_at,0)) as latest_order,
+           orders.created_at,
            CASE WHEN COUNT(orders.created_at)>1 THEN 'yes' ELSE 'no' END AS repeat_customer,
            DATEDIFF(CURDATE(), MIN(NULLIF(orders.created_at,0))) AS days_since_first_purchase
            FROM order_items JOIN orders ON order_items.order_id=orders.id
@@ -42,9 +43,19 @@ view: user_facts {
     sql: ${TABLE}.first_order ;;
   }
 
-  dimension: latest_order {
-    type: string
+  dimension_group: latest_order {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.latest_order ;;
+
   }
 
   dimension: repeat_customer {
@@ -62,14 +73,26 @@ view: user_facts {
     sql: ${TABLE}.days_since_first_purchase ;;
   }
 
+dimension_group: created_at {
+  type: time
+  timeframes: [raw, date, time, week, month]
+  datatype: timestamp
+  sql: ${TABLE}.created_at ;;
+}
+
+#   dimension: is_mau {
+#     type: yesno
+#     sql: ${total_orders} >= 2 AND DATEDIFF(${latest_order_date},${second_most_recent_date.created_at_date}) <= 30 AND ${repeat_customer} = "yes";;
+#   }
+
+
   set: detail {
     fields: [
       user_id,
       total_orders,
       first_order,
-      latest_order,
-      repeat_customer
-      ,
+#       latest_order,
+      repeat_customer,
       days_since_first_purchase
     ]
   }

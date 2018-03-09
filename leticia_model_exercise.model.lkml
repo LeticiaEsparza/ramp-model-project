@@ -175,3 +175,25 @@ explore: user_facts_test {}
 explore: user_facts {}
 explore: pdt_test {}
 explore: running_total_test {}
+
+explore: monthly_active_users {}
+
+# explore: second_most_recent_date {}
+
+explore: MAU_test {
+  view_name: user_facts
+  join: second_most_recent_date {
+    type: left_outer
+    sql_on: ${second_most_recent_date.user_id}=${user_facts.user_id} ;;
+    relationship: many_to_one
+  }
+  }
+
+#   explore: second_most_recent_date {
+#     join: user_facts {
+#       type: left_outer
+#       sql: ${user_facts.user_id}=${second_most_recent_date.user_id} ;;
+#       relationship: many_to_one
+#     }
+#
+# }
