@@ -16,6 +16,10 @@ view: products {
     type: string
     #hidden: yes
     sql: ${TABLE}.category ;;
+    drill_fields: [id, item_name]
+
+
+
   }
 
 #LIQUID IN URLS

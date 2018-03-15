@@ -235,6 +235,21 @@ measure: percentage_orders_2017_over_total {
     }
   }
 
+  dimension: filter_test_date_sano {
+    type: date
+    sql: CASE WHEN ${created_date} = "2018/03/01" THEN NULL
+         ELSE ${created_date}
+        END ;;
+}
+
+  measure: count_filter_date_sano{
+    type: count
+    filters: {
+      field: orders.filter_test_date_sano
+      value: "-NULL"
+    }
+  }
+
 
 
 

@@ -14,11 +14,11 @@ view: order_items {
     sql: ${TABLE}.inventory_item_id ;;
   }
 
-# dimension: test_hard_insert {
-#   type: date
-#   sql: CURDATE();;
-#
-# }
+dimension: test_hard_insert {
+  type: date
+  sql: CURDATE();;
+
+}
 
 # filter: test_filter_2 {
 #   sql: {% condition %} ${products.test_filter} {% endcondition %} ;;
@@ -55,6 +55,12 @@ measure: yn_test {
 measure: count_dist_concat {
   type: count_distinct
   sql: CONCAT(${products.category},",",CAST(${orders.id} AS string)) ;;
+}
+
+measure: test_quotient{
+  type: number
+  sql: ${total_profit}/${total_revenue} ;;
+  value_format: "0.00"
 }
 
   dimension_group: returned {
@@ -233,7 +239,7 @@ measure: total_profit {
         \"y_axis_combined\"       : true,
         \"show_y_axis_labels\"    : true,
         \"show_y_axis_ticks\"     : true,
-        \"y_axis_tick_density\"   : \"default\",
+        \"y_axis_tick_density\"   : \"default\"
         \"y_axis_tick_density_custom\"   : 5,
         \"show_x_axis_label\"     : true,
         \"show_x_axis_ticks\"     : true,
@@ -444,7 +450,7 @@ dimension: returned_color{
 
   measure: count {
     type: count
-    drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
+    drill_fields: [id, users.last_name, users.first_name, users.id]
   }
 
    parameter: metric_selector {
