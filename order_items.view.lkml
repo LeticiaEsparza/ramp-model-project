@@ -239,7 +239,7 @@ measure: total_profit {
         \"y_axis_combined\"       : true,
         \"show_y_axis_labels\"    : true,
         \"show_y_axis_ticks\"     : true,
-        \"y_axis_tick_density\"   : \"default\"
+        \"y_axis_tick_density\"   : \"default\",
         \"y_axis_tick_density_custom\"   : 5,
         \"show_x_axis_label\"     : true,
         \"show_x_axis_ticks\"     : true,

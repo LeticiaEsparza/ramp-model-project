@@ -250,7 +250,17 @@ measure: percentage_orders_2017_over_total {
     }
   }
 
+  dimension: last_day_of_previous_month {
+    type: date
+    sql: LAST_DAY(${created_date} - interval 1 month );;
+  }
 
-
+  dimension: this_month_plus_last_day_previous_month {
+    type: date
+    sql:
+        CASE WHEN ${created_date} >= LAST_DAY(now() - interval 1 month ) THEN ${created_date}
+        ELSE null END
+    ;;
+  }
 
 }
