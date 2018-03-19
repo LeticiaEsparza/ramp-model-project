@@ -218,6 +218,7 @@ measure: total_revenue {
 
 }
 
+
 measure: total_profit {
   label: "Total Profit"
   type: number
