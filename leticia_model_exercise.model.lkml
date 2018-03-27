@@ -7,6 +7,8 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+
+explore: sql_runner_query {}
 #Explore with fields parameter
 explore: events {
   join: users {
