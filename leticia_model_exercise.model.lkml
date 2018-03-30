@@ -41,18 +41,17 @@ explore: order_items {
     sql_on: ${order_items.order_id} = ${orders.id} ;;
     relationship: many_to_one
   }
-
 ## Joining PDT
   join: user_facts {
     type: left_outer
     sql_on: ${orders.user_id} = ${user_facts.user_id} ;;
     relationship: many_to_one
   }
-  join: user_facts_test {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${user_facts_test.user_id} ;;
-    relationship: many_to_one
-  }
+#   join: user_facts_test {
+#     type: left_outer
+#     sql_on: ${orders.user_id} = ${user_facts_test.user_id} ;;
+#     relationship: many_to_one
+#   }
 
   join: products {
     type: left_outer
@@ -60,11 +59,11 @@ explore: order_items {
     relationship: many_to_one
   }
 
-  join: disc_test_pdt {
-    type: left_outer
-    sql_on: ${disc_test_pdt.id} = ${products.id};;
-    relationship: many_to_one
-  }
+#   join: disc_test_pdt {
+#     type: left_outer
+#     sql_on: ${disc_test_pdt.id} = ${products.id};;
+#     relationship: many_to_one
+#   }
 
   join: users {
     type: left_outer

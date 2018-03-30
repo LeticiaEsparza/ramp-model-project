@@ -1,12 +1,12 @@
 view: sql_runner_query {
   derived_table: {
-    sql: SELECT null as example
+    sql: SELECT 0 as example
       UNION ALL
-      SELECT null as example
+      SELECT 0 as example
       UNION ALL
-      SELECT null as example
+      SELECT 0 as example
       UNION ALL
-      SELECT null as example
+      SELECT 0 as example
       UNION ALL
       SELECT "t1" as example
        ;;
@@ -34,6 +34,11 @@ measure: test {
     field: example
     value: "t1"
   }
+}
+
+dimension: sumtest {
+  type: number
+  sql: 1/NULLIF(${example},0) ;;
 }
 
   set: detail {

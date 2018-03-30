@@ -7,6 +7,17 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
+
+dimension: id_test {
+  type: number
+  sql: ${id} ;;
+}
+
+dimension: id_test_b {
+  type: number
+  sql: ${id} OR ${id_test} ;;
+}
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -93,6 +104,11 @@ measure: date_count {
     sql: ${TABLE}.user_id ;;
   }
 
+
+# measure: count_user_id {
+#   type: count
+#   sql: ${user_id} ;;
+# }
  # measure: first_order {
   #  type: min
   #  sql: ${created_date};;
