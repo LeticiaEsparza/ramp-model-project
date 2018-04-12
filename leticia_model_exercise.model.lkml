@@ -190,6 +190,11 @@ explore: MAU_test {
   }
   }
 
+  explore: p_test {
+    view_name: products
+
+  }
+
 #   explore: second_most_recent_date {
 #     join: user_facts {
 #       type: left_outer

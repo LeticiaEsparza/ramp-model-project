@@ -38,6 +38,28 @@ dimension: id_test_b {
   }
 
 
+  dimension: date_format_test {
+    type: string
+    sql: DATE_FORMAT(${created_date}, "%d/%m/%Y" );;
+  }
+
+  dimension: date_format_test_b {
+    type: date
+    sql: ${created_date} ;;
+    html: {{orders.date_format_test._rendered_value}} ;;
+  }
+
+  # sql: DATE_FORMAT(${created_date}, "%d/%m/%Y" );
+
+# dimension: date_format_test_b {
+#   type: date
+#   sql:  ;;
+# }
+  # dimension: station_id {
+  #   type: date
+  #   sql: ${date_format_test};;
+  #   html: <p style="font-size:30px"> {{value}} </p> ;;
+  # }
 # dimension: created_quarters_test {
 #   type: date
 #   sql: DATE_SUB(${created_date}, INTERVAL 1 QUARTER);;
@@ -158,6 +180,11 @@ measure: last_order {
          ELSE
            NULL
        END ;;
+  }
+
+  dimension: date_test {
+    type: date
+    sql: ${created_date} ;;
   }
 
 #templated filter example

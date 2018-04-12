@@ -34,9 +34,15 @@ view: user_facts {
   }
 
   dimension: total_orders {
-    type: string
+    type: number
     sql: ${TABLE}.total_orders ;;
   }
+
+
+#   dimension: test {
+#     type: number
+#     sql: ${total_orders}-${user_id} ;;
+#   }
 
   dimension: first_order {
     type: string
