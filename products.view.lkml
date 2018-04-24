@@ -22,6 +22,27 @@ view: products {
 
   }
 
+  dimension: test_sum_case {
+    type: number
+    sql:  CASE WHEN ${category} LIKE "a%" THEN 1
+              WHEN ${category} LIKE "b%" THEN 2
+          ELSE null
+          END;;
+  }
+
+  dimension: test_sum_case_b {
+    type: number
+    sql:  CASE WHEN ${category} LIKE "c%" THEN 3
+              WHEN ${category} LIKE "d%" THEN 4
+          ELSE null
+          END;;
+  }
+
+  measure: test_sum_case_sum {
+    type: sum
+    sql: ${test_sum_case} + ${test_sum_case_b} ;;
+  }
+
 #LIQUID IN URLS
 
  dimension: category_google_search{

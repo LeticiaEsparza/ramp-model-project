@@ -38,6 +38,7 @@ dimension: id_test_b {
   }
 
 
+# format date field while preserving date functionality
   dimension: date_format_test {
     type: string
     sql: DATE_FORMAT(${created_date}, "%d/%m/%Y" );;
@@ -48,6 +49,24 @@ dimension: id_test_b {
     sql: ${created_date} ;;
     html: {{orders.date_format_test._rendered_value}} ;;
   }
+# end of example formatting date field
+
+
+  dimension: date_field_test {
+    type: date
+    sql: ${created_date} ;;
+    html: <a href="https://localhost:9999/dashboards/18?date={{ value | date: "%s" | minus : 1209600 | date: "%Y-%m-%d"}}+to+{{value}}">
+    Current: {{rendered_value}} Two weeks ago: {{ value | date: "%s" | minus : 1209600 | date: "%Y-%m-%d"}}</a> ;;
+  }
+
+dimension: is_in_past_2_weeks{
+  type: yesno
+  sql:
+        ${users.created_date} >= DATE_SUB(${date_field_test}, INTERVAL 2 WEEK)
+
+  ;;
+}
+
 
   # sql: DATE_FORMAT(${created_date}, "%d/%m/%Y" );
 
@@ -152,7 +171,7 @@ measure: last_order {
 
   measure: count {
     type: count
-    drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
+    drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count, date_field_test, created_date]
   }
 
   #parameter practice
