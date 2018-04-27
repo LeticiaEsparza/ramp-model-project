@@ -93,7 +93,9 @@ explore: orders {
 
 }
 
-explore: products {}
+explore: products {
+  # fields: [brand, category]
+}
 
 explore: schema_migrations {}
 
@@ -105,21 +107,21 @@ explore: user_data {
   }
 }
 
-view: list_ndt {
-  derived_table: {
-    explore_source: products{
-      column: id {field: products.id}
-      column: category {field: products.category}
-      column: list_test {field: products.list_test}
-    }
-  }
-  dimension: id {hidden: no primary_key:yes}
-  dimension: category {type:string}
-  measure: list_test {type:list
-                      list_field:category}
-}
+# view: list_ndt {
+#   derived_table: {
+#     explore_source: products{
+#       column: id {field: products.id}
+#       column: category {field: products.category}
+#       column: list_test {field: products.list_test}
+#     }
+#   }
+#   dimension: id {hidden: no primary_key:yes}
+#   dimension: category {type:string}
+#   measure: list_test {type:list
+#                       list_field:category}
+# }
 
-explore: list_ndt {}
+# explore: list_ndt {}
 
 # beginning of ndt test
 view: ndt1 {
