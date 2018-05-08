@@ -85,6 +85,7 @@ measure: test_quotient{
 measure: total_sale_price {
   type: sum
   sql: ${sale_price} ;;
+  value_format: "$#,##0.00"
 }
 
 
@@ -218,6 +219,14 @@ measure: total_revenue {
 
 }
 
+
+measure: liquid_behavior_test{
+  type: number
+  sql:
+      {% if orders.created_date._is_filtered  %} ${user_facts.total} {% else %} ${total_sale_price} {% endif %}
+  ;;
+  value_format: "$#,##0.00"
+}
 
 measure: total_profit {
   label: "Total Profit"
@@ -416,6 +425,41 @@ dimension: was_item_returned {
 #   ;;
 }
 
+
+  parameter: yesno_param {
+    type: unquoted
+    allowed_value: {
+      label: "Yes"
+      value: "1"
+    }
+    allowed_value: {
+      label: "No"
+      value: "0"
+    }
+    allowed_value: {
+      label: "both"
+      value: "1,0"
+    }
+  }
+
+dimension: both_test {
+  type: string
+  sql:
+      CASE WHEN ${was_item_returned}=1 THEN "yes"
+      CASE WHEN ${was_item_returned}=0 THEN "no"
+      ELSE "both"
+      END
+
+  ;;
+}
+
+dimension: both_yes_and_no {
+  type: yesno
+  sql:
+      ${was_item_returned}=1 OR ${was_item_returned}=0
+  ;;
+}
+
 #Liquid example coloring cells
 dimension: returned_color{
   type: string
@@ -577,5 +621,18 @@ dimension: returned_color{
     }
   }
 
+
+dimension: video {
+  type: string
+  sql: ${id} ;;
+  html:
+       <a href="https://www.youtube.com/watch?v=Np4FYh5S1_4" target="_new">
+       <video width="320" height="240" controls>
+       <source src="https://www.youtube.com/watch?v=Np4FYh5S1_4" type="video/mp4">
+       <source src="https://www.youtube.com/watch?v=Np4FYh5S1_4" type="video/ogg">
+              Your browser does not support the video tag.
+       </video>
+  ;;
+}
 
 }

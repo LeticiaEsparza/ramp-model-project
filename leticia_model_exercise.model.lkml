@@ -20,6 +20,9 @@ explore: events {
 }
 
 explore: inventory_items {
+#   hidden: yes
+  view_name: inventory_items
+  from: inventory_items
   join: products {
     type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
@@ -94,7 +97,6 @@ explore: orders {
 }
 
 explore: products {
-  # fields: [brand, category]
 }
 
 explore: schema_migrations {}
@@ -197,6 +199,7 @@ explore: MAU_test {
 
   }
 
+explore: the_test {}
 #   explore: second_most_recent_date {
 #     join: user_facts {
 #       type: left_outer

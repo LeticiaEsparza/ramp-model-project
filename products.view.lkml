@@ -17,12 +17,35 @@ view: products {
     #hidden: yes
     sql: ${TABLE}.category ;;
     drill_fields: [id, item_name]
-
-
-
   }
 
-  dimension: test_sum_case {
+dimension: category_dupe_test{
+  label: "Category Dupe"
+  type: string
+  sql: ${category} ;;
+}
+
+#   dimension: category_colors {
+#     type: string
+#     sql: ${category}  ;;
+#     html:
+#     {% if value == "Accessories" %}
+#     <center><b><div style="background-color:#00E400">{{ rendered_value }}</div></b></center>
+#     {% elsif value == "Active"  %}
+#     <center><b><div style="background-color:#FFFF00">{{ rendered_value }}</div></b></center>
+#     {% elsif value == "Blazers & Jackets" %}
+#     <center><b><div style="background-color:#FF7E00"><font color="white">{{ rendered_value }}</font></div></b></center>
+#     {% elsif value == "Clothing Sets"  %}
+#     <center><b><div style="background-color:#FF0000"><font color="white">{{ rendered_value }}</font></div></b></center>
+#     {% elsif value == "Dresses"  %}
+#     <center><b><div style="background-color:#8F3F97"><font color="white">{{ rendered_value }}</font></div></b></center>
+#     {% else %}
+#     <center><b><div style="background-color:#7E0023"><font color="white">{{ rendered_value }}</font></div></b></center>
+#     {% endif %}
+#     ;;
+#   }
+
+  dimension: test_case {
     type: number
     sql:  CASE WHEN ${category} LIKE "a%" THEN 1
               WHEN ${category} LIKE "b%" THEN 2
@@ -30,18 +53,7 @@ view: products {
           END;;
   }
 
-  dimension: test_sum_case_b {
-    type: number
-    sql:  CASE WHEN ${category} LIKE "c%" THEN 3
-              WHEN ${category} LIKE "d%" THEN 4
-          ELSE null
-          END;;
-  }
 
-  measure: test_sum_case_sum {
-    type: sum
-    sql: ${test_sum_case} + ${test_sum_case_b} ;;
-  }
 
 #LIQUID IN URLS
 

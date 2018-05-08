@@ -14,8 +14,6 @@ view: user_facts {
            ORDER BY COUNT(DISTINCT orders.id) desc
 
 
-
-
  ;;
 
     sql_trigger_value: SELECT current_date;;
@@ -38,7 +36,10 @@ view: user_facts {
     sql: ${TABLE}.total_orders ;;
   }
 
-
+measure: total {
+  type: sum
+  sql: ${total_orders} ;;
+}
 #   dimension: test {
 #     type: number
 #     sql: ${total_orders}-${user_id} ;;
