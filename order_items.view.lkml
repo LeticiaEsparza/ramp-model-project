@@ -223,10 +223,18 @@ measure: total_revenue {
 measure: liquid_behavior_test{
   type: number
   sql:
-      {% if orders.created_date._is_filtered  %} ${user_facts.total} {% else %} ${total_sale_price} {% endif %}
+      {% if user_facts.id._is_filtered  %} ${user_facts.total} {% else %} ${total_sale_price} {% endif %}
   ;;
   value_format: "$#,##0.00"
 }
+
+  measure: liquid_behavior_test_2{
+    type: number
+    sql:
+      {% if orders.created_date._is_filtered  %} ${inventory_items.total_cost} {% else %} ${total_sale_price} {% endif %}
+  ;;
+    value_format: "$#,##0.00"
+  }
 
 measure: total_profit {
   label: "Total Profit"
