@@ -25,6 +25,11 @@ dimension: category_dupe_test{
   sql: ${category} ;;
 }
 
+
+# dimension: case_when_test {
+#   type: string
+#   sql: ${category} WHERE ${category} LIKE "s%" ;;
+# }
 #   dimension: category_colors {
 #     type: string
 #     sql: ${category}  ;;
@@ -128,7 +133,7 @@ dimension: category_dupe_test{
 #     }
 #   }
 
-measure: list_test {
+measure: list_category{
   type: list
   list_field: category
 }

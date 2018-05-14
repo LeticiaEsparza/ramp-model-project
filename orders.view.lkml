@@ -39,15 +39,15 @@ dimension: id_test_b {
 
 
 # format date field while preserving date functionality
-  dimension: date_format_test {
+  dimension: date_formatter {
     type: string
     sql: DATE_FORMAT(${created_date}, "%d/%m/%Y" );;
   }
 
-  dimension: date_format_test_b {
+  dimension: date_new_format {
     type: date
     sql: ${created_date} ;;
-    html: {{orders.date_format_test._rendered_value}} ;;
+    html: {{orders.date_format._rendered_value}} ;;
   }
 # end of example formatting date field
 

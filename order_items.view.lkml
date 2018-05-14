@@ -242,6 +242,12 @@ measure: total_profit {
   sql: ${total_revenue}-${inventory_items.total_cost} ;;
   value_format_name: usd
   drill_fields: [orders.created_quarter, order_items.total_revenue, order_items.total_profit]
+  # html:
+  # {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
+  # {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
+  # {% endif %};;
+
+
   link: {
     label: "Show as Line Chart"
     url: "
@@ -284,10 +290,10 @@ measure: total_profit {
 
 
 #  https://localhost:9999/explore/leticia_model_exercise/order_items?qid=NKR2CxljzCBEYWMDgfkowA&toggle=dat,vis
-#   html:
-#   {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
-#   {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
-#   {% endif %};;
+  # html:
+  # {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
+  # {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
+  # {% endif %};;
 
 
 
@@ -431,6 +437,14 @@ dimension: was_item_returned {
 #   <div style="background-color:#25A318">{{ value }}</div>
 #   {% endif %}
 #   ;;
+}
+
+measure: counts_filter {
+  type: count
+  filters: {
+    field: was_item_returned
+    value: "yes"
+  }
 }
 
 
