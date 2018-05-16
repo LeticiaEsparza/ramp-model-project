@@ -664,5 +664,17 @@ dimension: video {
           END;;
   }
 
+filter: category_filter{
+  type: string
+}
+
+filter: department_filter{
+  type: string
+}
+dimension: dashboard_category_department{
+  type: yesno
+  sql: (${products.category} = {% condition category_filter %} products.category {% endcondition %}
+        OR ${products.department}= {% condition department_filter %} products.category {% endcondition %}) ;;
+}
 
 }
