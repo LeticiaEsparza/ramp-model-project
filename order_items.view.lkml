@@ -664,17 +664,23 @@ dimension: video {
           END;;
   }
 
+#DYNAMICALLY FILTER A DASHBOARD WITH OR LOGIC
+
 filter: category_filter{
   type: string
+  suggest_dimension: products.category
 }
 
 filter: department_filter{
   type: string
+  suggest_dimension: products.department
 }
+
 dimension: dashboard_category_department{
   type: yesno
-  sql: (${products.category} = {% condition category_filter %} products.category {% endcondition %}
-        OR ${products.department}= {% condition department_filter %} products.category {% endcondition %}) ;;
+  sql:
+      ({% condition category_filter %} products.category {% endcondition %} OR
+       {% condition department_filter %} products.department {% endcondition %}) ;;
 }
 
 }
