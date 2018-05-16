@@ -34,7 +34,7 @@ dimension: id_test_b {
       day_of_year
     ]
     sql: ${TABLE}.created_at ;;
-#     allow_fill: no
+    allow_fill: yes
   }
 
 

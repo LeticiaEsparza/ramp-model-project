@@ -657,4 +657,12 @@ dimension: video {
   ;;
 }
 
+  dimension: case_category{
+    type: string
+    sql: CASE WHEN ${products.category} IN ("Pants","Shorts") AND ${order_items.sale_price} > 50 THEN "Win"
+          ELSE "other"
+          END;;
+  }
+
+
 }

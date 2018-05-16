@@ -7,6 +7,7 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+explore: list_test_ndt {}
 
 explore: sql_runner_query {}
 #Explore with fields parameter
@@ -198,6 +199,8 @@ explore: MAU_test {
     view_name: products
 
   }
+
+  explore: long_string_table {}
 
 explore: the_test {}
 #   explore: second_most_recent_date {
