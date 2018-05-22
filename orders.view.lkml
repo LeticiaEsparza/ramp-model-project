@@ -325,4 +325,18 @@ measure: percentage_orders_2017_over_total {
     ;;
   }
 
+  measure: order_count {
+    type: sum_distinct
+    sql_distinct_key:
+          {% if orders.id._in_query %}
+          ${orders.id}
+          {% else %}
+          ${id}
+          {% endif %}
+    ;;
+
+    sql:  ${id};;
+}
+
+
 }

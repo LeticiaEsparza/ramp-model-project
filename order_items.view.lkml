@@ -20,6 +20,12 @@ dimension: test_hard_insert {
 
 }
 
+#test for Charlie 5/22/18
+filter: test_filter_time {
+  type: date_time
+  datatype: datetime
+}
+
 # filter: test_filter_2 {
 #   sql: {% condition %} ${products.test_filter} {% endcondition %} ;;
 # }
@@ -81,6 +87,12 @@ measure: test_quotient{
     type: number
     sql: ${TABLE}.sale_price ;;
   }
+
+dimension: sale_price_pound {
+  type: number
+  sql: ${sale_price}*(0.74) ;;
+  value_format_name: gbp
+}
 
 measure: total_sale_price {
   type: sum
@@ -261,11 +273,11 @@ measure: total_profit {
         \"show_view_names\"       : true,
         \"limit_displayed_rows\"  : false,
         \"y_axis_combined\"       : true,
-        \"show_y_axis_labels\"    : true,
+        \"show_y_axis_labels\"    : false,
         \"show_y_axis_ticks\"     : true,
         \"y_axis_tick_density\"   : \"default\",
         \"y_axis_tick_density_custom\"   : 5,
-        \"show_x_axis_label\"     : true,
+        \"show_x_axis_label\"     : false,
         \"show_x_axis_ticks\"     : true,
         \"x_axis_scale\"          : \"auto\",
         \"show_null_points\"      : false,
@@ -279,8 +291,8 @@ measure: total_profit {
         \"totals_color\"          : \"#808080\",
         \"series_types\"          : {},
         \"x_axis_label\"          : \"Quarter\",
-        \"series_colors\"         : {}
-
+        \"series_colors\"         : {},
+        \"series_labels\": {\"order_items.total_revenue\":\"Revenue\",\"order_items.total_profit\":\"Profit\"}
 
       }' %}
     {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
@@ -682,5 +694,6 @@ dimension: dashboard_category_department{
       ({% condition category_filter %} products.category {% endcondition %} OR
        {% condition department_filter %} products.department {% endcondition %}) ;;
 }
+
 
 }

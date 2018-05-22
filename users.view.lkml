@@ -153,6 +153,11 @@ measure: users_in_ca {
     ]
   }
 
+  measure: user_count_test {
+    label: "repro pivot measure with coalesce"
+    type: count_distinct
+    sql: COALESCE(${id}, ${full_name});;
+  }
 
 
 }

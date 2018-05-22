@@ -33,6 +33,12 @@ explore: inventory_items {
 
 #join used for profit dimension in order_items
 explore: order_items {
+#   always_filter: {
+#     filters: {
+#       field: order_items.test_filter_time
+#       value: "after 2013/01/10"
+#     }
+#   }
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
