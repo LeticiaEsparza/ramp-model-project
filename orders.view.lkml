@@ -52,6 +52,25 @@ dimension: id_test_b {
 # end of example formatting date field
 
 
+dimension_group: created_churn_date{
+  type: time
+  timeframes: [
+    raw,
+    time,
+    date,
+    day_of_week,
+    week,
+    month,
+    quarter,
+    year,
+    day_of_month,
+    month_name,
+    day_of_year
+  ]
+  sql: DATE_ADD(${created_raw}, INTERVAL 30 DAY) ;;
+}
+
+
   dimension: date_field_test {
     type: date
     sql: ${created_date} ;;
@@ -211,10 +230,13 @@ filter: year_filter {
   type: number
 }
 
-
-
 dimension: status_satisfies_filter {
   type: yesno
+  sql: {% condition year_filter %} ${created_year} {% endcondition %}  ;;
+}
+
+measure:templated_filter_year_count{
+  type: count_distinct
   sql: {% condition year_filter %} ${created_year} {% endcondition %}  ;;
 }
 
@@ -324,19 +346,6 @@ measure: percentage_orders_2017_over_total {
         ELSE null END
     ;;
   }
-
-  measure: order_count {
-    type: sum_distinct
-    sql_distinct_key:
-          {% if orders.id._in_query %}
-          ${orders.id}
-          {% else %}
-          ${id}
-          {% endif %}
-    ;;
-
-    sql:  ${id};;
-}
 
 
 }

@@ -21,7 +21,7 @@ explore: events {
 }
 
 explore: inventory_items {
-#   hidden: yes
+  extension: required
   view_name: inventory_items
   from: inventory_items
   join: products {

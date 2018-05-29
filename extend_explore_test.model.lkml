@@ -6,4 +6,5 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 
 explore: test{
   extends: [inventory_items]
+  hidden:  no
 }

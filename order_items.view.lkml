@@ -2,12 +2,17 @@ view: order_items {
   sql_table_name: demo_db.order_items ;;
 
   dimension: id {
+    hidden: yes
     primary_key: yes
     #hidden: yes
     type: number
     sql: ${TABLE}.id ;;
   }
 
+measure: count_hidden{
+  type: count_distinct
+  sql: ${id} ;;
+}
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -253,11 +258,11 @@ measure: total_profit {
   type: number
   sql: ${total_revenue}-${inventory_items.total_cost} ;;
   value_format_name: usd
-  drill_fields: [orders.created_quarter, order_items.total_revenue, order_items.total_profit]
-  # html:
-  # {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
-  # {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
-  # {% endif %};;
+#  drill_fields: [orders.created_quarter, order_items.total_revenue, order_items.total_profit]
+#   html:
+#   {% if products._in_query %} <a href ="https://www.google.com/">{{rendered_value}}</a>
+#   {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
+#   {% endif %};;
 
 
   link: {
@@ -298,7 +303,7 @@ measure: total_profit {
     {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
 
   }
-}
+ }
 
 
 #  https://localhost:9999/explore/leticia_model_exercise/order_items?qid=NKR2CxljzCBEYWMDgfkowA&toggle=dat,vis
@@ -388,7 +393,17 @@ measure: date_test_subtract_time {
   ;;
 }
 
-
+# dimension: date_test_subtract_time_date{
+#     type: date
+#     sql:
+#       CASE WHEN
+#       ${orders.created_date} >= DATE_SUB( {% date_start date_filter_sub %} , INTERVAL 1 MONTH)
+#       AND ${orders.created_date} <= DATE_SUB( {% date_end date_filter_sub %} , INTERVAL 1 MONTH)
+#       THEN ${orders.created_date}
+#       ELSE 0
+#       END
+#   ;;
+#   }
 
 
 # Test End
@@ -655,20 +670,6 @@ dimension: returned_color{
     }
   }
 
-
-dimension: video {
-  type: string
-  sql: ${id} ;;
-  html:
-       <a href="https://www.youtube.com/watch?v=Np4FYh5S1_4" target="_new">
-       <video width="320" height="240" controls>
-       <source src="https://www.youtube.com/watch?v=Np4FYh5S1_4" type="video/mp4">
-       <source src="https://www.youtube.com/watch?v=Np4FYh5S1_4" type="video/ogg">
-              Your browser does not support the video tag.
-       </video>
-  ;;
-}
-
   dimension: case_category{
     type: string
     sql: CASE WHEN ${products.category} IN ("Pants","Shorts") AND ${order_items.sale_price} > 50 THEN "Win"
@@ -696,4 +697,16 @@ dimension: dashboard_category_department{
 }
 
 
-}
+#   measure: order_count {
+#     type: sum_distinct
+#     sql_distinct_key:
+#           {% if orders.id._in_query %}
+#           ${orders.id}
+#           {% else %}
+#           ${order_items.id}
+#           {% endif %}
+#     ;;
+#     sql:  ;;
+#     }
+
+ }

@@ -7,6 +7,26 @@ view: users {
     sql: ${TABLE}.id ;;
   }
 
+  # dimension: html_user_id_test {
+  #   type: number
+  #   sql: ${id} ;;
+  #   html: {{ users.email._value }} ;;
+  # }
+
+  dimension: test_key_value_1 {
+    type: string
+    sql: CONCAT(${email}, " <id ", ${id}, ">") ;;
+  }
+  parameter: test_parameter{
+    suggest_dimension: test_key_value_1
+  }
+
+  dimension: result_of_parameter {
+    type: number
+    sql: SUBSTRING({% parameter test_parameter %}, -5, 4);;
+    value_format_name: id
+  }
+
   dimension: age {
     type: number
     sql: ${TABLE}.age ;;
