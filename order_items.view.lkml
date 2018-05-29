@@ -258,7 +258,7 @@ measure: total_profit {
   type: number
   sql: ${total_revenue}-${inventory_items.total_cost} ;;
   value_format_name: usd
-#  drill_fields: [orders.created_quarter, order_items.total_revenue, order_items.total_profit]
+  drill_fields: [orders.created_quarter, order_items.total_revenue, order_items.total_profit]
 #   html:
 #   {% if products._in_query %} <a href ="https://www.google.com/">{{rendered_value}}</a>
 #   {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
