@@ -103,6 +103,7 @@ measure: total_sale_price {
   type: sum
   sql: ${sale_price} ;;
   value_format: "$#,##0.00"
+
 }
 
 
@@ -227,12 +228,33 @@ measure: smallest_order {
 
   }
 
-#measure using sum
 measure: total_revenue {
   type: sum
   sql: ${sale_price};;
   value_format_name: usd
   drill_fields: [users.id, users.full_name, products.category]
+
+  link: {
+    label: "Table"
+    url: "
+    {% assign vis_config = '{
+
+      \"type\":\"table\",
+      \"show_view_names\":false,
+      \"show_row_numbers\":true,
+      \"truncate_column_names\":false,
+      \"hide_totals\":false,
+      \"hide_row_totals\":false,
+      \"table_theme\":\"editable\",
+      \"limit_displayed_rows\":false,
+      \"enable_conditional_formatting\":false,
+      \"conditional_formatting_include_totals\":false,
+      \"conditional_formatting_include_nulls\":false
+
+    }' %}
+    {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
+
+  }
 
 }
 

@@ -248,6 +248,31 @@ measure: count_year_filter {
   }
 }
 
+
+
+parameter: test_date_param {
+  type: string
+  suggest_dimension: created_date
+}
+
+filter: test_date_temp {
+  type: string
+  suggest_dimension: created_date
+}
+
+dimension: entry_for_date_test{
+  type: string
+  # sql: "{% parameter test_date_param %}" ;;
+  sql: '{% condition test_date_temp %} ${created_date} {% endcondition %}';;
+}
+
+
+
+# dimension: entry_for_date_test_dash{
+#   type: string
+#   sql: ${TABLE}.{% parameter date_test_dashboard %}   ;;
+# }
+
 measure: count_last_quarter {
   type: count
   filters: {
