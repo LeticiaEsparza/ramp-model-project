@@ -8,3 +8,8 @@ explore: test{
   extends: [inventory_items]
   hidden:  no
 }
+
+explore: events_extended {
+  view_name: events
+  extends: [events]
+}

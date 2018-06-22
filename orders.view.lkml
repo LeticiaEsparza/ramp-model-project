@@ -25,6 +25,34 @@ dimension: id_test_b {
       time,
       date,
       day_of_week,
+      day_of_week_index,
+      week,
+      month,
+      quarter,
+      year,
+      day_of_month,
+      month_name,
+      month_num,
+      day_of_year
+    ]
+    sql: ${TABLE}.created_at ;;
+    allow_fill: yes
+    # html:
+    #       {% if orders.created_date._in_query %}
+    #       {{orders.date_formatter._rendered_value}}
+    #       {% else %}
+    #       {{value}}
+    #       {% endif %}
+    # ;;
+  }
+
+  dimension_group: created_dupe {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      day_of_week,
       week,
       month,
       quarter,
@@ -35,9 +63,21 @@ dimension: id_test_b {
     ]
     sql: ${TABLE}.created_at ;;
     allow_fill: yes
+
   }
 
+  measure: count_weekday{
+    type: count
+    filters: {
+      field: orders.created_day_of_week
+      value: "Monday, Tuesday, Wednesday, Thursday, Friday"
+    }
+  }
 
+measure: number_measures_test {
+  type: number
+  sql: ${count_weekday}/${count} ;;
+}
 # format date field while preserving date functionality
   dimension: date_formatter {
     type: string
@@ -59,6 +99,7 @@ dimension_group: created_churn_date{
     time,
     date,
     day_of_week,
+    day_of_week_index,
     week,
     month,
     quarter,
@@ -251,7 +292,7 @@ measure: count_year_filter {
 
 
 parameter: test_date_param {
-  type: string
+  type: date_time
   suggest_dimension: created_date
 }
 
@@ -261,8 +302,8 @@ filter: test_date_temp {
 }
 
 dimension: entry_for_date_test{
-  type: string
-  # sql: "{% parameter test_date_param %}" ;;
+  type: date
+#   sql: {% parameter test_date_param %};;
   sql: '{% condition test_date_temp %} ${created_date} {% endcondition %}';;
 }
 
@@ -372,5 +413,48 @@ measure: percentage_orders_2017_over_total {
     ;;
   }
 
+filter: test_date_standard {
+  type: date_time
+  suggest_dimension: created_date
+}
+
+dimension: test_date_standard_dim{
+  type: date_time
+  sql: {% condition test_date_standard %} orders.created_date {% endcondition %};;
+}
+
+
+  measure: week_day_count {
+    type: number
+    sql: DATEDIFF(stop,start) - ((FLOOR(DATEDIFF(stop,start) / 7) * 2) +
+      CASE WHEN DATE_PART(dow, start) - DATE_PART(dow, stop) IN (1, 2, 3, 4, 5) AND DATE_PART(dow, stop) != 0
+      THEN 2 ELSE 0 END +
+      CASE WHEN DATE_PART(dow, start) != 0 AND DATE_PART(dow, stop) = 0
+      THEN 1 ELSE 0 END +
+      CASE WHEN DATE_PART(dow, start) = 0 AND DATE_PART(dow, stop) != 0
+      THEN 1 ELSE 0 END) ;;
+  }
+
+  parameter: date_parameter {
+    type: string
+    allowed_value: {
+      label: "2018-06-18"
+      value: "2018-06-18"
+    }
+    allowed_value: {
+      label: "2018-06-17"
+      value: "2018-06-17"
+    }
+    allowed_value: {
+      label: "2018-06-16"
+      value: "2018-06-16"
+    }
+  }
+
+  dimension: date_from_parameter {
+    type:date
+    sql: ${created_date}=CAST({% parameter date_parameter %} AS date) ;;
+  }
 
 }
+#DAYOFWEEK

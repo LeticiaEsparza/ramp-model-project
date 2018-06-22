@@ -8,12 +8,14 @@ include: "*.view"
 include: "*.dashboard"
 
 explore: list_test_ndt {}
-
+explore: ndt_dim_group_test{}
+explore: ndt_min_date {}
 explore: sql_runner_query {}
 #Explore with fields parameter
 explore: events {
+  extension: required
   join: users {
-    fields: [users.full_name]
+#    fields: [users.full_name]
     type: left_outer
     sql_on: ${events.user_id} = ${users.id} ;;
     relationship: many_to_one
@@ -40,6 +42,7 @@ explore: order_items {
 #     }
 #   }
   join: inventory_items {
+    fields: []
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
     relationship: many_to_one
@@ -180,7 +183,6 @@ datagroup: pdt_test_datagroup {
 
 explore: stn_test {}
 explore: users {}
-explore: counts_tester {}
 
 explore: users_nn {}
 explore: user_facts_test {}

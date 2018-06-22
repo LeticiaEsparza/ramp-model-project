@@ -150,6 +150,20 @@ measure: list_category{
     sql: ${TABLE}.department ;;
   }
 
+
+  dimension: dummy_three {
+    case: {
+      when: {
+        label: "Men"
+        sql: 1=1 ;;
+      }
+      when: {
+        label: "Women"
+        sql: 1=1 ;;
+      }
+
+    }}
+
   dimension: item_name {
     type: string
     sql: ${TABLE}.item_name ;;

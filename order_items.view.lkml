@@ -19,6 +19,7 @@ measure: count_hidden{
     sql: ${TABLE}.inventory_item_id ;;
   }
 
+
 dimension: test_hard_insert {
   type: date
   sql: CURDATE();;
@@ -228,6 +229,14 @@ measure: smallest_order {
 
   }
 
+# measure: test_filter_measure {
+#   type: sum
+#   sql: ${total_profit} ;;
+#   filters: {
+#     field: largest_order
+#     value: ">10"
+#   }
+# }
 measure: total_revenue {
   type: sum
   sql: ${sale_price};;
@@ -457,8 +466,21 @@ measure: total_item_profit {
   value_format_name: usd
   drill_fields: [users.id, users.full_name, products.category,count]
 #   html: <a href="https://www.google.com/">{{ value }}</a>  ;;
+}
 
-
+#only apply formatting when the profit measure is in query
+dimension: category_formatting_based_on_profit{
+  type: string
+  sql: ${products.category} ;;
+  html:
+        {% if order_items.total_item_profit._in_query and order_items.total_item_profit._value > 50000 %}
+          <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ rendered_value }}</p>
+        {% elsif order_items.total_item_profit._in_query and order_items.total_item_profit._value <= 50000 %}
+          <p style="color: black; background-color: red; font-size:100%; text-align:center">{{ rendered_value }}</p>
+        {% else %}
+          {{value}}
+        {% endif %}
+  ;;
 }
 
 measure: profit_range {
@@ -479,13 +501,13 @@ dimension: was_item_returned {
   type: yesno
   sql: ${returned_date} IS NOT NULL;;
 # this will return red in red cell
-#   html:
-#   {% if value IS NOT NULL %}
-#   <div style="background-color:#E33F0F">{{ value }}</div>
-#   {% elsif value is null %}
-#   <div style="background-color:#25A318">{{ value }}</div>
-#   {% endif %}
-#   ;;
+  html:
+  {% if value IS NOT NULL %}
+  <div style="background-color:#E33F0F">{{ value }}</div>
+  {% elsif value is null %}
+  <div style="background-color:#25A318">{{ value }}</div>
+  {% endif %}
+  ;;
 }
 
 measure: counts_filter {
@@ -718,17 +740,60 @@ dimension: dashboard_category_department{
        {% condition department_filter %} products.department {% endcondition %}) ;;
 }
 
+dimension: one_filter_for_two_fields {
+  type: yesno
+  sql: ({% condition category_filter %} products.category {% endcondition %} AND
+        {% condition category_filter %} products.department {% endcondition %}) ;;
+}
 
-#   measure: order_count {
-#     type: sum_distinct
-#     sql_distinct_key:
-#           {% if orders.id._in_query %}
-#           ${orders.id}
-#           {% else %}
-#           ${order_items.id}
-#           {% endif %}
-#     ;;
-#     sql:  ;;
-#     }
+
+#templated filters test
+## filter determining time range for all "A" measures
+
+  filter: timeframe_a {
+    type: date
+  }
+
+## flag for "A" measures to only include appropriate time range
+
+  dimension: group_a_yesno {
+    hidden: yes
+    type: yesno
+    sql: {% condition timeframe_a %} ${orders.created_date} {% endcondition %} ;;
+  }
+
+## filtered measure A
+
+  measure: count_a {
+    type: count
+    filters: {
+      field: group_a_yesno
+      value: "yes"
+    }
+  }
+
+## filter determining time range for all "B" measures
+
+  filter: timeframe_b {
+    type: date
+  }
+
+## flag for "B" measures to only include appropriate time range
+
+  dimension: group_b_yesno {
+    hidden: yes
+    type: yesno
+    sql: {% condition timeframe_b %} ${orders.created_date} {% endcondition %} ;;
+  }
+
+  measure: count_b {
+    type: count
+    filters: {
+      field: group_b_yesno
+      value: "yes"
+    }
+  }
+
+
 
  }
