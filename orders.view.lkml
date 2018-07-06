@@ -7,6 +7,19 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
+  dimension: test_id_case {
+    type: string
+    sql:
+        CASE WHEN ${id} is null then null
+             WHEN ${id}=1 then "first"
+             WHEN ${id}=2 then "second"
+             WHEN ${id} between 3 and 10 then "three through ten"
+             WHEN ${id}>10 then "tester ten"
+             ELSE "stuff"
+        END
+    ;;
+  }
+
 
 dimension: id_test {
   type: number

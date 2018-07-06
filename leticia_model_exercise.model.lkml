@@ -7,6 +7,7 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+explore: linked_derived_table_test {}
 explore: list_test_ndt {}
 explore: ndt_dim_group_test{}
 explore: ndt_min_date {}
@@ -35,12 +36,12 @@ explore: inventory_items {
 
 #join used for profit dimension in order_items
 explore: order_items {
-#   always_filter: {
-#     filters: {
-#       field: order_items.test_filter_time
-#       value: "after 2013/01/10"
-#     }
-#   }
+  # always_filter: {
+  #   filters: {
+  #     field: orders.created_date
+  #     value: "before this week"
+  #   }
+  # }
   join: inventory_items {
     fields: []
     type: left_outer

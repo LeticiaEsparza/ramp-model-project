@@ -28,13 +28,14 @@ dimension: test_hard_insert {
 
 #test for Charlie 5/22/18
 filter: test_filter_time {
-  type: date_time
-  datatype: datetime
+  type: date
+#  datatype: datetime
 }
 
-# filter: test_filter_2 {
-#   sql: {% condition %} ${products.test_filter} {% endcondition %} ;;
-# }
+dimension: test_filter_time_date {
+  type: date
+  sql: {% condition test_filter_time %} ${orders.created_date} {% endcondition %};;
+}
 
 # filter: other_churn_days {
 #   sql: ${products.churn_days} ;;
@@ -102,6 +103,7 @@ dimension: sale_price_pound {
 
 measure: total_sale_price {
   type: sum
+#   sql: coalesce(${sale_price},0) ;;
   sql: ${sale_price} ;;
   value_format: "$#,##0.00"
 
@@ -169,6 +171,11 @@ dimension: profit_tier {
 #
 #   }
 # }
+
+measure: validity{
+  type:  number
+  sql: ${total_profit}/${total_revenue} ;;
+}
 
 
 #average order - measure with average
@@ -501,13 +508,13 @@ dimension: was_item_returned {
   type: yesno
   sql: ${returned_date} IS NOT NULL;;
 # this will return red in red cell
-  html:
-  {% if value IS NOT NULL %}
-  <div style="background-color:#E33F0F">{{ value }}</div>
-  {% elsif value is null %}
-  <div style="background-color:#25A318">{{ value }}</div>
-  {% endif %}
-  ;;
+#   html:
+#   {% if value IS NOT NULL %}
+#   <div style="background-color:#E33F0F">{{ value }}</div>
+#   {% elsif value is null %}
+#   <div style="background-color:#25A318">{{ value }}</div>
+#   {% endif %}
+#   ;;
 }
 
 measure: counts_filter {
@@ -794,6 +801,10 @@ dimension: one_filter_for_two_fields {
     }
   }
 
+# measure: number_pivot {
+#   type: number
+#   sql: ${order_id}+${id} ;;
+# }
 
 
  }

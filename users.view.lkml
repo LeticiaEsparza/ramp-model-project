@@ -131,11 +131,23 @@ dimension: relative_year {
     type: yesno
     sql: ${state}='California' ;;
   }
+  dimension: is_female_california{
+    type: yesno
+    sql: ${is_female}=1 AND ${is_california}=1;;
+  }
+
+
 
 # Dimension with zip code
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+  }
+
+  dimension: zip_b {
+    type: number
+    sql: ${TABLE}.zip ;;
+    value_format: "0####"
   }
 
 #Dimension of type location
