@@ -210,7 +210,7 @@ explore: MAU_test {
   }
 
   explore: long_string_table {}
-
+explore: table_calc_test_table {}
 explore: the_test {}
 #   explore: second_most_recent_date {
 #     join: user_facts {

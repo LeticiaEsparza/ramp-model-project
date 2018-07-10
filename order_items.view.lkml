@@ -148,7 +148,10 @@ dimension: profit_tier {
 
 
 }
-
+# measure: sum_count {
+#   type: sum
+#   sql: ${count} ;;
+# }
 
 # dimension: profit_test {
 #   case: {
@@ -177,7 +180,15 @@ measure: validity{
   sql: ${total_profit}/${total_revenue} ;;
 }
 
-
+dimension: case_test  {
+  case: {
+    when: {
+      sql: ${products.category}="pants" ;;
+      label: "winner"
+    }
+    else: "loser"
+  }
+}
 #average order - measure with average
 measure: avg_order {
   label: "Order Sale Average"
@@ -747,10 +758,22 @@ dimension: dashboard_category_department{
        {% condition department_filter %} products.department {% endcondition %}) ;;
 }
 
+
+#more templated filters tests
 dimension: one_filter_for_two_fields {
   type: yesno
   sql: ({% condition category_filter %} products.category {% endcondition %} AND
         {% condition category_filter %} products.department {% endcondition %}) ;;
+}
+
+filter: date_for_two_date_fields {
+  type: date_time
+}
+
+dimension: yesno_two_date_fields {
+  type: yesno
+  sql: ({% condition date_for_two_date_fields %} ${order_items.returned_date} {% endcondition %} AND
+        {% condition date_for_two_date_fields %} ${orders.created_date} {% endcondition %}) ;;
 }
 
 
