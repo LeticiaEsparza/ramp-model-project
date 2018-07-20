@@ -12,6 +12,7 @@ explore: list_test_ndt {}
 explore: ndt_dim_group_test{}
 explore: ndt_min_date {}
 explore: sql_runner_query {}
+
 #Explore with fields parameter
 explore: events {
   extension: required
@@ -22,11 +23,12 @@ explore: events {
     relationship: many_to_one
   }
 }
+explore: test_format {}
 
 explore: inventory_items {
-  extension: required
-  view_name: inventory_items
-  from: inventory_items
+#   extension: required
+#   view_name: inventory_items
+#   from: inventory_items
   join: products {
     type: left_outer
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
@@ -108,6 +110,7 @@ explore: orders {
 }
 
 explore: products {
+#  fields: [ALL_FIELDS*, -products.exclude_test*]
 }
 
 explore: schema_migrations {}
@@ -208,6 +211,12 @@ explore: MAU_test {
     view_name: products
 
   }
+
+
+# map_layer: my_neighborhood_layer {
+#   file: "POLYGON.topojson"
+#   property_key: "test_ca"
+# }
 
   explore: long_string_table {}
 explore: table_calc_test_table {}

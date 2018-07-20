@@ -64,8 +64,6 @@ dimension: category_dupe_test{
           END;;
   }
 
-
-
 #LIQUID IN URLS
 
  dimension: category_google_search{
@@ -150,6 +148,13 @@ measure: list_category{
     sql: ${TABLE}.department ;;
   }
 
+  dimension: department_center{
+    type: string
+    sql: ${department} ;;
+    # html: <center>{{rendered_value}}</center> ;;
+    drill_fields: [id, brand]
+  }
+
 
   dimension: dummy_three {
     case: {
@@ -187,5 +192,11 @@ measure: list_category{
   measure: count {
     type: count
     drill_fields: [id, item_name, inventory_items.count]
+  }
+  set: exclude_test {
+    fields: [
+      category,
+      brand
+    ]
   }
 }
