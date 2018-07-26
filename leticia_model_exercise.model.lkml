@@ -7,11 +7,13 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+explore: boolean_test {}
 explore: linked_derived_table_test {}
 explore: list_test_ndt {}
 explore: ndt_dim_group_test{}
 explore: ndt_min_date {}
 explore: sql_runner_query {}
+
 
 #Explore with fields parameter
 explore: events {
@@ -92,14 +94,14 @@ explore: order_items {
 
 #Explore with always_filter parameter; Looks at the orders from users only in California
 explore: orders {
-  always_filter: {
-    filters: {
-    field: users.state
-    value: "California"
-
-    }
-
-  }
+#   always_filter: {
+#     filters: {
+#     field: users.state
+#     value: "California"
+#
+#     }
+#
+#   }
 
   join: users {
     type: left_outer

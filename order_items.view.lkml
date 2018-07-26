@@ -19,6 +19,12 @@ measure: count_hidden{
     sql: ${TABLE}.inventory_item_id ;;
   }
 
+dimension: more_info {
+  type: string
+  sql: "For more information" ;;
+  html: <a href="https://www.google.com/">{{ value }}</a> ;;
+}
+
 dimension: test_fake {
   type: string
   sql: ${TABLE}.flsifjslkjsd ;;
@@ -40,6 +46,11 @@ dimension: test_filter_time_date {
   sql: {% condition test_filter_time %} ${orders.created_date} {% endcondition %};;
 }
 
+
+measure: ratio_test {
+  type: number
+  sql: ${count}/${orders.count} ;;
+  }
 # filter: other_churn_days {
 #   sql: ${products.churn_days} ;;
 # }
@@ -500,8 +511,19 @@ measure: total_item_profit {
   type: sum
   sql: ${profit} ;;
   value_format_name: usd
-  drill_fields: [users.id, users.full_name, products.category,count]
+#  drill_fields: [users.id, users.full_name, products.category,count]
+  link: {
+    label: "More information about this record"
+    url: "https://localhost:9999/explore/leticia_model_exercise/order_items?fields=products.category,products.department,order_items.total_profit&f[products.category]={{ products.category._value | url_encode }}&f[products.department]={{ products.department._value | url_encode }}&f[orders.created_date]={{ _filters['orders.created_date'] | url_encode }}"
+  }
 #   html: <a href="https://www.google.com/">{{ value }}</a>  ;;
+# html: {% if value >= 50000 %}
+#       <p><font color="green">{{rendered_value}}</font></p>
+#       {% else %}
+#       <p><font color="red">{{rendered_value}}</font></p>
+#       {% endif %}
+#       ;;
+
 }
 
 #only apply formatting when the profit measure is in query
@@ -702,7 +724,6 @@ dimension: returned_color{
        label: "Total Revenue"
        value: "total_revenue"
      }
-
    }
    measure: metric {
      label_from_parameter: metric_selector
@@ -965,6 +986,13 @@ dimension: test_date_range {
   ELSE null
   END
   ;;
+}
+
+
+
+parameter: category_parameter {
+  type: string
+  suggest_dimension: products.category
 }
 
  }

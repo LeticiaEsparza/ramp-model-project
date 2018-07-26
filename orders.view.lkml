@@ -59,6 +59,11 @@ dimension: id_test_b {
     # ;;
   }
 
+  dimension: minute_15{
+    type: date_minute15
+    sql: ${TABLE}.created_at  ;;
+  }
+
   dimension_group: created_dupe {
     type: time
     timeframes: [
