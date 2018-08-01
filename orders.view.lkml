@@ -262,7 +262,7 @@ measure: last_order {
     allowed_value: { value: "Year" }
   }
 
-  dimension: date {
+  dimension: date_granularity_dimension{
     label_from_parameter: date_granularity
     sql:
        CASE
@@ -469,10 +469,7 @@ dimension: test_date_standard_dim{
     }
   }
 
-  dimension: date_from_parameter {
-    type:date
-    sql: ${created_date}=CAST({% parameter date_parameter %} AS date) ;;
-  }
+
 
 }
 #DAYOFWEEK

@@ -13,6 +13,9 @@ measure: count_hidden{
   type: count_distinct
   sql: ${id} ;;
 }
+
+
+
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -517,12 +520,12 @@ measure: total_item_profit {
     url: "https://localhost:9999/explore/leticia_model_exercise/order_items?fields=products.category,products.department,order_items.total_profit&f[products.category]={{ products.category._value | url_encode }}&f[products.department]={{ products.department._value | url_encode }}&f[orders.created_date]={{ _filters['orders.created_date'] | url_encode }}"
   }
 #   html: <a href="https://www.google.com/">{{ value }}</a>  ;;
-# html: {% if value >= 50000 %}
-#       <p><font color="green">{{rendered_value}}</font></p>
-#       {% else %}
-#       <p><font color="red">{{rendered_value}}</font></p>
-#       {% endif %}
-#       ;;
+html: {% if value >= 50000 %}
+      <p><font color="green">{{rendered_value}}</font></p>
+      {% else %}
+      <p><font color="red">{{rendered_value}}</font></p>
+      {% endif %}
+      ;;
 
 }
 
@@ -994,5 +997,11 @@ parameter: category_parameter {
   type: string
   suggest_dimension: products.category
 }
+
+dimension: department_ca_yn {
+  type: yesno
+  sql: ${users.is_california}=1 AND (${products.department}="Men" OR ${products.department}="Women");;
+}
+
 
  }
