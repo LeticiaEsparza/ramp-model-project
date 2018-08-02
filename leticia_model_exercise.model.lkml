@@ -15,13 +15,13 @@ explore: ndt_min_date {}
 explore: sql_runner_query {}
 
 explore: name_attributes_test {
-  sql_always_where: ${last_name} =
-                    {% if _user_attributes['last_name'] == "Scott" %}
-                    "Scott"
-                    {% else %}
-                    ${last_name}
-                    {% endif %}
-  ;;
+  # sql_always_where: ${last_name} =
+  #                   {% if _user_attributes['last_name'] == "Scott" %}
+  #                   "Scott"
+  #                   {% else %}
+  #                   ${last_name}
+  #                   {% endif %}
+  # ;;
 }
 
 

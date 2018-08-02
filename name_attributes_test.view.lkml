@@ -1,14 +1,14 @@
 view: name_attributes_test {
   derived_table: {
-    sql: SELECT "Brooke" first_name, "Davis" last_name
+    sql: SELECT "Brooke" first_name, "Davis" last_name, "designer" occupation
       UNION ALL
-      SELECT "Peyton" first_name, "Sawyer" last_name
+      SELECT "Peyton" first_name, "Sawyer" last_name, "artist" occupation
       UNION ALL
-      SELECT "Lucas" first_name, "Scott" last_name
+      SELECT "Lucas" first_name, "Scott" last_name, "writer" occupation
       UNION ALL
-      SELECT "Nathan" first_name, "Scott" last_name
+      SELECT "Nathan" first_name, "Scott" last_name, "athlete" occupation
       UNION ALL
-      SELECT "Leticia" first_name, "Esparza" last_name
+      SELECT "Leticia" first_name, "Esparza" last_name, "analyst" occupation
        ;;
   }
 
@@ -27,7 +27,12 @@ view: name_attributes_test {
     sql: ${TABLE}.last_name ;;
   }
 
+  dimension: occupation {
+    type: string
+    sql: ${TABLE}.occupation ;;
+  }
+
   set: detail {
-    fields: [first_name, last_name]
+    fields: [first_name, last_name, occupation]
   }
 }
