@@ -5,7 +5,7 @@ include: "*.view"
 
 # model for ramp lookml project
 # include all the dashboards
-include: "*.dashboard"
+  include: "*.dashboard"
 
 explore: boolean_test {}
 explore: linked_derived_table_test {}
@@ -13,6 +13,19 @@ explore: list_test_ndt {}
 explore: ndt_dim_group_test{}
 explore: ndt_min_date {}
 explore: sql_runner_query {}
+explore: filter_options_test {}
+explore: ndt_chat_test {}
+explore: pdt_lab_1_orders {
+  label: "PDT LAB 1"
+  join: pdt_lab_1_b {
+    type: left_outer
+    sql_on: ${pdt_lab_1_orders.id}=${pdt_lab_1_b.id} ;;
+    relationship: many_to_one
+  }
+}
+explore: pdt_lab_1_b {}
+explore: lab_1_derived_table {}
+
 
 explore: name_attributes_test {
   # sql_always_where: ${last_name} =
@@ -201,7 +214,10 @@ explore: stn_test {}
 explore: users {}
 
 explore: users_nn {}
+
 explore: user_facts_test {}
+explore: users_nested {}
+
 explore: user_facts {}
 explore: pdt_test {}
 explore: running_total_test {}

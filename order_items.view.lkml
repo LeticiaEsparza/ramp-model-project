@@ -2,7 +2,7 @@ view: order_items {
   sql_table_name: demo_db.order_items ;;
 
   dimension: id {
-    hidden: yes
+   # hidden: yes
     primary_key: yes
     #hidden: yes
     type: number
@@ -13,8 +13,6 @@ measure: count_hidden{
   type: count_distinct
   sql: ${id} ;;
 }
-
-
 
   dimension: inventory_item_id {
     type: number
@@ -124,6 +122,26 @@ measure: total_sale_price {
   sql: ${sale_price} ;;
   value_format: "$#,##0.00"
 
+}
+
+parameter: measure_choice {
+  suggestions: ["sum", "count"]
+}
+
+measure: dynamic_aggregate {
+  type: number
+  sql: case when  {% condition measure_choice %} 'sum' {% endcondition %}  then sum(${sale_price})
+    when {% condition measure_choice %} 'count' {% endcondition %}  then count(${sale_price})
+    else null end ;;
+}
+
+measure: test_ratio_div {
+  type: number
+  sql: ${total_sale_price}/${profit} ;;
+  # filters: {
+  #   field: orders.category
+  #   value: "%pants%"
+  # }
 }
 
 
@@ -302,17 +320,34 @@ measure: total_revenue {
 
 }
 
-  measure: total_revenue_filtered {
+  measure: total_revenue_7_days{
     type: sum
     sql: ${sale_price};;
     value_format_name: usd
     drill_fields: [users.id, users.full_name, products.category]
     filters: {
       field: orders.created_date
-      value: "14 days ago for 7 days"
+      value: "7 days ago for 7 days"
     }
-    }
+  }
 
+  measure: total_revenue_1_week_ago {
+    type: sum
+    sql: ${sale_price};;
+    value_format_name: usd
+    drill_fields: [users.id, users.full_name, products.category]
+    filters: {
+      field: orders.created_date
+      value: "1 week ago"
+    }
+  }
+
+measure: total_revenue_example {
+  type: sum
+  sql: ${sale_price} ;;
+  value_format_name: usd
+  html: {{ rendered_value | replace: '.', 'µ' | replace: ',',' ' | replace: 'µ', ','}} ;;
+}
 
 measure: liquid_behavior_test{
   type: number
@@ -329,6 +364,13 @@ measure: liquid_behavior_test{
   ;;
     value_format: "$#,##0.00"
   }
+
+measure: total_profit_example {
+  type: number
+  sql: ${total_revenue}-${inventory_items.total_cost} ;;
+  value_format_name: usd
+  html: <font color="green">{{rendered_value}}</font> ;;
+}
 
 measure: total_profit {
   label: "Total Profit"
@@ -388,6 +430,29 @@ measure: total_profit {
   # {% if products._in_query     %} <a href ="https://www.google.com/">{{rendered_value}}</a>
   # {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
   # {% endif %};;
+
+
+  # measure: total_profit_last_7_days {
+  #   type: number
+  #   sql: ${total_revenue}-${inventory_items.total_cost} ;;
+  #   value_format_name: usd
+  #   drill_fields: [orders.created_quarter, order_items.total_revenue, order_items.total_profit]
+  #   filters: {
+  #     field: orders.created_date
+  #     value: "7 days ago for 7 days"
+  #   }
+  #   }
+
+  # measure: total_profit_last_week {
+  #   type: number
+  #   sql: ${total_revenue}-${inventory_items.total_cost} ;;
+  #   value_format_name: usd
+  #   drill_fields: [orders.created_quarter, order_items.total_revenue, order_items.total_profit]
+  #   filters: {
+  #     field: orders.created_date
+  #     value: "1 week ago"
+  #   }
+  # }
 
 
 measure: profit_running_total {
@@ -457,10 +522,9 @@ measure: date_test_other_measure{
 
 # DATE_SUB(date, 1 MONTH)
 
-
-filter: date_filter_sub {
-  type: date
-}
+  filter: date_filter_sub {
+    type: date
+  }
 
 measure: date_test_subtract_time {
   type: sum
@@ -473,6 +537,20 @@ measure: date_test_subtract_time {
       END
   ;;
 }
+
+filter: date_filter_test_pop {
+  type: date
+  sql: (${orders.created_date} >= DATE_SUB( {% date_start date_filter_test_pop %} , INTERVAL 1 YEAR)
+  AND  ${orders.created_date} < DATE_SUB( {% date_end date_filter_test_pop %} , INTERVAL 1 YEAR))
+  OR
+  (${orders.created_date} >= {% date_start date_filter_test_pop %}  AND ${orders.created_date} < {% date_end date_filter_test_pop %})
+
+
+  ;;
+
+}
+
+
 
 # dimension: date_test_subtract_time_date{
 #     type: date
@@ -1020,6 +1098,9 @@ dimension: department_ca_yn {
     }
   }
 
-
+filter: one_more_month_filter {
+  type: date
+  sql: ${orders.created_raw} >= DATE_SUB({% date_start one_more_month_filter %}, INTERVAL 1 MONTH) AND ${orders.created_raw} < {% date_end one_more_month_filter %} ;;
+}
 
  }

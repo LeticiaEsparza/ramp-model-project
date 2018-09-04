@@ -19,10 +19,18 @@ view: products {
     drill_fields: [id, item_name]
   }
 
-dimension: category_dupe_test{
-  label: "Category Dupe"
+dimension: category_case_when {
   type: string
-  sql: ${category} ;;
+  sql: CASE WHEN ${products.category} IN ("Pants","Shorts") THEN "Bottoms"
+       ELSE ${products.category}
+       END;;
+}
+
+dimension: category_example {
+  type: string
+  sql: ${TABLE}.category ;;
+  html: <b><center><p style="background-color:#B3F5F7;"><font size="4" color="#166088">{{value}}</font></p></center></b>;;
+  #html: <p style="color: #166088; background-color: #B3F5F7; font-size: 200%; text-align:center">{{value}}</p> ;;
 }
 
 # dimension: case_category{
@@ -140,6 +148,7 @@ dimension: category_dupe_test{
 measure: list_category{
   type: list
   list_field: category
+  html: {{ value | replace: ',', '*' }} ;;
 }
 
 

@@ -64,26 +64,17 @@ dimension: id_test_b {
     sql: ${TABLE}.created_at  ;;
   }
 
-  dimension_group: created_dupe {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      day_of_week,
-      week,
-      month,
-      quarter,
-      year,
-      day_of_month,
-      month_name,
-      day_of_year
-    ]
-    sql: ${TABLE}.created_at ;;
-    allow_fill: yes
+dimension: date_example {
+  type: date
+  sql: ${TABLE}.created_at  ;;
+  html: {{ rendered_value | date: "%B %e, %Y" }} ;;
+}
 
-  }
-
+dimension: time_hour {
+  type: date_time
+  sql: ${created_time} ;;
+  html: {{ rendered_value | date: "%I %p"}} ;;
+}
   measure: count_weekday{
     type: count
     filters: {
@@ -129,6 +120,10 @@ dimension_group: created_churn_date{
   sql: DATE_ADD(${created_raw}, INTERVAL 30 DAY) ;;
 }
 
+dimension:  date_churn_diff {
+  type: number
+  sql: DATEDIFF(${created_churn_date_raw},${created_raw});;
+}
 
   dimension: date_field_test {
     type: date
@@ -252,6 +247,17 @@ measure: last_order {
     drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count, date_field_test, created_date]
   }
 
+measure: count_dupe {
+  type: number
+  sql: CASE WHEN isnull(${count}) THEN 0
+       ELSE ${count}
+       END;;
+}
+
+measure: count_dupe_2 {
+  type: number
+  sql: COALESCE(${count},0) ;;
+}
   #parameter practice
 
   parameter: date_granularity {
@@ -262,18 +268,18 @@ measure: last_order {
     allowed_value: { value: "Year" }
   }
 
-  dimension: date_granularity_dimension{
+  dimension: date_granularity_test{
     label_from_parameter: date_granularity
     sql:
        CASE
          WHEN {% parameter date_granularity %} = 'Day' THEN
-           ${created_date}::VARCHAR
+           ${created_date}
          WHEN {% parameter date_granularity %} = 'Month' THEN
-           ${created_month}::VARCHAR
+           ${created_month}
          WHEN {% parameter date_granularity %} = 'Quarter' THEN
-           ${created_quarter}::VARCHAR
+           ${created_quarter}
          WHEN {% parameter date_granularity %} = 'Year' THEN
-           ${created_year}::VARCHAR
+           ${created_year}
          ELSE
            NULL
        END ;;

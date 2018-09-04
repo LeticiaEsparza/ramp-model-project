@@ -8,8 +8,10 @@ view: name_attributes_test {
       UNION ALL
       SELECT "Nathan" first_name, "Scott" last_name, "athlete" occupation
       UNION ALL
-      SELECT "Leticia" first_name, "Esparza" last_name, "analyst" occupation
+      SELECT "Leticia" first_name, "Esparza" last_name, null occupation
        ;;
+    sql_trigger_value: SELECT current_date;;
+    indexes: ["first_name"]
   }
 
   measure: count {
