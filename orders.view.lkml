@@ -263,8 +263,8 @@ measure: last_order {
   measure: count_example {
     type: count
     drill_fields: [orders.id,orders.created_date,orders.created_quarter,orders.status,orders.user_id,order_items.total_profit]
-    #html: <p style="font-size: 15px">{{linked_value}}</p> ;;
-    html:<p style="font-size: 15px"><a href="{{link}}" target="_self"> {{rendered_value}} </a></p>;;
+    html: <p style="font-size: 15px">{{linked_value}}</p> ;;
+    #html:<p style="font-size: 15px"><a href="{{link}}" target="_self"> {{rendered_value}} </a></p>;;
   }
     #html: <a href="/explore/leticia_model_exercise/order_items?fields=orders.id,orders.created_date,orders.created_quarter,orders.status,orders.user_id,order_items.total_profit">{{rendered_value}}</b> ;;
 
