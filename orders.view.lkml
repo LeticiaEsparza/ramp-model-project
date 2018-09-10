@@ -59,6 +59,19 @@ dimension: id_test_b {
     # ;;
   }
 
+  dimension_group: hour8 {
+    type: time
+    timeframes: [hour8]
+    sql: ${TABLE}.created_at ;;
+    html: {{ rendered_value | date: "%H" }} ;;
+  }
+
+dimension: hour8_single {
+  type: date_hour8
+  sql: ${TABLE}.created_at  ;;
+  html: {{ rendered_value | date: "%H" }} ;;
+}
+
   dimension: minute_15{
     type: date_minute15
     sql: ${TABLE}.created_at  ;;
@@ -246,6 +259,14 @@ measure: last_order {
     type: count
     drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count, date_field_test, created_date]
   }
+
+  measure: count_example {
+    type: count
+    drill_fields: [orders.id,orders.created_date,orders.created_quarter,orders.status,orders.user_id,order_items.total_profit]
+    #html: <p style="font-size: 15px">{{linked_value}}</p> ;;
+    html:<p style="font-size: 15px"><a href="{{link}}" target="_self"> {{rendered_value}} </a></p>;;
+  }
+    #html: <a href="/explore/leticia_model_exercise/order_items?fields=orders.id,orders.created_date,orders.created_quarter,orders.status,orders.user_id,order_items.total_profit">{{rendered_value}}</b> ;;
 
 measure: count_dupe {
   type: number

@@ -787,10 +787,11 @@ dimension: returned_color{
 
     link: {
       label: "Filtered Drill Modal"
-      url:
-      "{{ link }}&f[order_items.total_profit]=>50000"
-
+      url: "{{ link }}&f[order_items.total_profit]=>=50000"
     }
+
+    #html: <a href="{{ link }}&f[order_items.total_profit]=>=50000">{{ rendered_value }}</a> ;;
+
 
   }
 
