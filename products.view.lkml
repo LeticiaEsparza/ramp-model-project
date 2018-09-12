@@ -16,7 +16,12 @@ view: products {
     type: string
     #hidden: yes
     sql: ${TABLE}.category ;;
-    drill_fields: [id, item_name]
+    #drill_fields: [id, item_name]
+    html:  <a href="/dashboards/43?Category={{ value | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">{{ value }}</a> ;;
+    # link: {
+    #   label: "Category & Brand Info"
+    #   url: "/dashboards/43?Category={{ value | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}"
+    # }
   }
 
 dimension: category_case_when {
@@ -32,6 +37,14 @@ dimension: category_example {
   html: <b><center><p style="background-color:#B3F5F7;"><font size="4" color="#166088">{{value}}</font></p></center></b>;;
   #html: <p style="color: #166088; background-color: #B3F5F7; font-size: 200%; text-align:center">{{value}}</p> ;;
 }
+
+  dimension: category_example_2 {
+    type: string
+    sql: ${TABLE}.category ;;
+    html: <b><center><p style="background-color:#B3F5F7;"><a href="/dashboards/40?Category={{ value | url_encode }}"><font size="4" color="#166088">{{value}}</font></a></p></center></b>;;
+
+    #html: <p style="color: #166088; background-color: #B3F5F7; font-size: 200%; text-align:center">{{value}}</p> ;;
+  }
 
 # dimension: case_category{
 #   type: string
