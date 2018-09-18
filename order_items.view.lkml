@@ -379,6 +379,30 @@ measure: total_profit_example {
     html: <a href="/explore/leticia_model_exercise/order_items?fields=products.category,orders.count,inventory_items.total_cost,order_items.total_revenue,order_items.total_profit&f[order_items.total_profit]=>={{filterable_value}}">{{ rendered_value }}</a> ;;
   }
 
+  measure: total_profit_logic {
+    type: number
+    sql: ${total_revenue}-${inventory_items.total_cost} ;;
+    value_format_name: usd
+    html: {% if value >= 75000 %}
+            <font color="green">{{rendered_value}}</font>
+          {% elsif value >= 50000 and value < 75000 %}
+            <font color="goldenrod">{{rendered_value}}</font>
+          {% else %}
+            <font color="red">{{rendered_value}}</font>
+          {% endif %}
+    ;;
+#     html: {% if products.category._in_query and value >= 75000 %}
+#             <font color="green">{{rendered_value}}</font>
+#           {% elsif products.category._in_query and value >= 50000 and value < 75000 %}
+#             <font color="goldenrod">{{rendered_value}}</font>
+#           {% elsif products.category._in_query %}
+#             <font color="red">{{rendered_value}}</font>
+#           {% else %}
+#             {{rendered_value}}
+#           {% endif %}
+#     ;;
+  }
+
 measure: total_profit {
   label: "Total Profit"
   type: number
@@ -389,8 +413,7 @@ measure: total_profit {
 #   {% if products._in_query %} <a href ="https://www.google.com/">{{rendered_value}}</a>
 #   {% else %}  <a href ="https://www.yahoo.com/">{{rendered_value}}</a>
 #   {% endif %};;
-
-  html: <a href="/dashboards/43">{{ rendered_value }}</a> ;;
+  }
 
   # link: {
   #   label: "Show as Line Chart"
@@ -430,7 +453,6 @@ measure: total_profit {
   #   {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
 
   # }
- }
 
 
 #  https://localhost:9999/explore/leticia_model_exercise/order_items?qid=NKR2CxljzCBEYWMDgfkowA&toggle=dat,vis
@@ -1111,5 +1133,6 @@ filter: one_more_month_filter {
   type: date
   sql: ${orders.created_raw} >= DATE_SUB({% date_start one_more_month_filter %}, INTERVAL 1 MONTH) AND ${orders.created_raw} < {% date_end one_more_month_filter %} ;;
 }
+
 
  }
