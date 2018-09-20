@@ -46,7 +46,8 @@ dimension: id_test_b {
       day_of_month,
       month_name,
       month_num,
-      day_of_year
+      day_of_year,
+      hour6
     ]
     sql: ${TABLE}.created_at ;;
     allow_fill: yes
@@ -87,6 +88,11 @@ dimension: time_hour {
   type: date_time
   sql: ${created_time} ;;
   html: {{ rendered_value | date: "%I %p"}} ;;
+}
+
+dimension: days_since_order {
+  type: number
+  sql: DATEDIFF(CURDATE(), ${created_date}) ;;
 }
   measure: count_weekday{
     type: count
