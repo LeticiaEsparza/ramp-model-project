@@ -1161,5 +1161,18 @@ measure: total_profit_emoji {
     ;;
   }
 
+  measure: total_profit_emoji_2 {
+    type: number
+    sql: ${total_revenue}-${inventory_items.total_cost} ;;
+    value_format_name: usd
+    html: {% if value >= 75000 %}
+            ⭐️⭐️⭐️⭐️⭐️
+          {% elsif value >= 50000 and value < 75000 %}
+            ⭐️⭐️⭐️
+          {% else %}
+            ⭐️
+          {% endif %}
+    ;;
+  }
 
  }
