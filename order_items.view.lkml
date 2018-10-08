@@ -1134,5 +1134,32 @@ filter: one_more_month_filter {
   sql: ${orders.created_raw} >= DATE_SUB({% date_start one_more_month_filter %}, INTERVAL 1 MONTH) AND ${orders.created_raw} < {% date_end one_more_month_filter %} ;;
 }
 
+  filter: category_adina {
+    type: string
+    suggest_dimension: products.category
+    sql: {% condition category_adina %} products.category {% endcondition %};;
+  }
+
+
+measure: total_profit_emoji {
+    type: number
+    sql: ${total_revenue}-${inventory_items.total_cost} ;;
+    value_format_name: usd
+    html: {% if value >= 75000 %}
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+          {% elsif value >= 50000 and value < 75000 %}
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+          {% else %}
+            <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/129/white-medium-star_2b50.png" style="width:25px;height:25px;"/>
+          {% endif %}
+    ;;
+  }
+
 
  }
