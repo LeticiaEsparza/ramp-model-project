@@ -38,7 +38,7 @@ dimension: test_hard_insert {
 
 #test for Charlie 5/22/18
 filter: test_filter_time {
-  type: date
+  type: date_time
 #  datatype: datetime
 }
 
@@ -47,6 +47,10 @@ dimension: test_filter_time_date {
   sql: {% condition test_filter_time %} ${orders.created_date} {% endcondition %};;
 }
 
+  dimension: test_filter_time_date_2 {
+    type: date
+    sql: {% condition orders.created_date %} ${orders.created_date} {% endcondition %};;
+  }
 
 measure: ratio_test {
   type: number
@@ -498,7 +502,7 @@ measure: percent_of_total_profit {
 
 filter: date_filter_test {
   description: "filter dates for offline"
-  type: string
+  type: date_time
   suggest_explore: order_items
   suggest_dimension: orders.created_date
 }
@@ -521,7 +525,7 @@ filter: date_test_with_other_measure{
 measure: date_test_other_measure{
   type: number
   sql:
-    CASE WHEN {%condition date_test_with_other_measure%} ${orders.created_date} {%endcondition%}
+    CASE WHEN {% condition date_test_with_other_measure  %} ${orders.created_date} {% endcondition %}
     THEN ${total_revenue}-${inventory_items.total_cost}
     ELSE 0
     END

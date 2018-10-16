@@ -7,6 +7,7 @@ include: "*.view"
 # include all the dashboards
   include: "*.dashboard"
 
+explore: conditionally_filter {}
 explore: boolean_test {}
 explore: linked_derived_table_test {}
 explore: list_test_ndt {}
