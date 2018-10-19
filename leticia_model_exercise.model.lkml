@@ -63,12 +63,12 @@ explore: inventory_items {
 
 #join used for profit dimension in order_items
 explore: order_items {
-  # always_filter: {
-  #   filters: {
-  #     field: orders.created_date
-  #     value: "before this week"
-  #   }
-  # }
+  always_filter: {
+    filters: {
+      field: products.category
+      value: "%pant%,%act%"
+    }
+  }
   join: inventory_items {
     #fields: []
     type: left_outer

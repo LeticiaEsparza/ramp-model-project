@@ -31,6 +31,33 @@ dimension: id_test_b {
   sql: ${id} OR ${id_test} ;;
 }
 
+dimension: is_monday {
+  type: yesno
+  sql: ${created_day_of_week} = "Monday" ;;
+}
+
+  dimension: is_tuesday{
+    type: yesno
+    sql: ${created_day_of_week} = "Tuesday" ;;
+  }
+
+
+  dimension: week_day_list {
+    type: string
+    sql:
+        CONCAT(
+        CASE WHEN ${is_monday} THEN "Mon, "
+        ELSE
+        " "
+        END,
+        CASE WHEN ${is_tuesday} THEN "Tue, "
+        ELSE
+        " "
+        END
+        )
+    ;;
+  }
+
   dimension_group: created {
     type: time
     timeframes: [
