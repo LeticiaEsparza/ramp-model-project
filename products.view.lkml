@@ -19,11 +19,11 @@ view: products {
     sql: ${TABLE}.category ;;
     #drill_fields: [id, item_name]
     #EXAMPLES FOR URL ENCODE LESSON
-    html:  <a href="/dashboards/43?Category={{ value | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">{{ value }}</a> ;;
-    # link: {
-    #   label: "Category & Brand Info"
-    #   url: "/dashboards/43?Category={{ value | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}"
-    # }
+    # html:  <a href="/dashboards/43?Category={{ value | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">{{ value }}</a> ;;
+    link: {
+      label: "Category & Brand Info"
+      url: "/dashboards/43?Category={{ value | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}"
+    }
     #EXAMPLE FOR INTRO
     #html:  <a href="https://www.google.com/">{{ value }}</a> ;;
     #html:  <a href="https://www.google.com/search?q={{value}}">{{ value }}</a> ;;

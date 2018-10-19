@@ -109,6 +109,14 @@ dimension: relative_year {
     sql: ${gender}='f' ;;
   }
 
+  dimension: is_female_test {
+    type: string
+    sql: CASE WHEN ${is_female} THEN "female"
+         ELSE ""
+         END
+        ;;
+  }
+
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;

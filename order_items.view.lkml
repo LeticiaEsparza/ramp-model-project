@@ -407,6 +407,16 @@ measure: total_profit_example {
 #     ;;
   }
 
+measure: total_profit_logic_blegh {
+    type: number
+    sql: ${total_revenue}-${inventory_items.total_cost} ;;
+    value_format_name: usd
+    html: {% if value >= 75000 %}
+            <font color="green">{{rendered_value}}</font>
+          {% endif %}
+    ;;
+    }
+
 measure: total_profit {
   label: "Total Profit"
   type: number
@@ -1104,12 +1114,32 @@ dimension: test_date_range {
   ;;
 }
 
-
+#Example when helping AK
 
 parameter: category_parameter {
   type: string
   suggest_dimension: products.category
 }
+
+parameter: category_unquoted {
+  type: unquoted
+}
+
+dimension: parameter_condition {
+  type: string
+  sql:
+      {% if category_unquoted._parameter_value == 'jeans' or category_unquoted._parameter_value == 'Jeans' %}
+        "yes"
+      {% else %}
+        "no"
+      {% endif %}
+  ;;
+}
+
+#       {% if category_parameter._parameter_value == "'Jeans'" %}
+# or category_unquoted._parameter_value == 'Jeans'
+# order_items.category_parameter._in_query
+#End of example for AK
 
 dimension: department_ca_yn {
   type: yesno
