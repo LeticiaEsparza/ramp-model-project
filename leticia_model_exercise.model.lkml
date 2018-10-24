@@ -7,6 +7,10 @@ include: "*.view"
 # include all the dashboards
   include: "*.dashboard"
 
+datagroup: 24_hour_caching {
+  max_cache_age: "24 hours"
+}
+
 explore: conditionally_filter {}
 explore: boolean_test {}
 explore: linked_derived_table_test {}
@@ -63,6 +67,7 @@ explore: inventory_items {
 
 #join used for profit dimension in order_items
 explore: order_items {
+#  persist_with: 24_hour_caching
 #   always_filter: {
 #     filters: {
 #       field: products.category
