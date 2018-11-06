@@ -128,6 +128,11 @@ measure: total_sale_price {
 
 }
 
+measure: error {
+  type: sum
+  sql: ${sale_price} ;;
+}
+
 parameter: measure_choice {
   suggestions: ["sum", "count"]
 }

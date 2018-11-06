@@ -34,12 +34,104 @@ view: products {
     # }
   }
 
-dimension: category_case_when {
-  type: string
-  sql: CASE WHEN ${products.category} IN ("Pants","Shorts") THEN "Bottoms"
-       ELSE ${products.category}
-       END;;
-}
+  dimension: category_case_when {
+    case: {
+      when: {
+        sql: ${category}="Clothing Sets" ;;
+        label: "Clothing Sets"
+      }
+      when: {
+        sql: ${category}="Fashion Hoodies & Sweatshirts" ;;
+        label: "Fashion Hoodies & Sweatshirts"
+      }
+      when: {
+        sql: ${category}="Suits & Sport Coats" ;;
+        label: "Suits & Sport Coats"
+      }
+      when: {
+        sql: ${category}="Socks & Hosiery" ;;
+        label: "Socks & Hosiery"
+      }
+      when: {
+        sql: ${category}="Jumpsuits & Rompers" ;;
+        label: "Jumpsuits & Rompers"
+      }
+      when: {
+        sql: ${category}="Sleep & Lounge" ;;
+        label: "Sleep & Lounges"
+      }
+      when: {
+        sql: ${category}="Outerwear & Coats" ;;
+        label: "Outerwear & Coats"
+      }
+      when: {
+        sql: ${category}="Blazers & Jackets" ;;
+        label: "Blazers & Jackets"
+      }
+      when: {
+        sql: ${category}="Pants & Capris" ;;
+        label: "Pants & Capris"
+      }
+      when: {
+        sql: ${category}="Underwear" ;;
+        label: "Underwear"
+      }
+      when: {
+        sql: ${category}="Tops & Tees" ;;
+        label: "Tops & Tees"
+      }
+      when: {
+        sql: ${category}="Accessories" ;;
+        label: "Accessories"
+      }
+      when: {
+        sql: ${category}="Intimates" ;;
+        label: "Intimates"
+      }
+      when: {
+        sql: ${category}="Maternity" ;;
+        label: "Maternity"
+      }
+      when: {
+        sql: ${category}="Leggings" ;;
+        label: "Leggings"
+      }
+      when: {
+        sql: ${category}="Shorts" ;;
+        label: "Shorts"
+      }
+      when: {
+        sql: ${category}="Active" ;;
+        label: "Active"
+      }
+      when: {
+        sql: ${category}="Skirts" ;;
+        label: "Skirts"
+      }
+      when: {
+        sql: ${category}="Socks" ;;
+        label: "Socks"
+      }
+      when: {
+        sql: ${category}="Pants" ;;
+        label: "Pants"
+      }
+      when: {
+        sql: ${category}="Plus" ;;
+        label: "Plus"
+      }
+      when: {
+        sql: ${category}="Suits" ;;
+        label: "Suits"
+      }
+      when: {
+        sql: ${category}="Swim" ;;
+        label: "Swim"
+      }
+      else: "empty"
+    }
+  }
+
 
 dimension: category_example {
   type: string
