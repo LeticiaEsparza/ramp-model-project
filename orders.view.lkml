@@ -147,7 +147,7 @@ measure: number_measures_test {
 # end of example formatting date field
 
 
-dimension_group: created_churn_date{
+dimension_group: created_other_date{
   type: time
   timeframes: [
     raw,
@@ -163,13 +163,30 @@ dimension_group: created_churn_date{
     month_name,
     day_of_year
   ]
-  sql: DATE_ADD(${created_raw}, INTERVAL 30 DAY) ;;
+  sql: DATE_ADD(DATE_ADD(DATE_ADD(DATE_ADD(${created_raw}, INTERVAL 3 DAY), INTERVAL 9 HOUR), INTERVAL 35 MINUTE), INTERVAL 46 SECOND) ;;
 }
 
 dimension:  date_churn_diff {
   type: number
-  sql: DATEDIFF(${created_churn_date_raw},${created_raw});;
+  sql: TIMESTAMPDIFF(SECOND,${created_raw},${created_other_date_raw})/86400.0;;
+  value_format: "[h]:mm:ss"
+# [h] format counts all hours while hh counts only the hours of day
+# value_format: "[h]:mm:ss"
 }
+
+  dimension:  date_churn_diff_2 {
+    type: number
+    sql: TIMESTAMPDIFF(SECOND,${created_raw},${created_other_date_raw})/86400.0;;
+    value_format: "hh:mm:ss"
+  }
+
+dimension_group: duration {
+  type: duration
+  sql_start: ${created_raw};;
+  sql_end: ${created_other_date_raw};;
+  intervals: [hour,minute,second]
+}
+# dimension_group: diff_duration{}
 
   dimension: date_field_test {
     type: date
