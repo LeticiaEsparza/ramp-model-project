@@ -30,6 +30,7 @@ dimension: test_fake {
   type: string
   sql: ${TABLE}.flsifjslkjsd ;;
 }
+
 dimension: test_hard_insert {
   type: date
   sql: CURDATE();;

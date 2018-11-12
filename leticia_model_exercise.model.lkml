@@ -6,10 +6,13 @@ include: "*.view"
 # model for ramp lookml project
 # include all the dashboards
   include: "*.dashboard"
+  include: "Misc/*"
 
 datagroup: 24_hour_caching {
   max_cache_age: "24 hours"
 }
+
+
 
 explore: conditionally_filter {}
 explore: boolean_test {}
