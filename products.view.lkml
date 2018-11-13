@@ -34,6 +34,35 @@ view: products {
     # }
   }
 
+  dimension: category_suggestions {
+    type: string
+    sql: ${category} ;;
+    suggestions: ["Clothing Sets","Fashion Hoodies & Sweatshirts","Suits & Sport Coats","Socks & Hosiery"]
+  }
+
+#PARAMETERS EXAMPLE WITH A DIMENSION OF TYPE STRING
+  parameter: category_limited_values {
+    type: string
+    allowed_value: { value: "Clothing Sets" }
+    allowed_value: { value: "Fashion Hoodies & Sweatshirts" }
+    allowed_value: { value: "Suits & Sport Coats" }
+    allowed_value: { value: "Socks & Hosiery" }
+  }
+#WE CAN INCLUDE THE NORMAL CATEGORY DIMENSION AND FILTER BY THIS DIMENSION BEING 1 (TRUE)
+dimension: category_limited_value_dimension {
+  label_from_parameter: category_limited_values
+  sql:
+      CASE WHEN {% parameter category_limited_values %} = 'Clothing Sets' THEN ${category} = 'Clothing Sets'
+           WHEN {% parameter category_limited_values %} = 'Fashion Hoodies & Sweatshirts' THEN ${category} = 'Fashion Hoodies & Sweatshirts'
+           WHEN {% parameter category_limited_values %} = 'Suits & Sport Coats' THEN ${category} = 'Suits & Sport Coats'
+           WHEN {% parameter category_limited_values %} = 'Socks & Hosiery' THEN ${category} = 'Socks & Hosiery'
+      ELSE ${category}
+      END
+  ;;
+}
+#END OF EXAMPLE
+
+
   dimension: category_case_when {
     case: {
       when: {

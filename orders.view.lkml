@@ -188,6 +188,17 @@ dimension_group: duration {
 }
 # dimension_group: diff_duration{}
 
+# measure:  avg_duration {
+#   type: average
+#   sql: ${duration_minute} ;;
+# }
+
+measure: avg_duration_2 {
+  type: average
+  sql: ${date_churn_diff} ;;
+}
+
+
   dimension: date_field_test {
     type: date
     sql: ${created_date} ;;

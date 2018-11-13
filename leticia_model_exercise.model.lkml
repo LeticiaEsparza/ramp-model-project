@@ -5,8 +5,8 @@ include: "*.view"
 
 # model for ramp lookml project
 # include all the dashboards
-  include: "*.dashboard"
-  include: "Misc/*"
+include: "*.dashboard"
+include: "miscellaneous/*"
 
 datagroup: 24_hour_caching {
   max_cache_age: "24 hours"
