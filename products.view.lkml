@@ -165,8 +165,8 @@ dimension: category_limited_value_dimension {
 dimension: category_example {
   type: string
   sql: ${TABLE}.category ;;
-  html: <b><center><p style="background-color:#B3F5F7;"><font size="4" color="#166088">{{value}}</font></p></center></b>;;
-  #html: <p style="color: #166088; background-color: #B3F5F7; font-size: 200%; text-align:center">{{value}}</p> ;;
+#  html: <b><center><p style="background-color:#B3F5F7;"><font size="4" color="#166088">{{value}}</font></p></center></b>;;
+  html: <p style="color: #166088; background-color: #B3F5F7; font-size: 200%; text-align:center">{{value}}</p> ;;
 #   html:
 #         {% if _user_attributes['company'] == "Looker" %}
 #           <p style="color: #5A2FC2; background-color: #E5E5E6; font-size: 180%; font-weight: bold; text-align:center">{{value}}</p>
