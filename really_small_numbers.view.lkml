@@ -27,6 +27,11 @@ view: really_small_numbers {
     sql:  ${test_number}*0.0000000000012345;;
   }
 
+  dimension: smaller_number_string {
+    type: string
+    sql: CAST(${smaller_number} AS string) ;;
+  }
+
   set: detail {
     fields: [test_number]
   }
