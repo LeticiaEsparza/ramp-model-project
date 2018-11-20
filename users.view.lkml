@@ -199,5 +199,4 @@ measure: users_in_ca {
     sql: COALESCE(${id}, ${full_name});;
   }
 
-
 }

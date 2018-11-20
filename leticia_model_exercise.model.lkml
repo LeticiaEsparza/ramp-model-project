@@ -119,6 +119,10 @@ explore: order_items {
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
+  join: user_cohort_size {
+    sql_on: ${user_cohort_size.created_month} = ${users.created_month};;
+    relationship: many_to_one
+  }
 
 }
 
@@ -219,7 +223,23 @@ datagroup: pdt_test_datagroup {
 #end of ndt test
 
 explore: stn_test {}
-explore: users {}
+
+explore: users {
+#   join: orders {
+#     sql_on: ${orders.user_id} = ${users.id} ;;
+#     relationship : one_to_many
+#   }
+#
+#   join: order_items {
+#     sql_on: ${order_items.order_id} = ${orders.id} ;;
+#     relationship : one_to_many
+#   }
+#
+#   join: user_cohort_size {
+#     sql_on: ${user_cohort_size.created_month} = ${users.created_month};;
+#     relationship: many_to_one
+#   }
+}
 
 explore: users_nn {}
 

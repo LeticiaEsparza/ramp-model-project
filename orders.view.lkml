@@ -557,7 +557,23 @@ dimension: test_date_standard_dim{
     }
   }
 
+  dimension: days_since_user_signup {
+    hidden: yes
+    type: number
+    sql: DATEDIFF(${created_raw}, ${users.created_raw});;
+  }
 
+  dimension: months_since_user_signup {
+    type: number
+    sql: FLOOR(${days_since_user_signup}/(30)) ;;
+  }
+
+  dimension: months_since_user_signup_tier {
+    type: tier
+    tiers: [1,3,6,12,24]
+    style: integer
+    sql: ${months_since_user_signup} ;;
+  }
 
 }
 #DAYOFWEEK
