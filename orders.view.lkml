@@ -350,6 +350,10 @@ measure: count_dupe_2 {
     allowed_value: { value: "Year" }
   }
 
+  dimension: curls_test {
+    sql: {% parameter date_granularity %} ;;
+  }
+
   dimension: date_granularity_test{
     label_from_parameter: date_granularity
     sql:
