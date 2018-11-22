@@ -990,8 +990,8 @@ filter: department_filter{
 dimension: dashboard_category_department{
   type: yesno
   sql:
-      ({% condition category_filter %} products.category {% endcondition %} OR
-       {% condition department_filter %} products.department {% endcondition %}) ;;
+      ({% condition category_filter %} ${products.category} {% endcondition %} OR
+       {% condition department_filter %} ${products.department} {% endcondition %}) ;;
 }
 
 
