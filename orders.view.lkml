@@ -184,7 +184,7 @@ dimension_group: duration {
   type: duration
   sql_start: ${created_raw};;
   sql_end: ${created_other_date_raw};;
-  intervals: [hour,minute,second]
+  intervals: [hour,minute,second,day]
 }
 # dimension_group: diff_duration{}
 
@@ -348,6 +348,10 @@ measure: count_dupe_2 {
     allowed_value: { value: "Month" }
     allowed_value: { value: "Quarter" }
     allowed_value: { value: "Year" }
+  }
+
+  parameter: test_date_curl {
+    type: date_time
   }
 
   dimension: curls_test {

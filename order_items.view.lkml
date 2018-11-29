@@ -110,9 +110,28 @@ measure: test_quotient{
     sql: ${TABLE}.returned_at ;;
   }
 
+  parameter: sale_price_threshold {
+    type: number
+  }
+
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+    html:
+          {% assign threshold = sale_price_threshold._parameter_value | plus: 0 %}
+          {% if value >= threshold %}
+              <p style="color: green; font-weight: bold; text-align:center">{{rendered_value}}</p>
+          {% else %}
+              <p style="color: red; font-weight: bold; text-align:center">{{rendered_value}}</p>
+          {% endif %}
+    ;;
+  }
+
+  dimension: sale_price_tier {
+    type: tier
+    style: classic
+    sql: ${TABLE}.sale_price ;;
+    tiers: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
   }
 
 dimension: sale_price_pound {
@@ -1128,7 +1147,11 @@ parameter: category_parameter {
 }
 
 parameter: category_unquoted {
-  type: unquoted
+  type: string
+}
+
+dimension: param_curl_test {
+  sql: {% parameter category_unquoted %} ;;
 }
 
 dimension: parameter_condition {
