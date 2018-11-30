@@ -401,6 +401,13 @@ measure: total_profit_example {
   html: <font color="green">{{rendered_value}}</font> ;;
 }
 
+  measure: total_profit_scatterplot {
+    type: number
+    sql: ${total_revenue}-${inventory_items.total_cost} ;;
+    value_format_name: usd
+    html: {{ products.category._rendered_value }} ;;
+  }
+
   measure: total_profit_example_2 {
     type: number
     sql: ${total_revenue}-${inventory_items.total_cost} ;;
@@ -1237,5 +1244,24 @@ measure: total_profit_emoji {
           {% endif %}
     ;;
   }
+
+
+  filter: date_1_lauren {
+    type: date
+  }
+
+  filter: date_2_lauren {
+    type: number
+  }
+
+  dimension: dates_dimension_lauren {
+    type: yesno
+    sql:
+        {% condition date_1_lauren %} ${orders.created_date} {% endcondition %}
+        AND
+        {% condition date_2_lauren %} ${order_items.sale_price} {% endcondition %}
+    ;;
+  }
+
 
  }
