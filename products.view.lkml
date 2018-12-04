@@ -349,6 +349,25 @@ measure: list_category{
     sql: ${TABLE}.sku ;;
   }
 
+  filter: category_for_filtered_count {
+    type: string
+    suggest_dimension: products.category
+  }
+
+  dimension: category_yesno {
+    hidden: yes
+    sql: {% condition category_for_filtered_count %} products.category {% endcondition %};;
+  }
+
+    measure: count_category {
+      type: count
+      filters: {
+        field: category_yesno
+        value: "yes"
+      }
+
+    }
+
   measure: count {
     type: count
     drill_fields: [id, item_name, inventory_items.count]

@@ -58,6 +58,40 @@ dimension: is_monday {
     ;;
   }
 
+  # COUNT ORDERS FROM START DATE AND END DATE OF A FILTER
+
+  filter: date_filter {
+    type: date
+  }
+
+  dimension: is_date_filter_start {
+    type: yesno
+    sql: ${orders.created_raw} = {% date_start date_filter %} ;;
+  }
+
+  dimension: is_date_filter_end {
+    type: yesno
+    sql: ${orders.created_raw} = {% date_end date_filter %} ;;
+  }
+
+  measure: count_date_start {
+    type: count
+    filters: {
+      field: is_date_filter_start
+      value: "yes"
+    }
+  }
+
+  measure: count_date_end {
+    type: count
+    filters: {
+      field: is_date_filter_end
+      value: "yes"
+    }
+  }
+
+  # END OF EXAMPLE
+
   dimension_group: created {
     type: time
     timeframes: [

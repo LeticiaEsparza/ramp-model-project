@@ -148,6 +148,12 @@ measure: total_sale_price {
 
 }
 
+measure: total_sale_price_num {
+  type: number
+  sql: SUM(${sale_price});;
+  value_format_name: decimal_0
+}
+
 measure: error {
   type: sum
   sql: ${sale_price} ;;
@@ -405,7 +411,7 @@ measure: total_profit_example {
     type: number
     sql: ${total_revenue}-${inventory_items.total_cost} ;;
     value_format_name: usd
-    html: {{ products.category._rendered_value }} ;;
+    html: {{rendered_value}} || {{ products.category._rendered_value }} ;;
   }
 
   measure: total_profit_example_2 {
