@@ -23,7 +23,7 @@ view: long_string_table {
     type: string
     sql: ${TABLE}.string ;;
     drill_fields: [string_dupe]
-    html: <a href="{{link}}" target="_self"> {{ rendered_value | truncate: 15}} </a> ;;
+    html: <a href="{{link}}"> {{ rendered_value | truncate: 15}} </a> ;;
 #     html:
 #          <html>
 #          <head>
