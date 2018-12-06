@@ -97,6 +97,7 @@ dimension: is_monday {
     timeframes: [
       raw,
       time,
+      time_of_day,
       date,
       day_of_week,
       day_of_week_index,
@@ -186,6 +187,7 @@ dimension_group: created_other_date{
   timeframes: [
     raw,
     time,
+    time_of_day,
     date,
     day_of_week,
     day_of_week_index,

@@ -14,23 +14,30 @@ view: long_string_table {
     drill_fields: [detail*]
   }
 
+  dimension: string_dupe {
+    type: string
+    sql: ${TABLE}.string;;
+  }
+
   dimension: string {
     type: string
     sql: ${TABLE}.string ;;
-    html:
-         <html>
-         <head>
-         <style>
-
-          ul{
-              max-width:10ch;
-              word-wrap:normal;
-           }
-         </style>
-         </head>
-         </html>
-        <li> {{value}}</li>
-    ;;
+    drill_fields: [string]
+    html: <a href="{{link}}" target="_self"> {{ rendered_value | truncate: 15}} </a> ;;
+#     html:
+#          <html>
+#          <head>
+#          <style>
+#
+#           ul{
+#               max-width:10ch;
+#               word-wrap:normal;
+#            }
+#          </style>
+#          </head>
+#          </html>
+#         <li> {{value}}</li>
+#     ;;
   }
 
   dimension: other_string {
