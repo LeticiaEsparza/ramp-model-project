@@ -22,7 +22,7 @@ view: long_string_table {
   dimension: string {
     type: string
     sql: ${TABLE}.string ;;
-    drill_fields: [string]
+    drill_fields: [string_dupe]
     html: <a href="{{link}}" target="_self"> {{ rendered_value | truncate: 15}} </a> ;;
 #     html:
 #          <html>
