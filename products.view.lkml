@@ -34,6 +34,7 @@ view: products {
     # }
   }
 
+
   dimension: category_suggestions {
     type: string
     sql: ${category} ;;

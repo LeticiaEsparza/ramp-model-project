@@ -1269,5 +1269,14 @@ measure: total_profit_emoji {
     ;;
   }
 
+  measure: min_sale_price {
+    type: min
+    sql: ${sale_price} ;;
+  }
+
+  measure: max_sale_price {
+    type: max
+    sql: ${sale_price} ;;
+  }
 
  }
