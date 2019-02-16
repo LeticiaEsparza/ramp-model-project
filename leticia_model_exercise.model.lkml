@@ -11,6 +11,10 @@ include: "miscellaneous/*"
 datagroup: 24_hour_caching {
   max_cache_age: "24 hours"
 }
+
+explore: shipment_mock_table {}
+explore: boolean_sql_runner {}
+explore: current_date_parts {}
 explore: dynamic_category_table {}
 explore: derived_table_dynamic_date_filter {}
 explore: really_small_numbers {}

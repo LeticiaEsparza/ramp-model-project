@@ -150,6 +150,7 @@ dimension: relative_year {
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+    map_layer_name: us_zipcode_tabulation_areas
   }
 
   dimension: zip_b {

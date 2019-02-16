@@ -152,10 +152,33 @@ dimension: time_hour {
   html: {{ rendered_value | date: "%I %p"}} ;;
 }
 
+  dimension: time_hour_of_day {
+    type: date_time_of_day
+    sql: ${TABLE}.created_at ;;
+    html: {{ rendered_value | date: "%H:%M %p"}} ;;
+  }
+
+  dimension: assign_date {
+    type: date
+    sql: ${TABLE}.created_at;;
+    html:
+      {% assign first_date = '2019-01-01' | date: '%Y-%m-%d' %}
+      {% assign date_field = value | date: '%Y-%m-%d' %}
+      {% if date_field >= first_date %}
+          "Win"
+      {% else %}
+          "Lose"
+      {% endif %}
+  ;;
+
+  }
+
+
 dimension: days_since_order {
   type: number
   sql: DATEDIFF(CURDATE(), ${created_date}) ;;
 }
+
   measure: count_weekday{
     type: count
     filters: {
@@ -343,7 +366,6 @@ measure: date_count {
     type: date
     sql: min(${created_date});;
     drill_fields: [users.id, users.full_name, products.category]
-
   }
 
 measure: last_order {

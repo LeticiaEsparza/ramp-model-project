@@ -14,6 +14,9 @@ view: derived_table_dynamic_date_filter {
       GROUP BY 1,2,3,4
       ORDER BY DATE(orders.created_at ) DESC
        ;;
+
+    sql_trigger_value: SELECT current_date;;
+    indexes: ["orders.id"]
   }
 
   filter: date_filter {

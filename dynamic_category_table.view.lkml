@@ -12,9 +12,17 @@ view: dynamic_category_table {
       WHERE {% condition category_filter %} products.category {% endcondition %}
 
       GROUP BY 1,2
+
       ORDER BY (COALESCE(SUM(order_items.sale_price), 0))-(COALESCE(COALESCE((0E0 +  ( SUM(DISTINCT (CAST(FLOOR(COALESCE(inventory_items.cost ,0)*((0E0 + 1000000)*1.0)) AS DECIMAL(65,0))) + (CAST(CONV(SUBSTR(MD5(inventory_items.id ),1,16),16,10) AS DECIMAL(65)) *18446744073709551616 + CAST(CONV(SUBSTR(MD5(inventory_items.id ), 17, 16), 16, 10) AS DECIMAL(65))) ) - SUM(DISTINCT (CAST(CONV(SUBSTR(MD5(inventory_items.id ),1,16),16,10) AS DECIMAL(65)) *18446744073709551616 + CAST(CONV(SUBSTR(MD5(inventory_items.id ), 17, 16), 16, 10) AS DECIMAL(65)))) ) ) / (0E0 + ((0E0 + 1000000))), 0), 0))  DESC
        ;;
   }
+
+      #   HAVING
+      # {% if brand._in_query %}
+      #     (COALESCE(SUM(order_items.sale_price), 0) > 19000)
+      # {% else %}
+      #     1=1
+      # {% endif %}
 
   filter: category_filter {
     type: string

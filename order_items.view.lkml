@@ -154,6 +154,35 @@ measure: total_sale_price_num {
   value_format_name: decimal_0
 }
 
+measure: conditional_measure_sql {
+  type: number
+  sql:
+       {% assign first_date = '2019-01-01' | date: '%Y-%m-%d' %}
+       {% assign date_field = orders.created_raw | date: '%Y-%m-%d' %}
+       {% if date_field >= first_date %}
+          (${total_sale_price_num} * 100)
+       {% else %}
+          (${total_sale_price_num} * 0)
+       {% endif %}
+  ;;
+  value_format_name: decimal_2
+}
+
+  measure: conditional_measure_html {
+    type: date
+    sql: ${orders.created_date};;
+    html:
+         {% assign first_date = '2019-01-01' | date: '%Y-%m-%d' %}
+         {% assign date_field = value | date: '%Y-%m-%d' %}
+         {% if date_field >= first_date %}
+            {{ order_items.total_sale_price_num._value | times: 100 | round: 0 }}
+         {% else %}
+            {{ order_items.total_sale_price_num._value | times: 0 | round: 0 }}
+         {% endif %}
+  ;;
+  }
+
+
 measure: error {
   type: sum
   sql: ${sale_price} ;;
@@ -352,6 +381,8 @@ measure: total_revenue {
     {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
 
   }
+
+#  html: {{ value | round: 1 }} ;;
 
 }
 
@@ -872,7 +903,7 @@ dimension: returned_color{
       url: "{{ link }}&f[order_items.total_profit]=>=50000"
     }
 
-    #html: <a href="{{ link }}&f[order_items.total_profit]=>=50000">{{ rendered_value }}</a> ;;
+ #   html: <a href="{{ link }}&f[order_items.total_profit]=>=50000" target="_top">{{ rendered_value }}</a> ;;
 
 
   }
@@ -889,21 +920,59 @@ dimension: returned_color{
        value: "total_revenue"
      }
    }
+
    measure: metric {
      label_from_parameter: metric_selector
      type: number
-     value_format: "$0.0,\"K\""
+     value_format_name: usd
      sql:
        CASE
          WHEN {% parameter metric_selector %} = 'total_profit' THEN
            ${total_profit}
-         WHEN {% parameter metric_selector %} = 'total_first_purchase_revenue' THEN
+         WHEN {% parameter metric_selector %} = 'total_revenue' THEN
            ${total_revenue}
-
          ELSE
            NULL
        END ;;
    }
+
+  parameter: metric_selector_2 {
+    type: string
+    allowed_value: {
+      label: "Total Order Profit"
+      value: "total_profit"
+    }
+    allowed_value: {
+      label: "Total Revenue"
+      value: "total_revenue"
+    }
+  }
+
+
+  measure: metric_test {
+    label_from_parameter: metric_selector
+    type: number
+    value_format_name: usd
+    sql:
+    CASE
+    WHEN {% parameter metric_selector %} = 'total_profit' THEN
+    ${total_profit}
+    WHEN {% parameter metric_selector %} = 'total_revenue' THEN
+    ${total_revenue}
+    ELSE
+    NULL
+    END ;;
+#     html:
+#           {% if _filters['metric_selector'] == '' %}
+#             'No dynamic measure selected'
+#           {% elsif _filters['metric_selector'] == 'total_profit' %}
+#             {{ rendered_value | round: 0 }}
+#           {% else %}
+#             {{ rendered_value | round: 1 }}
+#           {% endif %}
+#     ;;
+    html: {{rendered_value | round: 0 }} ;;
+  }
 
 # filter: date_test {
 #   type: date
@@ -1279,4 +1348,8 @@ measure: total_profit_emoji {
     sql: ${sale_price} ;;
   }
 
+  dimension: dispensable {
+    type: string
+    sql: "test" ;;
+  }
  }
