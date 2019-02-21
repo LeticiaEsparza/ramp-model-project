@@ -81,6 +81,12 @@ explore: order_items {
 #       value: "%pant%,%act%"
 #     }
 #   }
+#   always_filter: {
+#     filters: {
+#       field: orders.created_date
+#       value: "90 days ago for 90 days"
+#     }
+#   }
   join: inventory_items {
     #fields: []
     type: left_outer

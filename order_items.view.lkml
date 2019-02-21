@@ -154,19 +154,19 @@ measure: total_sale_price_num {
   value_format_name: decimal_0
 }
 
-measure: conditional_measure_sql {
-  type: number
-  sql:
-       {% assign first_date = '2019-01-01' | date: '%Y-%m-%d' %}
-       {% assign date_field = orders.created_raw | date: '%Y-%m-%d' %}
-       {% if date_field >= first_date %}
-          (${total_sale_price_num} * 100)
-       {% else %}
-          (${total_sale_price_num} * 0)
-       {% endif %}
-  ;;
-  value_format_name: decimal_2
-}
+# measure: conditional_measure_sql {
+#   type: number
+#   sql:
+#        {% assign first_date = '2019-01-01' | date: '%Y-%m-%d' %}
+#        {% assign date_field = orders.created_raw | date: '%Y-%m-%d' %}
+#        {% if date_field >= first_date %}
+#           (${total_sale_price_num} * 100)
+#        {% else %}
+#           (${total_sale_price_num} * 0)
+#        {% endif %}
+#   ;;
+#   value_format_name: decimal_2
+# }
 
   measure: conditional_measure_html {
     type: date
