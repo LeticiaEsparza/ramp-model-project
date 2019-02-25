@@ -24,6 +24,12 @@ view: dynamic_category_table {
       #     1=1
       # {% endif %}
 
+    # {% if dynamic_category_table.brand._in_query %}
+    #   WHERE products.category = "Pants"
+    # {% else %}
+    #   WHERE products.category = "Shorts"
+    # {% endif %}
+
   filter: category_filter {
     type: string
     suggest_dimension: dynamic_category_table.category

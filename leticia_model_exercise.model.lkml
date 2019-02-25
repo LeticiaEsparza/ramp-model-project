@@ -27,6 +27,7 @@ explore: ndt_min_date {}
 explore: sql_runner_query {}
 explore: filter_options_test {}
 explore: ndt_chat_test {}
+
 explore: pdt_lab_1_orders {
   label: "PDT LAB 1"
   join: pdt_lab_1_b {
