@@ -179,6 +179,15 @@ dimension: days_since_order {
   sql: DATEDIFF(CURDATE(), ${created_date}) ;;
 }
 
+parameter: compare_date {
+  type: date
+}
+
+dimension: days_since_order_dynamic {
+  type: number
+  sql: DATEDIFF({% parameter compare_date %}, ${created_date}) ;;
+}
+
   measure: count_weekday{
     type: count
     filters: {

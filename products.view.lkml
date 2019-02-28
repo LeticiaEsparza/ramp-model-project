@@ -34,6 +34,15 @@ view: products {
     # }
   }
 
+  dimension: category_url {
+    type: string
+    sql: "Dashboard URL" ;;
+    link: {
+      label: "/dashboards/43?Brand={{ _filters['products.brand'] | url_encode }}"
+      url: "/dashboards/43?Brand={{ _filters['products.brand'] | url_encode }}"
+    }
+  }
+
 
   dimension: category_suggestions {
     type: string
