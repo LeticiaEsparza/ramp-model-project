@@ -1352,4 +1352,18 @@ measure: total_profit_emoji {
     type: string
     sql: "test" ;;
   }
+
+
+ measure: total_profit_ak {
+    type: number
+    sql: ${total_revenue}-${inventory_items.total_cost} ;;
+    value_format_name: usd
+    html: {% if value == nil %}
+            {{ products.category._rendered_value }}
+          {% else %}
+            {{rendered_value}}
+          {% endif %}
+    ;;
+    }
+
  }

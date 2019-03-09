@@ -242,6 +242,20 @@ dimension:  date_churn_diff {
 # value_format: "[h]:mm:ss"
 }
 
+  parameter: date_sandwich {
+    type: date
+  }
+
+  # filter: date_sandwich_filter {
+  #   type: date
+  #   sql:  ;;
+  # }
+
+  dimension: is_between_dates {
+    type: yesno
+    sql: {% parameter date_sandwich %} BETWEEN ${created_date} AND ${created_other_date_date};;
+}
+
   dimension:  date_churn_diff_2 {
     type: number
     sql: TIMESTAMPDIFF(SECOND,${created_raw},${created_other_date_raw})/86400.0;;

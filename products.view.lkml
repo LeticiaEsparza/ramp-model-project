@@ -171,6 +171,11 @@ dimension: category_limited_value_dimension {
     }
   }
 
+  parameter: category_parameter {
+    type: string
+    suggest_dimension: products.category
+  }
+
 
 dimension: category_example {
   type: string
