@@ -17,6 +17,13 @@ explore: user_facts_reference {}
 explore: shipment_mock_table {
   extension: required
 }
+
+explore: test_ryland {
+  view_name: shipment_mock_table
+  extends: [shipment_mock_table]
+}
+
+
 explore: boolean_sql_runner {}
 explore: current_date_parts {}
 explore: dynamic_category_table {}
