@@ -234,6 +234,12 @@ dimension_group: created_other_date{
   sql: DATE_ADD(DATE_ADD(DATE_ADD(DATE_ADD(${created_raw}, INTERVAL 3 DAY), INTERVAL 9 HOUR), INTERVAL 35 MINUTE), INTERVAL 46 SECOND) ;;
 }
 
+#   measure: last_updated_date {
+# #     type: date
+#     sql: (SELECT MAX(orders.created_at) FROM demo_db.orders WHERE status="complete") ;;
+#     convert_tz: no
+#   }
+
 dimension:  date_churn_diff {
   type: number
   sql: TIMESTAMPDIFF(SECOND,${created_raw},${created_other_date_raw})/86400.0;;

@@ -3,7 +3,7 @@ view: derived_table_dynamic_date_filter {
     sql: SELECT
         DATE(orders.created_at ) AS created_date,
         CAST(orders.created_at  AS CHAR) AS created_time,
-        orders.id  AS `orders.id`,
+        orders.id  AS orders_id,
         CONCAT(users.first_name,' ',users.last_name) AS full_name,
         COALESCE(SUM(order_items.sale_price ), 0) AS total_sale_price
       FROM demo_db.order_items  AS order_items
@@ -16,11 +16,17 @@ view: derived_table_dynamic_date_filter {
        ;;
 
     sql_trigger_value: SELECT current_date;;
-    indexes: ["orders.id"]
+    indexes: ["orders_id"]
   }
+
+  # HAVING {% condition threshold %} COALESCE(SUM(order_items.sale_price ), 0) {% endcondition %}
 
   filter: date_filter {
     type: date
+  }
+
+  filter: threshold {
+    type: number
   }
 
   measure: count {
@@ -41,7 +47,7 @@ view: derived_table_dynamic_date_filter {
 
   dimension: orders_id {
     type: number
-    sql: ${TABLE}.orders.id ;;
+    sql: ${TABLE}.orders_id ;;
   }
 
   dimension: full_name {

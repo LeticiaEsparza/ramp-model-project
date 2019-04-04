@@ -364,6 +364,26 @@ measure: list_category{
     sql: ${TABLE}.sku ;;
   }
 
+    dimension: category_colors {
+    type: string
+    sql: ${category}  ;;
+    html:
+    {% if value == "Accessories" %}
+    <center><b><div style="background-color:#00E400">{{ rendered_value }}</div></b></center>
+    {% elsif value == "Active"  %}
+    <center><b><div style="background-color:#FFFF00">{{ rendered_value }}</div></b></center>
+    {% elsif value == "Blazers & Jackets" %}
+    <center><b><div style="background-color:#FF7E00"><font color="white">{{ rendered_value }}</font></div></b></center>
+    {% elsif value == "Clothing Sets"  %}
+    <center><b><div style="background-color:#FF0000"><font color="white">{{ rendered_value }}</font></div></b></center>
+    {% elsif value == "Dresses"  %}
+    <center><b><div style="background-color:#8F3F97"><font color="white">{{ rendered_value }}</font></div></b></center>
+    {% else %}
+    <center><b><div style="background-color:#7E0023"><font color="white">{{ rendered_value }}</font></div></b></center>
+    {% endif %}
+    ;;
+  }
+
   filter: category_for_filtered_count {
     type: string
     suggest_dimension: products.category

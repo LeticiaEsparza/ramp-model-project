@@ -567,16 +567,20 @@ measure: total_profit {
   #   }
   # }
 
-
 measure: profit_running_total {
   type: running_total
   sql: ${total_profit} ;;
 }
 
+
+
 measure: percent_of_total_profit {
   type: percent_of_total
-  sql: ${total_profit};;
-  value_format: "0.0\%"
+  sql: ${total_revenue_7_days} ;;
+ # value_format: "0.0\%"
+  html:
+       {{ value | times: 2 | round : 0 }}%
+  ;;
 }
 
 filter: date_filter_test {
@@ -1364,6 +1368,12 @@ measure: total_profit_emoji {
             {{rendered_value}}
           {% endif %}
     ;;
+    }
+
+
+    measure: subtract_counts {
+      type: number
+      sql: ${count} - ${orders.count} ;;
     }
 
  }

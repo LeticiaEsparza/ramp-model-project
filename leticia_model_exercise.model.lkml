@@ -12,7 +12,11 @@ datagroup: 24_hour_caching {
   max_cache_age: "24 hours"
 }
 
-explore: shipment_mock_table {}
+
+explore: user_facts_reference {}
+explore: shipment_mock_table {
+  extension: required
+}
 explore: boolean_sql_runner {}
 explore: current_date_parts {}
 explore: dynamic_category_table {}
