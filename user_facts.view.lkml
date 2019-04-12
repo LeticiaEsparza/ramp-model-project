@@ -8,7 +8,8 @@ view: user_facts {
            MAX(NULLIF(orders.created_at,0)) as latest_order,
            orders.created_at,
            CASE WHEN COUNT(orders.created_at)>1 THEN 'yes' ELSE 'no' END AS repeat_customer,
-           DATEDIFF(CURDATE(), MIN(NULLIF(orders.created_at,0))) AS days_since_first_purchase
+           DATEDIFF(CURDATE(), MIN(NULLIF(orders.created_at,0))) AS days_since_first_purchase,
+           "test" AS test
            FROM order_items JOIN orders ON order_items.order_id=orders.id
            GROUP BY orders.user_id
            ORDER BY COUNT(DISTINCT orders.id) desc
@@ -92,6 +93,10 @@ dimension_group: created_at {
 #     sql: ${total_orders} >= 2 AND DATEDIFF(${latest_order_date},${second_most_recent_date.created_at_date}) <= 30 AND ${repeat_customer} = "yes";;
 #   }
 
+dimension: test {
+  type: string
+  sql: ${TABLE}.test ;;
+}
 
   set: detail {
     fields: [

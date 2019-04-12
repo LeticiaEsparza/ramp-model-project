@@ -158,6 +158,12 @@ dimension: time_hour {
     html: {{ rendered_value | date: "%H:%M %p"}} ;;
   }
 
+  dimension: day_of_week {
+    type: date_day_of_week
+    sql: CURDATE() ;;
+
+  }
+
   dimension: assign_date {
     type: date
     sql: ${TABLE}.created_at;;

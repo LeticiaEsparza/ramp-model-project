@@ -61,6 +61,18 @@ view: inventory_items {
     sql: ${TABLE}.sold_at ;;
   }
 
+  dimension: pao_test {
+    type: string
+    sql: "test" ;;
+    html:
+            {% if products._in_query %}
+              "yes"
+            {% else %}
+              "no"
+            {% endif %}
+      ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, products.item_name, products.id, order_items.count]

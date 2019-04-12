@@ -1,9 +1,9 @@
-#connection: "thelook"
+connection: "thelook"
 
 include: "*.view.lkml"         # include all views in this project
-include: "*.dashboard.lookml"  # include all dashboards in this project
-include: "*"
+# include: "*.dashboard.lookml"  # include all dashboards in this project
+# include: "*"
 
-explore: pdt_test_extended {
+# explore: pdt_test_extended {
 
-}
+# }

@@ -13,15 +13,15 @@ datagroup: 24_hour_caching {
 }
 
 
-explore: user_facts_reference {}
-explore: shipment_mock_table {
-  extension: required
-}
+# explore: user_facts_reference {}
+# explore: shipment_mock_table {
+#   extension: required
+# }
 
-explore: test_ryland {
-  view_name: shipment_mock_table
-  extends: [shipment_mock_table]
-}
+# explore: test_ryland {
+#   view_name: shipment_mock_table
+#   extends: [shipment_mock_table]
+# }
 
 
 explore: boolean_sql_runner {}

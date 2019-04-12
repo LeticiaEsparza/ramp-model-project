@@ -1376,4 +1376,16 @@ measure: total_profit_emoji {
       sql: ${count} - ${orders.count} ;;
     }
 
+    dimension: pao_test {
+      type: string
+      sql: "test" ;;
+      html:
+            {% if products._in_query %}
+              "yes"
+            {% else %}
+              "no"
+            {% endif %}
+      ;;
+    }
+
  }
