@@ -171,6 +171,25 @@ dimension: category_limited_value_dimension {
     }
   }
 
+  dimension: category_ryland_1 {
+    type: string
+    sql:
+        CASE WHEN ${category}="Accessories" THEN "Bling"
+        ELSE "Other"
+        END
+    ;;
+  }
+
+  dimension: category_ryland_2 {
+    case: {
+      when: {
+        sql: ${category}="Accessories" ;;
+        label: "Bling"
+      }
+      else: "Other"
+    }
+  }
+
   parameter: category_parameter {
     type: string
     suggest_dimension: products.category

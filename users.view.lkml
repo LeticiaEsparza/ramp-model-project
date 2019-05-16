@@ -2,6 +2,7 @@ view: users {
   sql_table_name: demo_db.users ;;
 
   dimension: id {
+    tags: ["id"]
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
@@ -90,11 +91,13 @@ dimension: relative_year {
 
 
   dimension: email {
+    tags: ["email"]
     type: string
     sql: ${TABLE}.email ;;
   }
 
   dimension: first_name {
+    tags: ["first_name"]
     type: string
     sql: ${TABLE}.first_name ;;
   }
@@ -118,6 +121,7 @@ dimension: relative_year {
   }
 
   dimension: last_name {
+    tags: ["last_name"]
     type: string
     sql: ${TABLE}.last_name ;;
   }

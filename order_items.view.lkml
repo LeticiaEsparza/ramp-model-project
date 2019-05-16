@@ -1232,12 +1232,20 @@ parameter: category_parameter {
   suggest_dimension: products.category
 }
 
+  parameter: category_parameter_unquoted {
+    type: unquoted
+    suggest_dimension: products.category
+  }
+
 parameter: category_unquoted {
   type: string
 }
 
-dimension: param_curl_test {
-  sql: {% parameter category_unquoted %} ;;
+dimension: test_label_by_param {
+  label: "{% parameter category_parameter %} Group"
+  type: string
+  sql: ${products.category} ;;
+
 }
 
 dimension: parameter_condition {
@@ -1387,5 +1395,12 @@ measure: total_profit_emoji {
             {% endif %}
       ;;
     }
+
+  parameter: attribution_select {
+    label: "Attribution Window"
+    hidden: no
+    suggestions: ["default", "1d_click", "7d_click", "28d_click", "1d_view", "7d_view", "28d_view"]
+    default_value: "default"
+  }
 
  }

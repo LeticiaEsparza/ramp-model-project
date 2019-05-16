@@ -417,19 +417,17 @@ measure: last_order {
   measure: count_example {
     type: count
     drill_fields: [orders.id,orders.created_date,orders.created_quarter,orders.status,orders.user_id,order_items.total_profit]
-    html: <p style="font-size: 15px">{{linked_value}}</p> ;;
+    html: <p style="font-size: 100px">{{linked_value}}</p> ;;
     #html:<p style="font-size: 15px"><a href="{{link}}" target="_self"> {{rendered_value}} </a></p>;;
   }
     #html: <a href="/explore/leticia_model_exercise/order_items?fields=orders.id,orders.created_date,orders.created_quarter,orders.status,orders.user_id,order_items.total_profit">{{rendered_value}}</b> ;;
 
-measure: count_dupe {
+measure: count_sql {
   type: number
-  sql: CASE WHEN isnull(${count}) THEN 0
-       ELSE ${count}
-       END;;
+  sql: COALESCE(COUNT(DISTINCT ${id}),0) ;;
 }
 
-measure: count_dupe_2 {
+measure: count_dupe {
   type: number
   sql: COALESCE(${count},0) ;;
 }
@@ -445,6 +443,11 @@ measure: count_dupe_2 {
 
   parameter: test_date_curl {
     type: date_time
+  }
+
+  dimension: date_granularity_output {
+    type: string
+    sql: {% parameter date_granularity %} ;;
   }
 
   dimension: curls_test {

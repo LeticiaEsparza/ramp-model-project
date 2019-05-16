@@ -13,6 +13,7 @@ datagroup: 24_hour_caching {
 }
 
 
+
 # explore: user_facts_reference {}
 # explore: shipment_mock_table {
 #   extension: required
@@ -23,7 +24,7 @@ datagroup: 24_hour_caching {
 #   extends: [shipment_mock_table]
 # }
 
-
+explore: padded_numbers {}
 explore: boolean_sql_runner {}
 explore: current_date_parts {}
 explore: dynamic_category_table {}

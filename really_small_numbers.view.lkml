@@ -22,6 +22,12 @@ view: really_small_numbers {
     sql: ${TABLE}.test ;;
   }
 
+  dimension: test_number_padded {
+    type: number
+    sql: ${TABLE}.test ;;
+    value_format: "*00000#"
+  }
+
   dimension: smaller_number {
     type: number
     sql:  ${test_number}*0.0000000000012345;;
