@@ -91,7 +91,7 @@ dimension: relative_year {
 
 
   dimension: email {
-    tags: ["email"]
+    tags: ["Email"]
     type: string
     sql: ${TABLE}.email ;;
   }
