@@ -254,6 +254,14 @@ dimension:  date_churn_diff {
 # value_format: "[h]:mm:ss"
 }
 
+  dimension:  date_churn_diff_tier {
+    type: tier
+    style: integer
+    sql: TIMESTAMPDIFF(SECOND,${created_raw},${created_other_date_raw})/86400.0;;
+    tiers: [0,1,3,6,9,12,15,18,21,24,36,48,60]
+
+  }
+
   parameter: date_sandwich {
     type: date
   }

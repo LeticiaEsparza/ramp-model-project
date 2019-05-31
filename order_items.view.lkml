@@ -857,7 +857,7 @@ dimension: returned_color{
   measure: count_test {
     type: count
     drill_fields: [products.category, order_items.total_profit]
-
+#
 #     link: {
 #       label: "Filtered Drill Modal"
 #       url: "
@@ -1092,14 +1092,16 @@ filter: department_filter{
   suggest_dimension: products.department
 }
 
-dimension: dashboard_category_department{
+dimension: dashboard_category_department {
   type: yesno
   sql:
       ({% condition category_filter %} ${products.category} {% endcondition %} OR
        {% condition department_filter %} ${products.department} {% endcondition %}) ;;
 }
 
-
+filter: yesno_filter {
+  type: yesno
+}
 #more templated filters tests
 dimension: one_filter_for_two_fields {
   type: yesno

@@ -17,6 +17,16 @@ view: dynamic_category_table {
        ;;
   }
 
+
+
+#       WHERE
+#       {% if yesno._parameter_value == 'Yes' %}
+#         {% condition category_filter %} products.category {% endcondition %}
+#       {% else %}
+#         1=1
+#       {% endif %}
+
+
       #   HAVING
       # {% if brand._in_query %}
       #     (COALESCE(SUM(order_items.sale_price), 0) > 19000)
@@ -33,6 +43,18 @@ view: dynamic_category_table {
   filter: category_filter {
     type: string
     suggest_dimension: dynamic_category_table.category
+  }
+
+  parameter: yesno {
+    type: unquoted
+    allowed_value: {
+      label: "Yes"
+      value: "Yes"
+    }
+    allowed_value: {
+      label: "No"
+      value: "No"
+    }
   }
 
   measure: count {

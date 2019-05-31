@@ -17,7 +17,7 @@ view: products {
     type: string
     #hidden: yes
     sql: ${TABLE}.category ;;
-    #drill_fields: [id, item_name]
+  #  drill_fields: [id, item_name]
     #EXAMPLES FOR URL ENCODE LESSON
     # html:  <a href="/dashboards/43?Category={{ value | url_encode }}&Brand={{ _filters['products.brand'] | url_encode }}">{{ value }}</a> ;;
     link: {
