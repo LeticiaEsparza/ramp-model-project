@@ -465,7 +465,7 @@ measure: count_dupe {
     allowed_value: { value: "Year" }
   }
 
-  dimension: date_granularity_test{
+  dimension: date_granularity_test {
     label_from_parameter: date_granularity
     sql:
        CASE
