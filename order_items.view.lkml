@@ -14,6 +14,16 @@ measure: count_hidden{
   sql: ${id} ;;
 }
 
+measure: static_number {
+  type: number
+  sql: 100 ;;
+}
+
+  dimension: static_number_dim {
+    type: number
+    sql: 100 ;;
+  }
+
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -1099,9 +1109,6 @@ dimension: dashboard_category_department {
        {% condition department_filter %} ${products.department} {% endcondition %}) ;;
 }
 
-filter: yesno_filter {
-  type: yesno
-}
 #more templated filters tests
 dimension: one_filter_for_two_fields {
   type: yesno
@@ -1403,6 +1410,11 @@ measure: total_profit_emoji {
     hidden: no
     suggestions: ["default", "1d_click", "7d_click", "28d_click", "1d_view", "7d_view", "28d_view"]
     default_value: "default"
+  }
+
+  measure: yesno_measure {
+    type: yesno
+    sql: COALESCE(${order_items.total_profit},0);;
   }
 
  }

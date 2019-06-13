@@ -179,6 +179,22 @@ dimension: time_hour {
 
   }
 
+  dimension: date_is_now {
+    type: date_raw
+    sql: CAST(${TABLE}.created_at AS date);;
+    html:
+    {% assign now_value = "today" | date: "%Y-%m-%d" %}
+    {% assign date_value = value | date: "%Y-%m-%d" %}
+    {% if date_value == now_value %}
+    <div style=" background-color: #d36b6b">{{ rendered_value }}</div>
+    {% else %}
+    <div style=" background-color: #79b288">{{ rendered_value }}</div>
+    {% endif %}
+    ;;
+  }
+
+
+
 
 dimension: days_since_order {
   type: number
