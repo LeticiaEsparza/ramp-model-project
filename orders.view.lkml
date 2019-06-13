@@ -465,19 +465,6 @@ measure: count_dupe {
     allowed_value: { value: "Year" }
   }
 
-  parameter: test_date_curl {
-    type: date_time
-  }
-
-  dimension: date_granularity_output {
-    type: string
-    sql: {% parameter date_granularity %} ;;
-  }
-
-  dimension: curls_test {
-    sql: {% parameter date_granularity %} ;;
-  }
-
   dimension: date_granularity_test{
     label_from_parameter: date_granularity
     sql:
@@ -493,6 +480,19 @@ measure: count_dupe {
          ELSE
            NULL
        END ;;
+  }
+
+  parameter: test_date_curl {
+    type: date_time
+  }
+
+  dimension: date_granularity_output {
+    type: string
+    sql: {% parameter date_granularity %} ;;
+  }
+
+  dimension: curls_test {
+    sql: {% parameter date_granularity %} ;;
   }
 
   dimension: date_test {
