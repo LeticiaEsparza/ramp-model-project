@@ -41,6 +41,9 @@ view: boolean_test {
     sql: ${TABLE}.boolean ;;
   }
 
+#   sql: IFNULL(${TABLE}.boolean, "Null") ;;
+#   html: <p style="color: #166088; background-color: #B3F5F7; font-size: 200%; text-align:center">{{value}}</p> ;;
+
   dimension: emotion {
     type: string
     sql: ${TABLE}.emotion ;;

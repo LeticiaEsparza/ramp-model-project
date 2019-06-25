@@ -193,8 +193,24 @@ dimension: time_hour {
     ;;
   }
 
+parameter: date_selector {
+  type: date
+}
 
+dimension: is_month_of_date_selected {
+  type: yesno
+  sql: MONTH(${orders.created_date}) = MONTH({% parameter date_selector %}) ;;
+}
 
+dimension: date_selector_dim {
+  type: date
+  sql: {% parameter date_selector %} ;;
+}
+
+dimension: is_one_month_before_date_selected {
+  type: yesno
+  sql: MONTH(${orders.created_date}) = MONTH(DATE_SUB({% parameter date_selector %} , INTERVAL 1 MONTH)) ;;
+}
 
 dimension: days_since_order {
   type: number
@@ -701,6 +717,14 @@ dimension: test_date_standard_dim{
     tiers: [1,3,6,12,24]
     style: integer
     sql: ${months_since_user_signup} ;;
+  }
+
+  measure: count_complete {
+    type: count
+    filters: {
+      field: status
+      value: "complete"
+    }
   }
 
 }

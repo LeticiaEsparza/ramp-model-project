@@ -10,7 +10,10 @@ view: derived_table_dynamic_date_filter {
       LEFT JOIN demo_db.orders  AS orders ON order_items.order_id = orders.id
       LEFT JOIN demo_db.users  AS users ON orders.user_id = users.id
 
-      WHERE {% condition date_filter %} orders.created_at {% endcondition %}
+      WHERE
+
+      {% condition date_filter %} orders.created_at {% endcondition %}
+
       GROUP BY 1,2,3,4
       ORDER BY DATE(orders.created_at ) DESC
        ;;

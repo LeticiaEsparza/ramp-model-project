@@ -1116,6 +1116,14 @@ dimension: one_filter_for_two_fields {
         {% condition category_filter %} products.department {% endcondition %}) ;;
 }
 
+dimension: category_filter_values {
+  description: "Example for Patricia"
+  type: string
+#  sql: {{ _filters['order_items.category_filter'] }};;
+  sql: 1 ;;
+   html: {{ _filters['order_items.category_filter'] }} ;;
+}
+
 #Updating two fields with one filter
 filter: date_for_two_date_fields {
   type: date_time
@@ -1257,6 +1265,11 @@ dimension: test_label_by_param {
 
 }
 
+dimension: category_param_dim {
+  type: string
+  sql: {% parameter category_parameter %} ;;
+}
+
 dimension: parameter_condition {
   type: string
   sql:
@@ -1373,20 +1386,6 @@ measure: total_profit_emoji {
     type: string
     sql: "test" ;;
   }
-
-
- measure: total_profit_ak {
-    type: number
-    sql: ${total_revenue}-${inventory_items.total_cost} ;;
-    value_format_name: usd
-    html: {% if value == nil %}
-            {{ products.category._rendered_value }}
-          {% else %}
-            {{rendered_value}}
-          {% endif %}
-    ;;
-    }
-
 
     measure: subtract_counts {
       type: number
