@@ -1416,4 +1416,7 @@ measure: total_profit_emoji {
     sql: COALESCE(${order_items.total_profit},0);;
   }
 
+  filter: test_all_hands {
+    type: number
+  }
  }

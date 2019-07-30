@@ -179,6 +179,13 @@ dimension: time_hour {
 
   }
 
+  dimension: olivias_test {
+    description: "Grabs last month of last quarter"
+    type: yesno
+    sql: (EXTRACT(MONTH FROM ${orders.created_date})) = (EXTRACT(MONTH FROM DATE_SUB((MAKEDATE(YEAR(CURDATE()), 1) + INTERVAL QUARTER(CURDATE()) QUARTER - INTERVAL 1 QUARTER), INTERVAL 1 DAY)))
+          AND (EXTRACT(YEAR FROM ${orders.created_date})) = (EXTRACT(YEAR FROM CURDATE())) ;;
+  }
+
   dimension: date_is_now {
     type: date_raw
     sql: CAST(${TABLE}.created_at AS date);;
@@ -326,6 +333,17 @@ dimension_group: duration {
 #   type: average
 #   sql: ${duration_minute} ;;
 # }
+
+
+filter: date_start_filter {
+  type: date
+}
+
+dimension: date_start_test {
+  type: date
+  sql: {% date_start  date_start_filter %} ;;
+  html: The start date is {{rendered_value}} ;;
+}
 
 measure: avg_duration_2 {
   type: average
@@ -725,6 +743,11 @@ dimension: test_date_standard_dim{
       field: status
       value: "complete"
     }
+  }
+
+  measure: count_distinct {
+    type: count_distinct
+    sql_distinct_key: ${id} ;;
   }
 
 }

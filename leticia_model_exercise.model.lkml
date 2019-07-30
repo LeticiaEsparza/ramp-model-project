@@ -23,7 +23,7 @@ datagroup: 24_hour_caching {
 #   view_name: shipment_mock_table
 #   extends: [shipment_mock_table]
 # }
-
+explore: ally_dvm_test {}
 explore: padded_numbers {}
 explore: boolean_sql_runner {}
 explore: current_date_parts {}

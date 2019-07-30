@@ -14,6 +14,12 @@ view: users {
   #   html: {{ users.email._value }} ;;
   # }
 
+  dimension: id_masked_name {
+    type: string
+    sql: ${TABLE}.id ;;
+    html: {{users.full_name._rendered_value}} ;;
+  }
+
   dimension: test_key_value_1 {
     type: string
     sql: CONCAT(${email}, " <id ", ${id}, ">") ;;

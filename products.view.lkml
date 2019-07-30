@@ -72,6 +72,12 @@ dimension: category_limited_value_dimension {
 }
 #END OF EXAMPLE
 
+dimension: colorful_image {
+  type: string
+  sql: ${category} ;;
+  html: <img src="https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/65439723_10157424671227958_2274128794606370816_o.png?_nc_cat=101&_nc_oc=AQmO5ltZeqaiRGzp1n6SrYABXZdOds3ErgTzTdz04mt1eafQnTcHoEnMbgB6s7EpbTQ&_nc_ht=scontent-sea1-1.xx&oh=177888101b45735d36dd12d414082aa4&oe=5DB2C995" width="50%" height="30%"/> ;;
+  }
+
 
   dimension: category_case_when {
     case: {
