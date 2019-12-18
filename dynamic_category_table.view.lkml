@@ -17,8 +17,6 @@ view: dynamic_category_table {
        ;;
   }
 
-
-
 #       WHERE
 #       {% if yesno._parameter_value == 'Yes' %}
 #         {% condition category_filter %} products.category {% endcondition %}
@@ -39,6 +37,13 @@ view: dynamic_category_table {
     # {% else %}
     #   WHERE products.category = "Shorts"
     # {% endif %}
+
+
+#     {% if dynamic_category_table.category_filter._is_filtered %}
+#       {% condition category_filter %} products.category {% endcondition %}
+#     {% else %}
+#       1!=1
+#     {% endif %}
 
   filter: category_filter {
     type: string

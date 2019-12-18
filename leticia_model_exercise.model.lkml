@@ -13,7 +13,6 @@ datagroup: 24_hour_caching {
 }
 
 
-
 # explore: user_facts_reference {}
 # explore: shipment_mock_table {
 #   extension: required
@@ -23,6 +22,7 @@ datagroup: 24_hour_caching {
 #   view_name: shipment_mock_table
 #   extends: [shipment_mock_table]
 # }
+explore: commitments {}
 explore: ally_dvm_test {}
 explore: padded_numbers {}
 explore: boolean_sql_runner {}
@@ -59,6 +59,11 @@ explore: name_attributes_test {
   #                   ${last_name}
   #                   {% endif %}
   # ;;
+  access_filter: {
+    field: name_attributes_test.company
+    user_attribute: company
+
+  }
 }
 
 

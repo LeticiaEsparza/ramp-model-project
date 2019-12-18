@@ -334,6 +334,10 @@ dimension_group: duration {
 #   sql: ${duration_minute} ;;
 # }
 
+dimension: duration_dim {
+  type: number
+  sql: ${days_duration} ;;
+}
 
 filter: date_start_filter {
   type: date

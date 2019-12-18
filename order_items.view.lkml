@@ -1419,4 +1419,11 @@ measure: total_profit_emoji {
   filter: test_all_hands {
     type: number
   }
+
+  dimension: category_dynamic_label {
+    label: "{% if users._in_query %}Category User{% elsif orders._in_query %}Orders User{% else %}category test{% endif %}"
+    type: string
+    sql: ${products.category};;
+  }
+
  }

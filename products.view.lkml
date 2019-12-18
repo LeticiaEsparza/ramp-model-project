@@ -34,6 +34,13 @@ view: products {
     # }
   }
 
+  dimension: category_curls {
+    type: string
+    sql: ${TABLE}.category ;;
+    suggest_dimension: products.brand
+  }
+
+
   dimension: category_url {
     type: string
     sql: "Dashboard URL" ;;
